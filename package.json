@@ -1,0 +1,21 @@
+{
+  "name": "HeroesOfTheStorm_StormMapGenerator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Jamie Phan",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.1",
+    "sanitize-filename": "^1.6.3",
+    "tmp": "^0.2.1",
+    "xml2js": "^0.4.23"
+  }
+}
