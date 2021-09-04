@@ -10,6 +10,12 @@ This repo contains both server and client side code that allows for generating a
 
 This app is build on Express as the server and React as the front-end.
 
+#### Screenshots
+
+![home](https://i.imgur.com/NDNRwYb.png)
+
+![editor](https://i.imgur.com/M4BEQ2s.png)
+
 ## What is a Storm Map?
 
 Heroes of the Storm is based on a StarCraft 2 Engine, which supports modding and have a map editor. Therefore, Heroes of the Storm inherited some modding features even was not documented.
