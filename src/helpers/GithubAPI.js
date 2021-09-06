@@ -8,7 +8,6 @@ const client = require("../redis")
 client.get = util.promisify(client.get);
 client.set = util.promisify(client.set);
 
-const EXPIRE_SECONDS = 60
 const GithubAPI = async (type) => {
   // Redis Caching
   const result = await client.get(type.name)
@@ -19,7 +18,7 @@ const GithubAPI = async (type) => {
     const response = await fetch(type.url)
     const responseJson = await response.json()
     const parsedData = type.parser(responseJson)
-    await client.setex(type.name, EXPIRE_SECONDS, JSON.stringify(parsedData))
+    await client.setex(type.name, parseInt(process.env.REDIS_API_CACHE_EXPIRE), JSON.stringify(parsedData))
     return parsedData
   }
 }

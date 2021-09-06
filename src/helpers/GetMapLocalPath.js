@@ -11,8 +11,6 @@ const basePath = path.resolve("./_cache_maps")
 
 const fileExpireMap = new Map()
 
-const EXPIRE_SECONDS = 60
-
 const getCombinationId = (...args) => {
   const hash = crypto.createHash('sha1')
   hash.update(args.map(x => x.toString()).join("-"))
@@ -49,7 +47,7 @@ const getCachePath = async (downloadLink, id) => {
 
   // Update fileExpireMap
   const expiryDate = new Date()
-  expiryDate.setSeconds(expiryDate.getSeconds() + EXPIRE_SECONDS);
+  expiryDate.setSeconds(expiryDate.getSeconds() + parseInt(process.env.MAP_FILE_CACHE_EXPIRE));
 
   fileExpireMap.set(id, {
     path: path.resolve(`${basePath}/${id}.stormmap`),
