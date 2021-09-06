@@ -1,15 +1,13 @@
 const tmp = require("tmp")
 const fs = require("fs")
-const fetch = require("node-fetch")
 const util = require('util');
 const xml2js = require('xml2js')
+const glob = require("glob")
 const sanitize = require("sanitize-filename");
 
 const writeFile = util.promisify(fs.writeFile)
 const readFile = util.promisify(fs.readFile)
-const readDir = util.promisify(fs.readdir)
 const mkdir = util.promisify(fs.mkdir)
-const copyFile = util.promisify(fs.copyFile)
 const exec = util.promisify(require('child_process').exec);
 
 // Get nested obj, stolen from https://stackoverflow.com/questions/2631001/test-for-existence-of-nested-javascript-object-key
@@ -55,84 +53,66 @@ class StormMapGenerator {
     // Sanitize XML file name + random id
     this.XMLFiles = XMLFiles.map(f => ({ name: randId().toString() + "-" + sanitize(f.name).replace(/ /g, ""), content: f.content }))
 
-    this.mapFileObj = null
-    this.mapBinary = null
-  }
-
-
-  async _copyMap() {
     this.mapFileObj = tmp.fileSync({ unsafeCleanup: true })
-    await copyFile(this.localMapPath, this.mapFileObj.name)
-    // const map = await fetch(this.downloadLink)
-    // const mapData = await map.arrayBuffer()
-    // await writeFile(this.mapFileObj.name, Buffer.from(mapData))
+    this.mapBinary = null
   }
 
   async _patchMap() {
 
-    const modDirName = randId().toString() + "-StormMapGenerator"
-
-    // Prevent sometimes small latters
-    let gameDataFilename = "gamedata.xml"
-
-    // Step 1, Try to extract the gamedata file and read it
-    const gamedataDirObj = tmp.dirSync({ unsafeCleanup: true })
-    await exec(`wine "/app/bin/MPQEditor.exe" e "Z:/${this.mapFileObj.name}" "base.stormdata/gamedata.xml" "Z:/${gamedataDirObj.name}"`)
-
-    let gameData;
+    // Extract the whole map first
+    const tempMapObj = tmp.dirSync({ unsafeCleanup: true })
+    await exec(`wine "/app/bin/MPQEditor.exe" e "Z:/${this.localMapPath}" "*" "Z:/${tempMapObj.name}" /fp`)
 
     if (this.XMLFiles.length > 0) {
 
-      const list = await readDir(gamedataDirObj.name)
-      if (list.length == 0) {
-        gameData = false
-      } else {
-        gameDataFilename = list[0]
-        gameData = await readFile(`${gamedataDirObj.name}/${gameDataFilename}`, { encoding: "utf-8" })
+      const modDirName = randId().toString() + "-StormMapGenerator"
+
+      const baseStormData = glob.sync(`${tempMapObj.name}/base.stormdata`, { nocase: true, })
+
+      // Get Gamedata File Name
+      const gameDataFilesArr = glob.sync(`${baseStormData}/gamedata.xml`, { nocase: true, })
+      let gameDataXMLPath = gameDataFilesArr.length > 0 ? gameDataFilesArr[0] : null
+
+      // Make the dir for saving mods
+      await mkdir(`${baseStormData}/${modDirName}`)
+
+
+      let gameDataXMLContent
+      let gameDataXMLContentParsed = {
+        Includes: {
+          Catalog: []
+        }
       }
 
-      await mkdir(`${gamedataDirObj.name}/${modDirName}`)
+      // if Gamedata.xml exist
+      if (gameDataXMLPath) {
+        gameDataXMLContent = await readFile(`${gameDataXMLPath}`, { encoding: "utf-8" })
+        const _gameDataXMLContentParsedTemp = await xml2js.parseStringPromise(gameDataXMLContent)
 
-      let xml;
-      if (!(gameData === false)) {
-        xml = await xml2js.parseStringPromise(gameData)
-        const catalogs = getNested(xml, "Includes", "Catalog")
+        const catalogs = getNested(_gameDataXMLContentParsedTemp, "Includes", "Catalog")
+        // Check is gamedata legit
         if (catalogs && Array.isArray(catalogs)) {
+          // Probably legit, then change the data to Parsed
           console.log("Has Gamedata.Includes.Catalog and its an array")
-        } else {
-          console.log("Has Gamedata but fucked up")
-          xml = {
-            Includes: {
-              Catalog: []
-            }
-          }
-
+          gameDataXMLContentParsed = await xml2js.parseStringPromise(gameDataXMLContent)
         }
       } else {
-        console.log("Does not have Gamedata")
-        xml = {
-          Includes: {
-            Catalog: []
-          }
-        }
+        gameDataXMLPath = `${baseStormData}/gamedata.xml`
       }
 
+
+      // Loop each XML file
       this.XMLFiles.forEach(f => {
-        // Save XML files to tmp (non async)
-        fs.writeFileSync(`${gamedataDirObj.name}/${modDirName}/${f.name}`, f.content, { encoding: "utf-8" })
+        // Save XML file to tmp (non async)
+        fs.writeFileSync(`${baseStormData}/${modDirName}/${f.name}`, f.content, { encoding: "utf-8" })
         // Push to catalog game data xml
-        xml.Includes.Catalog.push({ '$': { path: `${modDirName}/${f.name}` } })
+        gameDataXMLContentParsed.Includes.Catalog.push({ '$': { path: `${modDirName}/${f.name}` } })
       });
 
-      const xmlString = new xml2js.Builder().buildObject(xml)
+      gameDataXMLContent = new xml2js.Builder().buildObject(gameDataXMLContentParsed)
 
-      // Save the game data
-      await writeFile(`${gamedataDirObj.name}/${gameDataFilename}`, xmlString, { encoding: "utf-8" })
-
-      // Insert the file into MPQ
-      await exec(`wine /app/bin/MPQEditor.exe a "Z:/${this.mapFileObj.name}" "Z:/${gamedataDirObj.name}" "base.stormdata" /c /auto /r`)
-
-      gamedataDirObj.removeCallback()
+      // Save the gamedata file
+      await writeFile(`${gameDataXMLPath}`, gameDataXMLContent, { encoding: "utf-8" })
 
     }
 
@@ -140,83 +120,64 @@ class StormMapGenerator {
 
     if (this.isDebug || this.msg !== "") {
 
-      const mapScriptDirObj = tmp.dirSync({ unsafeCleanup: true })
-
       // Extract MapScript.galaxy
-      await exec(`wine "/app/bin/MPQEditor.exe" e "Z:/${this.mapFileObj.name}" "MapScript.galaxy" "Z:/${mapScriptDirObj.name}"`)
+      const mapScriptFilePath = glob.sync(`${tempMapObj.name}/mapscript.galaxy`, { nocase: true })[0]
+      let mapScriptFileContent = await readFile(`${mapScriptFilePath}`, { encoding: "utf-8" })
 
       // Read it
-      let mapScript = await readFile(`${mapScriptDirObj.name}/MapScript.galaxy`, { encoding: "utf-8" })
+      let mapScriptInsertContentArr = []
 
-      let strArr = []
-
-      if (this.isDebug) strArr.push(`    libCore_gv_dEBUGDebuggingEnabled = true;`)
-      if (this.msg !== "") strArr.push(`    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("${this.msg.replace(/\"/g, "'")}"));`)
+      if (this.isDebug) mapScriptInsertContentArr.push(`    libCore_gv_dEBUGDebuggingEnabled = true;`)
+      if (this.msg !== "") mapScriptInsertContentArr.push(`    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("${this.msg.replace(/\"/g, "'")}"));`)
 
       // Modify it
-      mapScript = mapScript.replace("    InitTriggers();", [
+      mapScriptFileContent = mapScriptFileContent.replace("    InitTriggers();", [
         `    InitTriggers();`,
-        ...strArr
+        ...mapScriptInsertContentArr
       ].join("\n"))
 
       // Save it
-      await writeFile(`${mapScriptDirObj.name}/MapScript.galaxy`, mapScript, { encoding: "utf-8" })
-
-      // Add to MPQ
-      await exec(`wine /app/bin/MPQEditor a "Z:/${this.mapFileObj.name}" "Z:/${mapScriptDirObj.name}/MapScript.galaxy" "MapScript.galaxy" /c /auto`)
-
-      mapScriptDirObj.removeCallback()
+      await writeFile(`${mapScriptFilePath}`, mapScriptFileContent, { encoding: "utf-8" })
 
     }
 
     // Patch Map name
 
-    const name = this.name.replace(/\.stormmap/gi, "")
-
-    const documentHDirObj = tmp.dirSync({ unsafeCleanup: true })
-
-    // Extract DocumentHeader
-    await exec(`wine "/app/bin/MPQEditor.exe" e "Z:/${this.mapFileObj.name}" "DocumentHeader" "Z:/${documentHDirObj.name}"`)
-
+    const mapDisplayName = this.name.replace(/\.stormmap/gi, "")
     // Read it
-    let documentH = await readFile(`${documentHDirObj.name}/DocumentHeader`)
-
+    const documentHeaderPath = glob.sync(`${tempMapObj.name}/documentheader`, { nocase: true })[0]
+    let documentHeaderContent = await readFile(`${documentHeaderPath}`)
     // ==================
-
-    const documentHArr = [...new Uint8Array(documentH)].map(s => ('0' + s.toString(16)).slice(-2))
-    const docInfoArr = [...new Uint8Array(Buffer.from("DocInfo/NameSUne"))].map(s => ('0' + s.toString(16)).slice(-2))
-
-    const index = documentHArr.join("").lastIndexOf(docInfoArr.join("")) / 2
+    const documentHeaderArray = [...new Uint8Array(documentHeaderContent)].map(s => ('0' + s.toString(16)).slice(-2))
+    const DocInfoArray = [...new Uint8Array(Buffer.from("DocInfo/NameSUne"))].map(s => ('0' + s.toString(16)).slice(-2))
+    const index = documentHeaderArray.join("").lastIndexOf(DocInfoArray.join("")) / 2
 
     let endIndex = -1
-    for (const index1500 of getIndicesOf("1500", documentHArr.join(""), false)) {
+    for (const index1500 of getIndicesOf("1500", documentHeaderArray.join(""), false)) {
       if (index1500 > index) {
         endIndex = (index1500 / 2)
         break;
       }
     }
-    const extractedArr = documentHArr.slice(index, endIndex)
+
+    const extractedArr = documentHeaderArray.slice(index, endIndex)
     const extractedBuffer = Buffer.from((extractedArr.map(x => parseInt(Number("0x" + x), 10))))
     const newArr = [
-      ...docInfoArr,
-      ('0' + name.length.toString(16)).slice(-2),
+      ...DocInfoArray,
+      ('0' + mapDisplayName.length.toString(16)).slice(-2),
       "00",
-      ...[...new Uint8Array(Buffer.from(name))].map(s => ('0' + s.toString(16)).slice(-2))
+      ...[...new Uint8Array(Buffer.from(mapDisplayName))].map(s => ('0' + s.toString(16)).slice(-2))
     ]
-
     const newArrBuffer = Buffer.from((newArr.map(x => parseInt(Number("0x" + x), 10))))
-
-    documentH = replace(documentH, extractedBuffer, newArrBuffer)
-
-    // =============
+    documentHeaderContent = replace(documentHeaderContent, extractedBuffer, newArrBuffer)
 
     // Save it
-    await writeFile(`${documentHDirObj.name}/DocumentHeader`, documentH)
+    await writeFile(`${documentHeaderPath}`, documentHeaderContent)
 
-    // Add to MPQ
-    await exec(`wine /app/bin/MPQEditor.exe a "Z:/${this.mapFileObj.name}" "Z:/${documentHDirObj.name}/DocumentHeader" "DocumentHeader" /c /auto`)
-
-    documentHDirObj.removeCallback()
+    // =======================
+    // Build the map
+    await exec(`wine "/app/bin/MPQEditor.exe" n "Z:/${this.mapFileObj.name}"`)
+    await exec(`wine "/app/bin/MPQEditor.exe" a "Z:/${this.mapFileObj.name}" "Z:/${tempMapObj.name}" /c /auto /r`)
 
   }
 
@@ -228,7 +189,6 @@ class StormMapGenerator {
 
 
   async get() {
-    await this._copyMap()
     await this._patchMap()
     await this._readMap()
     return this.mapBinary
