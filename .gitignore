@@ -120,3 +120,4 @@ dist
 # Custom
 public
 !client/public
+_cache_maps

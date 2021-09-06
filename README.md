@@ -45,15 +45,13 @@ Heroes of the Storm's map file is `*.StormMap`, which is a modified, but shares 
 
 ## Development
 
-### Environment Prerequisite
+### Prerequisite
 - Linux
   - Currently will not work on Windows due to some hard coded path. However you can run the application with Docker in Windows.
 - [Wine](https://www.winehq.org/)
 - [NodeJS + npm](https://nodejs.org/en/)
+- [Redis](https://redis.io/)
 - [Docker (optional)](https://www.docker.com/)
-- Github Token (optional)
-   - This application rely heavily on GitHub API to fetch the map files. Therefore using API token can rise the API call limit from 60 to 5000 per hour.
-   - You can create a token [here](https://github.com/settings/tokens).
 
 ### Building
 
@@ -66,15 +64,23 @@ chmod +x *.sh
 ./build.sh
 ```
 
-#### Optionally adding GitHub API Token:
-If you generated a Github API token, you can increase your API call limit from 60 to 5000 per hour.
+### Environment Variable 
 
-The application will read from two environment variable:
+All Environment Variables configuration is stored in the `.env` file.
 
-- `STORMMAP_GITHUB_TOKEN`: The API token, which looks like `ghp_0rw9E2zGFzl6YRV7laGI9tDVpOifB636iPhl`
-- `STORMMAP_GITHUB_USERNAME`: The github username associate with the API Token.
+You can either rename `.env.example` to `.env`, or by setting the environment variable from your shell:
 
-You can also use the `.env` file to store those environment variable by renaming `.env.example` to `.env`. 
+`SET PORT=80`
+
+Here are the used environment variable that you can configure:
+
+| Variable | Default | Usage |
+|---|---|---|
+| `PORT` | `8080` | The port of the sever running on |
+| `REDIS_URL` | `"//127.0.0.1"` | The Redis server URL |
+| `REDIS_API_CACHE_EXPIRE` | `1800` | Seconds until the cache expire for Github API calls. (`1800` = 30 minutes) |
+| `MAP_FILE_CACHE_EXPIRE` | `3600` | Seconds until the downloaded map cache expires. (`3600` = 1 hour) |
+
 
 ### Running
 
@@ -89,6 +95,18 @@ You can also use Docker to run the application, especially on Windows:
 ```bash
 chmod +x *.sh
 ./run.sh
+```
+
+If you need a redis server, you can set it up with docker:
+
+```bash
+# Run the server
+docker run --name redis-server -d -p 6379:6379 redis
+
+# Getting the IP of the container
+docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' redis-server
+
+# Then copy the IP to the .env file
 ```
 
 A docker container will now run on port `8080`, with an image named `stormmap`.
