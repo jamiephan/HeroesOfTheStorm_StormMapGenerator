@@ -21,7 +21,6 @@ const getCombinationId = (...args) => {
 const isExpired = (id) => {
   const value = fileExpireMap.get(id)
   if (!value) return true;
-  console.log(value)
   return value.expire <= new Date()
 }
 
@@ -29,11 +28,9 @@ const getCachePath = async (downloadLink, id) => {
 
   // Not Expired, so just return the path
   if (!isExpired(id)) {
-    console.log("hi")
     return fileExpireMap.get(id).path
   }
 
-  console.log("expired")
 
   // Expired, so download and return the file path
 
