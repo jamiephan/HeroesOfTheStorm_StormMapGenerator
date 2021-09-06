@@ -4,12 +4,12 @@ const fetch = require("node-fetch")
 const util = require('util');
 const xml2js = require('xml2js')
 const sanitize = require("sanitize-filename");
-const e = require("express");
 
 const writeFile = util.promisify(fs.writeFile)
 const readFile = util.promisify(fs.readFile)
 const readDir = util.promisify(fs.readdir)
 const mkdir = util.promisify(fs.mkdir)
+const copyFile = util.promisify(fs.copyFile)
 const exec = util.promisify(require('child_process').exec);
 
 // Get nested obj, stolen from https://stackoverflow.com/questions/2631001/test-for-existence-of-nested-javascript-object-key
@@ -47,9 +47,9 @@ const getIndicesOf = (searchStr, str, caseSensitive) => {
 
 
 class StormMapGenerator {
-  constructor(name, isDebug, msg, downloadLink, XMLFiles) {
+  constructor(name, isDebug, msg, localMapPath, XMLFiles) {
     this.name = name
-    this.downloadLink = downloadLink
+    this.localMapPath = localMapPath
     this.isDebug = isDebug
     this.msg = msg
     // Sanitize XML file name + random id
@@ -60,12 +60,12 @@ class StormMapGenerator {
   }
 
 
-  async _downloadMap() {
+  async _copyMap() {
     this.mapFileObj = tmp.fileSync({ unsafeCleanup: true })
-    const map = await fetch(this.downloadLink)
-    const mapData = await map.arrayBuffer()
-    await writeFile(this.mapFileObj.name, Buffer.from(mapData))
-
+    await copyFile(this.localMapPath, this.mapFileObj.name)
+    // const map = await fetch(this.downloadLink)
+    // const mapData = await map.arrayBuffer()
+    // await writeFile(this.mapFileObj.name, Buffer.from(mapData))
   }
 
   async _patchMap() {
@@ -228,7 +228,7 @@ class StormMapGenerator {
 
 
   async get() {
-    await this._downloadMap()
+    await this._copyMap()
     await this._patchMap()
     await this._readMap()
     return this.mapBinary
