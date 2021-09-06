@@ -2,20 +2,13 @@ const fetch = require("node-fetch")
 const util = require('util');
 
 const host = require("./GithubAPIHost")
+const tutorialMaps = require("./TutorialMaps")
 
 const client = require("../redis")
 client.get = util.promisify(client.get);
 client.set = util.promisify(client.set);
 
 const EXPIRE_SECONDS = 60
-
-const tutorialMaps = [
-  "Try Me Mode.stormmap",
-  "Tutorial Map Mechanics.stormmap",
-  "Tutorial.stormmap",
-  "Heroes of the Storm Veteran Challenges.stormmap"
-]
-
 const GithubAPI = async (type) => {
   // Redis Caching
   const result = await client.get(type.name)
