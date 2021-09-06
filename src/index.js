@@ -2,7 +2,6 @@ require("dotenv").config()
 
 const express = require("express")
 const fetch = require("node-fetch")
-const templates = require("./templates")
 
 const app = express()
 
@@ -29,54 +28,14 @@ const tutorialMaps = [
 
 app.use(express.static('public'))
 
+app.use("/list", require("./routes/api/list"))
+app.use("/templates", require("./routes/api/templates"))
+
 app.get("/ratelimit", async (req, res) => {
   try {
     const response = await fetch(`https://${host}/rate_limit`)
     const json = await response.json()
     res.json(json)
-  } catch (e) {
-    res.status(500).json(respError("Github API Error"))
-  }
-})
-
-app.get("/templates/:type", async (req, res) => {
-  if (templates.hasOwnProperty(req.params.type)) {
-    return res.json(templates[req.params.type])
-  } else {
-    return res.status(404).json(respError("Invalid Template"))
-  }
-})
-
-app.get("/list/maps", async (req, res) => {
-  try {
-    const response = await fetch(`https://${host}/repos/jamiephan/HeroesOfTheStorm_S2MA/contents/maps`)
-    const json = await response.json()
-    let maps = json.map(m => m.name)
-    // Filter out Tutorial Maps
-    maps = maps.filter(m => !tutorialMaps.includes(m))
-    res.json(maps)
-  } catch (e) {
-    res.status(500).json(respError("Github API Error"))
-  }
-})
-
-app.get("/list/ai", async (req, res) => {
-  try {
-    const response = await fetch(`https://${host}/repos/jamiephan/HeroesOfTheStorm_AIMaps/contents/maps`)
-    const json = await response.json()
-    const comps = json.map(m => m.name)
-    res.json(comps)
-  } catch (e) {
-    res.status(500).json(respError("Github API Error"))
-  }
-})
-
-app.get("/list/trymode20", async (req, res) => {
-  try {
-    const response = await fetch(`https://${host}/repos/jamiephan/HeroesOfTheStorm_TryMode2.0/releases`)
-    const json = await response.json()
-    const trymode20maps = json[0].assets.map(m => m.name)
-    res.json(trymode20maps)
   } catch (e) {
     res.status(500).json(respError("Github API Error"))
   }
