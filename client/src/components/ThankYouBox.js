@@ -23,6 +23,12 @@ export default function BottomSection() {
             <hr />
             Changelog:
             <ul>
+              <li>1.4</li>
+              <ul>
+                <li>Server Side: Implement API caching. Fetching map list and AI compositions should see a significant improvement</li>
+                <li>Server Side: Implement Map caching and updated map generation logic, map build time should now <code>~50%</code> faster.</li>
+                <li><a href="https://github.com/jamiephan/HeroesOfTheStorm_StormMapGenerator" target="_blank" rel="noreferrer">Now open source!</a></li>
+              </ul>
               <li>1.3.1</li>
               <ul>
                 <li>Updated some icons</li>
