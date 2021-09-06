@@ -6,65 +6,12 @@ const host = require("../../helpers/GithubAPIHost")
 const tutorialMaps = require("../../helpers/TutorialMaps")
 const router = express.Router()
 
+const validateBuildParams = require("../../middleware/validation/validateBuildParams")
+
 const StormMapGenerator = require("../../helpers/StormMapGenerator")
 
-router.post("/", async (req, res) => {
+router.post("/", validateBuildParams, async (req, res) => {
   const { name, map, ai, debug, msg, xmlFiles, trymode20 } = req.body
-
-  // Check map name
-  if (typeof name !== "string" || name === "") {
-    return res.status(406).send(respError("Map Name was not defined."))
-  }
-
-  if (!(/^[\x00-\x7F]*$/.test(name))) {
-    return res.status(406).send(respError("Map Name contains invalid characters. Only ASCII characters are allowed."))
-  }
-
-
-  // Check trymode20 type
-  if (typeof trymode20 !== "boolean") {
-    return res.status(406).send(respError("trymode20 must be a Boolean (true/false)"))
-  }
-
-  // Check debug type
-  if (typeof debug !== "boolean") {
-    return res.status(406).send(respError("debug must be a Boolean (true/false)"))
-  }
-
-  // Check nsg type
-  if (typeof msg !== "string") {
-    return res.status(406).send(respError("msg must be a String (text)"))
-  }
-
-  if (msg !== "") {
-    if (!(/^[\x00-\x7F]*$/.test(msg))) {
-      return res.status(406).send(respError("Message contains invalid characters. Only ASCII characters are allowed."))
-    }
-  }
-
-  // Check XMlFiles Object
-  // MY EYES.............
-  if (!Array.isArray(xmlFiles)) return res.status(406).send(respError("Invalid XML Files"))
-  for (let i = 0; i < xmlFiles.length; i++) {
-    const xmlFile = xmlFiles[i];
-    if (typeof xmlFile !== "object") return res.status(406).send(respError("Invalid XML Files"))
-    if (!('name' in xmlFile) || typeof xmlFile["name"] !== "string" || !(/^[\x00-\x7F]*$/.test(xmlFile["name"]))) return res.status(406).send(respError("Invalid XML file name. Only ASCII characters are allowed"))
-    if (!('content' in xmlFile) || typeof xmlFile["content"] !== "string") return res.status(406).send(respError("Invalid XML Files"))
-  }
-
-  // Check AI
-  if (ai !== "none") {
-    let AIResponse;
-    try {
-      AIResponse = await fetch(`https://${host}/repos/jamiephan/HeroesOfTheStorm_AIMaps/contents/maps`)
-    } catch (e) {
-      return res.status(500).json(respError("Github API Error"))
-    }
-    const AIJson = await AIResponse.json()
-    if (!AIJson.map(m => m.name).includes(ai)) return res.status(406).send(respError("Invalid AI composition"))
-  }
-
-  // Check Map
 
   let mapLink = ""
 
