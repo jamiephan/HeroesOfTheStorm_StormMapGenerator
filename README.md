@@ -12,9 +12,13 @@ This app is build on Express as the server and React as the front-end.
 
 #### Screenshots
 
-![home](https://i.imgur.com/NDNRwYb.png)
+Home Screen:
 
-![editor](https://i.imgur.com/M4BEQ2s.png)
+![home](https://i.imgur.com/v9HX8vQ.png)
+
+Editor: 
+
+![editor](https://i.imgur.com/OKuw53b.png)
 
 ## What is a Storm Map?
 
