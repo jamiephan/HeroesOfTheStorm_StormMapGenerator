@@ -1,6 +1,6 @@
 
 const express = require("express")
-const GithubAPI = require("../../helpers/githubAPI")
+const GithubAPI = require("../../helpers/GithubAPI")
 
 const router = express.Router()
 

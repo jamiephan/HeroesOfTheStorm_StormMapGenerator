@@ -1,6 +1,6 @@
 const express = require("express")
 const Joi = require('joi');
-const GithubAPI = require("../../helpers/githubAPI");
+const GithubAPI = require("../../helpers/GithubAPI");
 const Error = require("../../Model/Responses/Error");
 
 const buildSchema = async () => {
