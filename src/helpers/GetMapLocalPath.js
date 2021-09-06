@@ -47,7 +47,7 @@ const getCachePath = async (downloadLink, id) => {
 
   // Update fileExpireMap
   const expiryDate = new Date()
-  expiryDate.setSeconds(expiryDate.getSeconds() + parseInt(process.env.MAP_FILE_CACHE_EXPIRE));
+  expiryDate.setSeconds(expiryDate.getSeconds() + parseInt(process.env.MAP_FILE_CACHE_EXPIRE || 3600));
 
   fileExpireMap.set(id, {
     path: path.resolve(`${basePath}/${id}.stormmap`),

@@ -18,7 +18,7 @@ const GithubAPI = async (type) => {
     const response = await fetch(type.url)
     const responseJson = await response.json()
     const parsedData = type.parser(responseJson)
-    await client.setex(type.name, parseInt(process.env.REDIS_API_CACHE_EXPIRE), JSON.stringify(parsedData))
+    await client.setex(type.name, parseInt(process.env.REDIS_API_CACHE_EXPIRE || 1800), JSON.stringify(parsedData))
     return parsedData
   }
 }
