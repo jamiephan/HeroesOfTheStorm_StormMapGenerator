@@ -51,9 +51,6 @@ Heroes of the Storm's map file is `*.StormMap`, which is a modified, but shares 
 - [Wine](https://www.winehq.org/)
 - [NodeJS + npm](https://nodejs.org/en/)
 - [Docker (optional)](https://www.docker.com/)
-- Github Token (optional)
-   - This application rely heavily on GitHub API to fetch the map files. Therefore using API token can rise the API call limit from 60 to 5000 per hour.
-   - You can create a token [here](https://github.com/settings/tokens).
 
 ### Building
 
@@ -65,16 +62,6 @@ cd HeroesOfTheStorm_StormMapGenerator
 chmod +x *.sh
 ./build.sh
 ```
-
-#### Optionally adding GitHub API Token:
-If you generated a Github API token, you can increase your API call limit from 60 to 5000 per hour.
-
-The application will read from two environment variable:
-
-- `STORMMAP_GITHUB_TOKEN`: The API token, which looks like `ghp_0rw9E2zGFzl6YRV7laGI9tDVpOifB636iPhl`
-- `STORMMAP_GITHUB_USERNAME`: The github username associate with the API Token.
-
-You can also use the `.env` file to store those environment variable by renaming `.env.example` to `.env`. 
 
 ### Running
 
