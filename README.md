@@ -8,17 +8,7 @@ Try it online: https://stormmap.herokuapp.com/
 
 This repo contains both server and client side code that allows for generating a `*.StormMap` file completely online without any editor or application installed on your computer. Simply use the web interface and you can generate your own custom map for Heroes of the Storm based on various templates.
 
-This app is build on Express as the server and React as the front-end.
-
-#### Screenshots
-
-Home Screen:
-
-![home](https://i.imgur.com/v9HX8vQ.png)
-
-Editor: 
-
-![editor](https://i.imgur.com/OKuw53b.png)
+This app is build on ExpressJS as the server and ReactJS as the front-end.
 
 ## What is a Storm Map?
 
