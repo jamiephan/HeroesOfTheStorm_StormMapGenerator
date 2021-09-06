@@ -56,7 +56,7 @@ const getCachePath = async (downloadLink, id) => {
     expire: expiryDate
   })
 
-  return [fileExpireMap.get(id).path, fileExpireMap.get(id).expire]
+  return fileExpireMap.get(id).path
 }
 
 
