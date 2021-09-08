@@ -176,7 +176,17 @@ export default function MainForm() {
             {/* is Using Try Mode 2.0 */}
 
             <Form.Group className="mb-3">
-              <Form.Check type="checkbox" label="Use jamiephan's Try Mode 2.0" checked={isUsingTryMode20} onChange={e => setIsUsingTryMode20(e.target.checked)} />
+              <Form.Check type="checkbox"
+                label={<>Use <a href="https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0" target="_blank" rel="noreferrer">Try Mode 2.0</a></>}
+                checked={isUsingTryMode20}
+                onChange={e => setIsUsingTryMode20(e.target.checked)} />
+              <Form.Text>
+                {
+                  isUsingTryMode20 ?
+                    "The generated map will use Try Mode 2.0 maps." :
+                    "The generated map will use Official maps."
+                }
+              </Form.Text>
             </Form.Group>
 
 
