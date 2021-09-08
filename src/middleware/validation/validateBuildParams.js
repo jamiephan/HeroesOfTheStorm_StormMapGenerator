@@ -74,7 +74,9 @@ const buildSchema = async () => {
       .items(
         Joi.string().valid(
           ...libsOptions
-        )
+        ).messages({
+          "any.only": "LibOptions contains invalid variable key"
+        }),
       )
       .required()
 
