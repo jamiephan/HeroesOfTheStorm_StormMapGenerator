@@ -74,7 +74,7 @@ export default function BottomSection() {
       }
       <hr />
       <p>
-        Created with ❤️ by <a href="https://github.com/jamiephan" target="_blank" rel="noreferrer">Jamie Phan</a>.
+        Created with ❤️ by <a href="https://github.com/jamiephan" target="_blank" rel="noreferrer">Jamie Phan</a>. (<a href="https://github.com/jamiephan/HeroesOfTheStorm_StormMapGenerator" target="_blank" rel="noreferrer">Source Code</a>)
       </p>
     </Alert>
   )
