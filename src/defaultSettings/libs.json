@@ -1,6 +1,6 @@
 [
   {
-    "title": "Core Libraries",
+    "title": "Core",
     "libraries": [
       {
         "title": "Heroes",
@@ -728,7 +728,7 @@
     ]
   },
   {
-    "title": "Maps*",
+    "title": "Maps",
     "libraries": [
       {
         "title": "Alterac Pass",
@@ -1039,7 +1039,7 @@
     ]
   },
   {
-    "title": "Brawl*",
+    "title": "Brawl",
     "libraries": [
       {
         "title": "Arena Mode",
