@@ -118,6 +118,11 @@ The app name is `stormmap`, which you need to change it if you wish to deploy to
 
 https://stormmap.herokuapp.com should show up a while later.
 
+## Legal Stuff
+
+Licence: MIT
+
+Storm Map Generator is a personal project and is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Blizzard or Heroes of the Storm.
 
 
 
