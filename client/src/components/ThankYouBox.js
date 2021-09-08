@@ -23,6 +23,12 @@ export default function BottomSection() {
             <hr />
             Changelog:
             <ul>
+              <li>1.5</li>
+              <ul>
+                <li>Separated sections into tabs: General, XML Files and Advanced Options</li>
+                <li>Added Advanced Options to tweak each variables in game (currently only Boolean values)</li>
+                <li>Debug option have been removed. Enable <code>libCore_gv_dEBUGDebuggingEnabled</code> for the same result in Advanced Options.</li>
+              </ul>
               <li>1.4</li>
               <ul>
                 <li>Server Side: Implement API caching. Fetching map list and AI compositions should see a significant improvement</li>
