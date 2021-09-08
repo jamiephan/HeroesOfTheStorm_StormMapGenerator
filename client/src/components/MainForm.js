@@ -18,8 +18,6 @@ export default function MainForm() {
   const [isUsingAIComp, setIsUsingAIComp] = useLocalStorage("isUsingAIComp", false, "bool")
   const [libsOptions, setLibsOptions] = useState([])
 
-  const [isUsingDebugMode, setIsUsingDebugMode] = useLocalStorage("isUsingDebugMode", false, "bool")
-
   const [isLoadingMaps, setIsLoadingMaps] = useState(true)
   const [isLoadingOptions, setIsLoadingOptions] = useState(true)
   const [isGenerating, setIsGenerating] = useState("")
@@ -121,7 +119,6 @@ export default function MainForm() {
       map: isUsingTryMode20 ? map20 : map,
       trymode20: isUsingTryMode20,
       ai: (isUsingTryMode20 || !isUsingAIComp) ? "none" : ai,
-      debug: (!isUsingTryMode20 && isUsingDebugMode),
       msg,
       libsOptions: libsOptions
         .map(s => s.libraries)

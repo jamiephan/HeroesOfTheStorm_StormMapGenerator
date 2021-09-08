@@ -56,16 +56,6 @@ const buildSchema = async () => {
       })
       .required(),
 
-    // is Using Debug
-    debug: Joi.boolean()
-      .when("trymode20", {
-        is: true,
-        then: Joi.valid(false).messages({
-          "any.only": "When \"trymode20\" is true, \"debug\" option must set to false, since Try Mode 2.0 already enabled Debug Mode."
-        }),
-      })
-      .required(),
-
     // Name must be ASCII
     msg: Joi.string()
       .pattern(/^[\x20-\x7E]*$/)

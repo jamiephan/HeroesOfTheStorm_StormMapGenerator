@@ -124,7 +124,7 @@ class StormMapGenerator {
 
     }
 
-    // Patch Debug Mode or message
+    // Patch libs variables or message
 
     if (this.libsOptions.length > 0 || this.msg !== "") {
 
@@ -135,7 +135,6 @@ class StormMapGenerator {
       // Read it
       let mapScriptInsertContentArr = []
 
-      // if (this.isDebug) mapScriptInsertContentArr.push(`    libCore_gv_dEBUGDebuggingEnabled = true;`)
       this.libsOptions.forEach(o => {
         const defaultLibsOption = defaultLibsOptions.find(x => x.name === o)
         if (defaultLibsOption) {
