@@ -5,6 +5,14 @@ const Error = require("../../Model/Responses/Error");
 
 const buildSchema = async () => {
 
+  const libsOptions = require("../../defaultSettings/")
+    .libs
+    .map(s => s.libraries)
+    .reduce((p, n) => p.concat(n))
+    .map(x => x.options)
+    .reduce((p, n) => p.concat(n))
+    .map(x => x.name)
+
   const schema = Joi.object({
     // Name must be ASCII
     name: Joi.string()
@@ -48,16 +56,6 @@ const buildSchema = async () => {
       })
       .required(),
 
-    // is Using Debug
-    debug: Joi.boolean()
-      .when("trymode20", {
-        is: true,
-        then: Joi.valid(false).messages({
-          "any.only": "When \"trymode20\" is true, \"debug\" option must set to false, since Try Mode 2.0 already enabled Debug Mode."
-        }),
-      })
-      .required(),
-
     // Name must be ASCII
     msg: Joi.string()
       .pattern(/^[\x20-\x7E]*$/)
@@ -71,6 +69,15 @@ const buildSchema = async () => {
         content: Joi.string().required()
       }))
       .unique((a, b) => a.name.toLowerCase() === b.name.toLowerCase())
+      .required(),
+    libsOptions: Joi.array()
+      .items(
+        Joi.string().valid(
+          ...libsOptions
+        ).messages({
+          "any.only": "LibOptions contains invalid variable key"
+        }),
+      )
       .required()
 
   }).prefs({ convert: false })

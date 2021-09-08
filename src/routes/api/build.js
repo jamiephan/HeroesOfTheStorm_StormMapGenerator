@@ -9,14 +9,14 @@ const GetMapLocalPath = require("../../helpers/GetMapLocalPath")
 const StormMapGenerator = require("../../helpers/StormMapGenerator")
 
 router.post("/", validateBuildParams, async (req, res) => {
-  const { name, map, ai, debug, msg, xmlFiles, trymode20 } = req.body
+  const { name, map, ai, msg, xmlFiles, trymode20, libsOptions } = req.body
+
 
   try {
     // Get the Map Path
     const localTemplateMapPath = await GetMapLocalPath(trymode20, map, ai)
-
     // Create a patched map
-    const stormMap = new StormMapGenerator(name, debug, msg, localTemplateMapPath, xmlFiles)
+    const stormMap = new StormMapGenerator(name, msg, localTemplateMapPath, xmlFiles, libsOptions)
     const mapBinary = await stormMap.get()
 
     // Set Headers
