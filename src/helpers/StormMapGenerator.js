@@ -14,6 +14,14 @@ const exec = util.promisify(require('child_process').exec);
 const getNested = (obj, ...args) => args.reduce((obj, level) => obj && obj[level], obj)
 const randId = () => Math.floor(100000 + Math.random() * 900000)
 
+const defaultLibsOptions = require("../defaultSettings/")
+  .libs
+  .map(s => s.libraries)
+  .reduce((p, n) => p.concat(n))
+  .map(x => x.options)
+  .reduce((p, n) => p.concat(n))
+  .map(x => ({ name: x.name, default: x.default }))
+
 const replace = (buf, a, b) => {
   if (!Buffer.isBuffer(buf)) buf = Buffer(buf);
   const idx = buf.indexOf(a);
@@ -45,11 +53,11 @@ const getIndicesOf = (searchStr, str, caseSensitive) => {
 
 
 class StormMapGenerator {
-  constructor(name, isDebug, msg, localMapPath, XMLFiles) {
+  constructor(name, msg, localMapPath, XMLFiles, libsOptions) {
     this.name = name
     this.localMapPath = localMapPath
-    this.isDebug = isDebug
     this.msg = msg
+    this.libsOptions = libsOptions
     // Sanitize XML file name + random id
     this.XMLFiles = XMLFiles.map(f => ({ name: randId().toString() + "-" + sanitize(f.name).replace(/ /g, ""), content: f.content }))
 
@@ -118,7 +126,7 @@ class StormMapGenerator {
 
     // Patch Debug Mode or message
 
-    if (this.isDebug || this.msg !== "") {
+    if (this.libsOptions.length > 0 || this.msg !== "") {
 
       // Extract MapScript.galaxy
       const mapScriptFilePath = glob.sync(`${tempMapObj.name}/mapscript.galaxy`, { nocase: true })[0]
@@ -127,12 +135,20 @@ class StormMapGenerator {
       // Read it
       let mapScriptInsertContentArr = []
 
-      if (this.isDebug) mapScriptInsertContentArr.push(`    libCore_gv_dEBUGDebuggingEnabled = true;`)
+      // if (this.isDebug) mapScriptInsertContentArr.push(`    libCore_gv_dEBUGDebuggingEnabled = true;`)
+      this.libsOptions.forEach(o => {
+        const defaultLibsOption = defaultLibsOptions.find(x => x.name === o)
+        if (defaultLibsOption) {
+          mapScriptInsertContentArr.push(`    ${o} = ${String(!defaultLibsOption.default)};`)
+        }
+
+      })
+
       if (this.msg !== "") mapScriptInsertContentArr.push(`    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("${this.msg.replace(/\"/g, "'")}"));`)
 
       // Modify it
-      mapScriptFileContent = mapScriptFileContent.replace("    InitTriggers();", [
-        `    InitTriggers();`,
+      mapScriptFileContent = mapScriptFileContent.replace("    InitLibs();", [
+        `    InitLibs();`,
         ...mapScriptInsertContentArr
       ].join("\n"))
 

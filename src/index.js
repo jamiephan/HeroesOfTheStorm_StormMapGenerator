@@ -11,6 +11,7 @@ app.use(express.static('public'))
 
 app.use("/list", require("./routes/api/list"))
 app.use("/templates", require("./routes/api/templates"))
+app.use("/default", require("./routes/api/default"))
 app.use("/build", require("./routes/api/build"))
 
 // Redirect everything back to "/", the webapp interface

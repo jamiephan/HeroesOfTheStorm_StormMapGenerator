@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import {
-  Alert, Button, Form, Spinner
+  Accordion,
+  Alert, Button, Form, Spinner, Tab, Tabs
 } from 'react-bootstrap'
-import { CheckLg } from 'react-bootstrap-icons'
+import { ArrowRight, CheckLg } from 'react-bootstrap-icons'
 import BuildXMLTemplate from '../helpers/BuildXMLTemplate'
 import XMLValidate from "../helpers/XMLValidate"
 import useLocalStorage from '../hooks/useLocalStorage'
@@ -15,9 +16,12 @@ export default function MainForm() {
   // App States
   const [isUsingTryMode20, setIsUsingTryMode20] = useLocalStorage("isUsingTryMode20", false, "bool")
   const [isUsingAIComp, setIsUsingAIComp] = useLocalStorage("isUsingAIComp", false, "bool")
+  const [libsOptions, setLibsOptions] = useState([])
+
   const [isUsingDebugMode, setIsUsingDebugMode] = useLocalStorage("isUsingDebugMode", false, "bool")
 
   const [isLoadingMaps, setIsLoadingMaps] = useState(true)
+  const [isLoadingOptions, setIsLoadingOptions] = useState(true)
   const [isGenerating, setIsGenerating] = useState("")
 
   // Form States
@@ -34,6 +38,7 @@ export default function MainForm() {
   const [listMaps, setListMaps] = useState([])
   const [listTryMode20Maps, setListTryMode20Maps] = useState([])
   const [listAIComps, setListAIComps] = useState([])
+
 
   // Status Alert box
   const [alertBox, setAlertBox] = useState({ show: false, variant: "warning", message: "Why do people use light mode??" })
@@ -75,10 +80,32 @@ export default function MainForm() {
 
       setIsLoadingMaps(false)
 
+      // Load Options
+      const optionsResponse = await fetch("/default/libs")
+      let optionsJson = await optionsResponse.json()
+      for (let i = 0; i < optionsJson.length; i++) {
+        const section = optionsJson[i];
+        for (let j = 0; j < section.libraries.length; j++) {
+          const library = section.libraries[j];
+          for (let k = 0; k < library.options.length; k++) {
+            const options = library.options[k];
+            optionsJson[i].libraries[j].options[k] = {
+              value: options.default, name: options.name, default: options.default
+            }
+          }
+        }
+      }
+      setLibsOptions(optionsJson)
+      setIsLoadingOptions(false)
+
+
+
     })()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+
 
 
   const handleSubmit = async (e) => {
@@ -96,7 +123,15 @@ export default function MainForm() {
       ai: (isUsingTryMode20 || !isUsingAIComp) ? "none" : ai,
       debug: (!isUsingTryMode20 && isUsingDebugMode),
       msg,
-      xmlFiles
+      libsOptions: libsOptions
+        .map(s => s.libraries)
+        .reduce((p, n) => p.concat(n))
+        .map(x => x.options)
+        .reduce((p, n) => p.concat(n))
+        .filter(x => x.value !== x.default)
+        .map(x => x.name)
+      ,
+      xmlFiles,
     })
 
     const response = await fetch("/build", {
@@ -128,172 +163,256 @@ export default function MainForm() {
     <>
       <Form onSubmit={handleSubmit}>
 
-        {/* Map Name */}
-        <Form.Group className="mb-3">
-          <Form.Label>The name of the map:</Form.Label>
-          <Form.Control type="text" placeholder="My Map" required value={name} onChange={e => setName(e.target.value)} />
-          <Form.Text className="text-muted">
-            This is the name of the map during the loading screen (the title text showing "<code>Welcome to {name === "" ? "My Map" : name}</code>"), as well as the downloaded filename (<code>{name === "" ? "My Map" : name}.stormmap</code>) for your map.
-          </Form.Text>
-        </Form.Group>
-
-        {/* is Using Try Mode 2.0 */}
-
-        <Form.Group className="mb-3">
-          <Form.Check type="checkbox" label="Use jamiephan's Try Mode 2.0" checked={isUsingTryMode20} onChange={e => setIsUsingTryMode20(e.target.checked)} />
-        </Form.Group>
-
-
-        {isUsingTryMode20 ?
-
-          <Form.Group className="mb-3">
-            <Form.Label>Select the <code>*.stormmap</code> template:</Form.Label>
-            <Form.Select value={map20} onChange={e => setMap20(e.target.value)}>
-              {
-                listTryMode20Maps.length > 0 ?
-                  listTryMode20Maps.map((m, i) =>
-                    <option value={m} key={i}>{m.replace(".stormmap", "")}</option>
-                  ) :
-                  <option>Loading...</option>
-              }
-            </Form.Select>
-            <Form.Text className="text-muted">
-              This selection will choose the base template map for your own custom map.
-              The maps are from <a href="https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0" target="_blank" rel="noreferrer">jamiephan/TryMode2.0</a>.
-            </Form.Text>
-          </Form.Group> :
-
-          // Start Section for official Map
-          <>
+        <Tabs>
+          <Tab eventKey="general" title="General Settings">
+            <br />
+            {/* Map Name */}
             <Form.Group className="mb-3">
-              <Form.Label>Select the <code>*.stormmap</code> template:</Form.Label>
-              <Form.Select value={map} onChange={e => setMap(e.target.value)}>
-                {
-                  listMaps.length > 0 ?
-                    listMaps.map((m, i) =>
-                      <option value={m} key={i}>{m.replace(".stormmap", "")}</option>
-                    ) :
-                    <option>Loading...</option>
-                }
-              </Form.Select>
+              <Form.Label>The name of the map:</Form.Label>
+              <Form.Control type="text" placeholder="My Map" required value={name} onChange={e => setName(e.target.value)} />
               <Form.Text className="text-muted">
-                This selection will choose the base template map for your own custom map.
-                The maps are from <a href="https://github.com/jamiephan/HeroesOfTheStorm_S2MA" target="_blank" rel="noreferrer">jamiephan/s2ma</a>,
-                or <a href="https://github.com/jamiephan/HeroesOfTheStorm_AIMaps" target="_blank" rel="noreferrer">jamiephan/AIMaps</a> if AI were selected.
+                This is the name of the map during the loading screen (the title text showing "<code>Welcome to {name === "" ? "My Map" : name}</code>"), as well as the downloaded filename (<code>{name === "" ? "My Map" : name}.stormmap</code>) for your map.
               </Form.Text>
             </Form.Group>
 
-            {/* Enable Debug Mode Checkbox */}
+            {/* is Using Try Mode 2.0 */}
 
             <Form.Group className="mb-3">
-              <Form.Check type="checkbox" label="Enable Debug Mode" checked={isUsingDebugMode} onChange={e => setIsUsingDebugMode(e.target.checked)} />
-              <Form.Text>
-                {
-                  isUsingDebugMode ?
-                    <>
-                      The map will enable Debug mode (<code>libCore_gv_dEBUGDebuggingEnabled = true;</code>).
-                      <ul>
-                        <li>Debug mode allows you to use the Internal Debug Menu (with <code>&#x5C;</code> key)</li>
-                        <li>QA Cheat Menu (with <code>&#x2D;devcheats</code> chat command, by typing it on allied chat channel)</li>
-                        <li>Debug only triggers / chat commands, e.g <code>DebugBoostFX</code>, a chat command to display the Boost UI</li>
-                        <li>(Please note that this option enables <i>Debug Mode</i>, but not <i>Cheat Mode</i>, <code>GameCheatsEnabled()</code>, hence some debug functionalities might not be available.)</li>
-                      </ul>
-                    </> :
-                    "The map will not enable Debug Mode."
-                }
-              </Form.Text>
+              <Form.Check type="checkbox" label="Use jamiephan's Try Mode 2.0" checked={isUsingTryMode20} onChange={e => setIsUsingTryMode20(e.target.checked)} />
             </Form.Group>
 
 
-            {/* is Using AI Comp  Checkbox*/}
+            {isUsingTryMode20 ?
 
-            <Form.Group className="mb-3">
-              <Form.Check type="checkbox" label="Include AI" checked={isUsingAIComp} onChange={e => setIsUsingAIComp(e.target.checked)} />
-              <Form.Text>
+              <Form.Group className="mb-3">
+                <Form.Label>Select the <code>*.stormmap</code> template:</Form.Label>
+                <Form.Select value={map20} onChange={e => setMap20(e.target.value)}>
+                  {
+                    listTryMode20Maps.length > 0 ?
+                      listTryMode20Maps.map((m, i) =>
+                        <option value={m} key={i}>{m.replace(".stormmap", "")}</option>
+                      ) :
+                      <option>Loading...</option>
+                  }
+                </Form.Select>
+                <Form.Text className="text-muted">
+                  This selection will choose the base template map for your own custom map.
+                  The maps are from <a href="https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0" target="_blank" rel="noreferrer">jamiephan/TryMode2.0</a>.
+                </Form.Text>
+              </Form.Group> :
+
+              // Start Section for official Map
+              <>
+                <Form.Group className="mb-3">
+                  <Form.Label>Select the <code>*.stormmap</code> template:</Form.Label>
+                  <Form.Select value={map} onChange={e => setMap(e.target.value)}>
+                    {
+                      listMaps.length > 0 ?
+                        listMaps.map((m, i) =>
+                          <option value={m} key={i}>{m.replace(".stormmap", "")}</option>
+                        ) :
+                        <option>Loading...</option>
+                    }
+                  </Form.Select>
+                  <Form.Text className="text-muted">
+                    This selection will choose the base template map for your own custom map.
+                    The maps are from <a href="https://github.com/jamiephan/HeroesOfTheStorm_S2MA" target="_blank" rel="noreferrer">jamiephan/s2ma</a>,
+                    or <a href="https://github.com/jamiephan/HeroesOfTheStorm_AIMaps" target="_blank" rel="noreferrer">jamiephan/AIMaps</a> if AI were selected.
+                  </Form.Text>
+                </Form.Group>
+
+                {/* is Using AI Comp  Checkbox*/}
+
+                <Form.Group className="mb-3">
+                  <Form.Check type="checkbox" label="Include AI" checked={isUsingAIComp} onChange={e => setIsUsingAIComp(e.target.checked)} />
+                  <Form.Text>
+                    {
+                      isUsingAIComp ?
+                        "The map will include AIs in the game." :
+                        "The map will not include any AIs. Only yourself will be loaded into the game."
+                    }
+                  </Form.Text>
+                </Form.Group>
+
                 {
                   isUsingAIComp ?
-                    "The map will include AIs in the game." :
-                    "The map will not include any AIs. Only yourself will be loaded into the game."
+                    // Is using AI comp
+                    <>
+                      <Form.Group className="mb-3">
+                        <Form.Label>Select the AI Compositions:</Form.Label>
+                        <Form.Select value={ai} onChange={e => setAi(e.target.value)}>
+                          {
+                            listAIComps.map((a, i) =>
+                              <option value={a} key={i}>{a}</option>
+                            )
+                          }
+                        </Form.Select>
+                        <Form.Text className="text-muted">
+                          The AI composition is the number of AIs for both team. The number on the left side also include the player yourself.
+                          <br />
+                          For example: <code>3v4</code> means <i>Player + 2 AI vs 3 AI</i>; <code>1v5</code> means <i>Player + 0 AI vs 5 AI</i>
+                          <br />
+                          Note that <code>spectator</code> means <i>spectator mode</i>, which is watching 5 AI vs 5 AI.
+                        </Form.Text>
+                      </Form.Group>
+                    </> :
+                    // Is NOT using AI comp
+                    <></>
                 }
-              </Form.Text>
-            </Form.Group>
 
-            {
-              isUsingAIComp ?
-                // Is using AI comp
-                <>
-                  <Form.Group className="mb-3">
-                    <Form.Label>Select the AI Compositions:</Form.Label>
-                    <Form.Select value={ai} onChange={e => setAi(e.target.value)}>
-                      {
-                        listAIComps.map((a, i) =>
-                          <option value={a} key={i}>{a}</option>
-                        )
-                      }
-                    </Form.Select>
-                    <Form.Text className="text-muted">
-                      The AI composition is the number of AIs for both team. The number on the left side also include the player yourself.
-                      <br />
-                      For example: <code>3v4</code> means <i>Player + 2 AI vs 3 AI</i>; <code>1v5</code> means <i>Player + 0 AI vs 5 AI</i>
-                      <br />
-                      Note that <code>spectator</code> means <i>spectator mode</i>, which is watching 5 AI vs 5 AI.
-                    </Form.Text>
-                  </Form.Group>
-                </> :
-                // Is NOT using AI comp
-                <></>
+              </>
+              // End Section for official Map
             }
 
-          </>
-          // End Section for official Map
-        }
+            {/* Welcome Message */}
 
-        {/* Welcome Message */}
+            <Form.Group className="mb-3">
+              <Form.Label>Welcome message (optional):</Form.Label>
+              <Form.Control type="text" placeholder="Welcome to My Map!" value={msg} onChange={e => setMsg(e.target.value)} />
+              <Form.Text>
+                A message to display on the left of the screen (Debug Area) when the map was loaded. This message is optional.
+              </Form.Text>
+            </Form.Group>
+          </Tab>
+          <Tab eventKey="xmlfile" title="XML Files">
+            <br />
+            {/* XML Files */}
 
-        <Form.Group className="mb-3">
-          <Form.Label>Welcome message (optional):</Form.Label>
-          <Form.Control type="text" placeholder="Welcome to My Map!" value={msg} onChange={e => setMsg(e.target.value)} />
-          <Form.Text>
-            A message to display on the left of the screen (Debug Area) when the map was loaded. This message is optional.
-          </Form.Text>
-        </Form.Group>
+            <Form.Group className="mb-3">
 
-        {/* XML Files */}
+              {/* File List */}
+              <Form.Label>Additional <code>XML</code> (Game Data) Files:</Form.Label>
+              <FileList
+                files={xmlFiles}
+                setFiles={setXmlFiles}
+                fileType="xml"
+                editorValidatorFn={XMLValidate}
+              />
+              <Form.Text className="text-muted">
+                The additional <code>XML</code> (Game Data) files that will be loaded into your custom map.
+                <ul>
+                  <li>
+                    For more information about XML data modding, please refer to <a href="https://jamiephan.github.io/HeroesOfTheStorm_TryMode2.0/modding.html#mod-xml" target="_blank" rel="noreferrer">jamiephan/TryMode2.0/modding.html#mod-xml</a>.
+                  </li>
+                  <li>
+                    Currently only supports Game Data (<code>&lt;Catalog&gt;</code>) type of <code>xml</code> files. Files such as Layouts (<code>&lt;Desc&gt;</code>) are not supported.
+                  </li>
+                  <li>
+                    These files are stored in your browser's storage, which will retain after a page refresh. Although the size limit is <code>5MB</code>, it should be more than enough for normal XML modding.
+                  </li>
+                </ul>
+              </Form.Text>
 
-        <Form.Group className="mb-3">
-
-          {/* File List */}
-          <Form.Label>Additional <code>XML</code> (Game Data) Files:</Form.Label>
-          <FileList
-            files={xmlFiles}
-            setFiles={setXmlFiles}
-            fileType="xml"
-            editorValidatorFn={XMLValidate}
-          />
-          <Form.Text className="text-muted">
-            The additional <code>XML</code> (Game Data) files that will be loaded into your custom map.
+              {/* File Upload */}
+              <FileUploadBar
+                files={xmlFiles}
+                setFiles={setXmlFiles}
+                fileType="xml"
+                mimeType="application/xml"
+                templateFn={BuildXMLTemplate}
+              />
+            </Form.Group>
+          </Tab>
+          <Tab eventKey="advancedoptions" title="Advanced Options">
+            <br />
             <ul>
-              <li>
-                For more information about XML data modding, please refer to <a href="https://jamiephan.github.io/HeroesOfTheStorm_TryMode2.0/modding.html#mod-xml" target="_blank" rel="noreferrer">jamiephan/TryMode2.0/modding.html#mod-xml</a>.
-              </li>
-              <li>
-                Currently only supports Game Data (<code>&lt;Catalog&gt;</code>) type of <code>xml</code> files. Files such as Layouts (<code>&lt;Desc&gt;</code>) are not supported.
-              </li>
-              <li>
-                These files are stored in your browser's storage, which will retain after a page refresh. Although the size limit is <code>5MB</code>, it should be more than enough for normal XML modding.
-              </li>
+              <li>This section allows you to modify each of the variables in the game (currently only supports <code>Boolean</code> type).</li>
+              <li>The script will be injected into the <code>MapScript.galaxy</code> after all libraries have been initialized.</li>
+              <li>Each of the section belows represent a single library from the game. </li>
+              <li>The default values were gathered via the <code>InitVariables()</code> function.</li>
             </ul>
-          </Form.Text>
+            <h4>Changes:</h4>
+            <ul>
+              {
+                isLoadingOptions ? <></> :
+                  libsOptions
+                    .map(s => s.libraries)
+                    .reduce((p, n) => p.concat(n))
+                    .map(x => x.options)
+                    .reduce((p, n) => p.concat(n))
+                    .map(x => x.value !== x.default ?
+                      <li>
+                        <code>{x.name} = </code>
+                        <code style={{ color: x.default ? "green" : "red" }}>{String(x.default)}</code>
+                        {" "}
+                        <ArrowRight />
+                        {" "}
+                        <code style={{ color: x.value ? "green" : "red" }}>
+                          <b>{String(x.value)}</b>
+                        </code>
+                      </li>
+                      : null)
+              }
+            </ul>
+            <Button variant="danger" onClick={() => {
+              if (window.confirm("You sure want to reset the options to default?")) {
+                const ol = JSON.parse(JSON.stringify(libsOptions))
+                ol.forEach(s => {
+                  s.libraries.forEach(d => {
+                    d.options.forEach(o => {
+                      o.value = o.default
+                    })
+                  })
+                })
+                setLibsOptions(ol)
+              }
+            }}
+            >Reset ALL to default</Button>
 
-          {/* File Upload */}
-          <FileUploadBar
-            files={xmlFiles}
-            setFiles={setXmlFiles}
-            fileType="xml"
-            mimeType="application/xml"
-            templateFn={BuildXMLTemplate}
-          />
-        </Form.Group>
+            {
+              isLoadingOptions ? <></> :
+                libsOptions.map((s, i) =>
+                  // Each section
+                  <React.Fragment key={i}>
+                    <hr />
+                    <h1>{s.title}</h1>
+                    <Accordion>
+                      {
+                        s.libraries.map((l, j) =>
+                          <Accordion.Item key={`${i}-${j}`} eventKey={`${i}-${j}`}>
+                            <Accordion.Header><span>{l.title} Library (<code>{l.lib}</code>)</span></Accordion.Header>
+                            <Accordion.Body>
+                              {
+                                // <Form.Group className="mb-3" >
+                                l.options.map((o, k) =>
+                                  <Form.Check key={`${i}-${j}-${k}`} type="checkbox" label={
+                                    o.default === o.value ?
+                                      <code style={{ color: o.value ? "green" : "red" }}>(default) {o.name} = {o.value ? "true" : "false"};</code> :
+                                      <code style={{ color: o.value ? "green" : "red" }}><b><i>* {o.name} = {o.value ? "true" : "false"};</i></b></code>
+                                  } checked={o.value} onChange={e => {
+                                    setLibsOptions(o => {
+                                      // Sorry
+                                      const ol = JSON.parse(JSON.stringify(o))
+                                      ol[i].libraries[j].options[k].value = e.target.checked
+                                      return ol
+                                    })
+                                  }
+                                  } />
+                                  // </Form.Group>
+                                )
+                              }
+                              <hr />
+                              <Button variant="danger" onClick={() => {
+                                if (window.confirm(`You sure want to reset ${l.title} Library to default?`)) {
+                                  setLibsOptions(o => {
+                                    const ol = JSON.parse(JSON.stringify(o))
+                                    ol[i].libraries[j].options.forEach(o => {
+                                      o.value = o.default
+                                    })
+                                    return ol
+                                  })
+                                }
+                              }}
+                              >{`Reset ${l.title} Library to default`}</Button>
+                            </Accordion.Body>
+                          </Accordion.Item>
+                        )
+                      }
+                    </Accordion>
+                  </React.Fragment>
+                )}
+          </Tab>
+        </Tabs>
 
         <hr />
 

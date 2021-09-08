@@ -5,6 +5,14 @@ const Error = require("../../Model/Responses/Error");
 
 const buildSchema = async () => {
 
+  const libsOptions = require("../../defaultSettings/")
+    .libs
+    .map(s => s.libraries)
+    .reduce((p, n) => p.concat(n))
+    .map(x => x.options)
+    .reduce((p, n) => p.concat(n))
+    .map(x => x.name)
+
   const schema = Joi.object({
     // Name must be ASCII
     name: Joi.string()
@@ -71,6 +79,13 @@ const buildSchema = async () => {
         content: Joi.string().required()
       }))
       .unique((a, b) => a.name.toLowerCase() === b.name.toLowerCase())
+      .required(),
+    libsOptions: Joi.array()
+      .items(
+        Joi.string().valid(
+          ...libsOptions
+        )
+      )
       .required()
 
   }).prefs({ convert: false })

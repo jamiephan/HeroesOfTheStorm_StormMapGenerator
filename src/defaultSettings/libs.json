@@ -1,0 +1,1468 @@
+[
+  {
+    "title": "Core Libraries",
+    "libraries": [
+      {
+        "title": "Heroes",
+        "lib": "libCore",
+        "options": [
+          {
+            "name": "libCore_gv_dEBUGDebuggingEnabled",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_dEBUGGameIsOnline",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_dEBUGDeathRecapEnabled",
+            "default": true
+          },
+          {
+            "name": "libCore_gv_dEBUGPingLimitEnabled",
+            "default": true
+          },
+          {
+            "name": "libCore_gv_dEBUGSoloXPOn",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_sYSIsBrawlGame",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_sYSStartGame",
+            "default": true
+          },
+          {
+            "name": "libCore_gv_sYSDisplayIntroCutscene",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_sYSTowns",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_sYSMinionAI",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_sYSMinionSpawningOn",
+            "default": true
+          },
+          {
+            "name": "libCore_gv_sYSCustomMinionsEnabled",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_sYSTalentsOn",
+            "default": true
+          },
+          {
+            "name": "libCore_gv_sYSTowerAI",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_sYSJungleCreepCamps",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_sYSJungleWatchTowers",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_sYSUseEncouragementPanel",
+            "default": true
+          },
+          {
+            "name": "libCore_gv_sYSDataMiningListenForData",
+            "default": true
+          },
+          {
+            "name": "libCore_gv_sYSXPOn",
+            "default": true
+          },
+          {
+            "name": "libCore_gv_tUTTalentsAutobuyOn",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_mAPUsesCirclingAI",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_brettTimersEnabled",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_dataXPGranularBountyXPMathDisplayEnabled",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_dEBUGErrorDuringInitialization",
+            "default": false
+          },
+          {
+            "name": "libCore_gv_zS_SendTransmissionCampaignChatBubbleOn",
+            "default": true
+          }
+        ]
+      },
+      {
+        "title": "Game",
+        "lib": "libGame",
+        "options": [
+          {
+            "name": "libGame_gv_firstBloodAvailable",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_gameOver",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_teamOrderCoreAlive",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_xPTrickleEnabled",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_afk_AfkDetectionSystemEnabled",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_afk_AfkDetectionSystemSkipped",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_afk_DebugOn",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_afk_UseAFKSystem",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_afk_UseBrawlAFKSystem",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_afk_BrawlAfkAccountsForAbilities",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_announcement_SystemEnabled",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_towerMapPlaysCoreWarning",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_endofMatchAwardsDisabled",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_oldXPCheat",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_heroSpawnReady",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_heroPickDone",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_gateTimerReady",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_heroSpawnBlockGame",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_gameStarted",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_randomizeMountsAndSkins",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_shufflePickEnabled",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_gameOver_DetermineWinningTeamHasRun",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_dEBUG_PercentScalingEnabled",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_heroDeath_UpdateStats",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_heroDeath_RespawnMounted",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_heroDeath_RunDeathUIUpdates",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_heroDeathMultikillTimerEnabled",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_loot_DropBannerInTownHallRubble",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_minionTakesReducedSpellDamage",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_minionSystemStarted",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_minionSystemPaused",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_minionSpawningEnabled",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_minionMapNeverSpawnsCatapults",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_minionStaggerCatapultSpawning",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_minion_CapCatapults",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_minionScalingEnabled",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_townDestructionRemovesCoreInvulnerable",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_onFireFirstCalculationDone",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_onFireEnabled",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_onFirePrintingEnabled",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_onFireUpdating",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_suppressInitialHeroSpawnFX",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_buildingScalingEnabled",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_talents_PlayChooseATalentSound",
+            "default": true
+          },
+          {
+            "name": "libGame_gv_townMidLateGamePowerTransitionOn",
+            "default": false
+          },
+          {
+            "name": "libGame_gv_townBasicMinimapHealthMontior",
+            "default": true
+          }
+        ]
+      },
+      {
+        "title": "Support",
+        "lib": "libSprt",
+        "options": [
+          {
+            "name": "libSprt_gv_performanceTestPerformanceTestRunning",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_qACheatsSeekingApplyTarget",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_qACheatsSeekingRemoveTarget",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_qACheatsWeaponsDisabled",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUGDesignCamEnabled",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_soundRepeatActive",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUGXPPassiveBalancerEnable",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUGXPBoostEnable",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUGXPTrickleOnly",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUGXPSourceHero",
+            "default": true
+          },
+          {
+            "name": "libSprt_gv_dEBUGXPSourceMinion",
+            "default": true
+          },
+          {
+            "name": "libSprt_gv_dEBUGXPSourceStructure",
+            "default": true
+          },
+          {
+            "name": "libSprt_gv_dEBUGXPSourceCreep",
+            "default": true
+          },
+          {
+            "name": "libSprt_gv_dEBUGSelectionEnabled",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUGTalentDebugEnabled",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUGCombatTextEnabled",
+            "default": true
+          },
+          {
+            "name": "libSprt_gv_dEBUGXPTextEnabled",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUGHeroSelectWait",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUGHeroMimic",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUG60SecondPauseOnOff",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUGDebugMessagesEnabled",
+            "default": true
+          },
+          {
+            "name": "libSprt_gv_dEBUGCinematicsModeEnabled",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUGMapTextEnabled",
+            "default": true
+          },
+          {
+            "name": "libSprt_gv_dEBUGBonusMinionXP",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUGNoRegen",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUGSapperMinionsEnabled",
+            "default": false
+          },
+          {
+            "name": "libSprt_gv_gPU2021ExtendedDurationXPGlobesEnabled",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "AI",
+        "lib": "libAIAI",
+        "options": [
+          {
+            "name": "libAIAI_gv_towerSystemOn",
+            "default": false
+          },
+          {
+            "name": "libAIAI_gv_defenderAICreepNeedsNewOrder",
+            "default": false
+          },
+          {
+            "name": "libAIAI_gv_defenderAIDisplayAIStatus",
+            "default": false
+          },
+          {
+            "name": "libAIAI_gv_heroAIActive",
+            "default": false
+          },
+          {
+            "name": "libAIAI_gv_heroAIAIChoosesTalents",
+            "default": true
+          },
+          {
+            "name": "libAIAI_gv_heroAIDisplayAIStatus",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Map Mechanics",
+        "lib": "libMapM",
+        "options": [
+          {
+            "name": "libMapM_gv_jungleCreepCampsInitialized",
+            "default": false
+          },
+          {
+            "name": "libMapM_gv_jungleAllCampsShouldBeHibernating",
+            "default": false
+          },
+          {
+            "name": "libMapM_gv_mMMapMechanicDisabled",
+            "default": false
+          },
+          {
+            "name": "libMapM_gv_mMMapEventHasOccured",
+            "default": false
+          },
+          {
+            "name": "libMapM_gv_mMRavenUseManualTributeSpawns",
+            "default": false
+          },
+          {
+            "name": "libMapM_gv_mMRavenUseTributePreviews",
+            "default": true
+          },
+          {
+            "name": "libMapM_gv_mMRavenCurseLifted",
+            "default": false
+          },
+          {
+            "name": "libMapM_gv_mMRavenTimers2",
+            "default": false
+          },
+          {
+            "name": "libMapM_gv_mMRavenEventFirstTime",
+            "default": true
+          },
+          {
+            "name": "libMapM_gv_mMGardensDragonSpawnFirstTime",
+            "default": true
+          },
+          {
+            "name": "libMapM_gv_mMDragonballsTransmissionShrinesRechargeFirstTime",
+            "default": true
+          }
+        ]
+      },
+      {
+        "title": "Game Data Helper",
+        "lib": "libGDHL",
+        "options": [
+          {
+            "name": "libGDHL_gv_gPU2020EventEnabled",
+            "default": true
+          },
+          {
+            "name": "libGDHL_gv_gPU2020Force01Rando",
+            "default": false
+          },
+          {
+            "name": "libGDHL_gv_heroAbathurSymbioteDontLockCameraforCutscene",
+            "default": false
+          },
+          {
+            "name": "libGDHL_gv_heroSgtHammerUseEffectForBFGTargetCalculation",
+            "default": false
+          },
+          {
+            "name": "libGDHL_gv_ragnarosExists",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "UI",
+        "lib": "libUIUI",
+        "options": [
+          {
+            "name": "libUIUI_gv_deathTimerPane_Enabled",
+            "default": false
+          },
+          {
+            "name": "libUIUI_gv_uIDebugPanelForceMinionWaveComp",
+            "default": false
+          },
+          {
+            "name": "libUIUI_gv_uIDebugPanelSpawnAtCamera",
+            "default": false
+          },
+          {
+            "name": "libUIUI_gv_uIDebugPanelSavedHero",
+            "default": false
+          },
+          {
+            "name": "libUIUI_gv_uIDebugPanelShowAllCombatText",
+            "default": false
+          },
+          {
+            "name": "libUIUI_gv_uIDebugPanelDisableMinionSpawningToggle",
+            "default": false
+          },
+          {
+            "name": "libUIUI_gv_uIDebugPanelDisableTrickleXPToggle",
+            "default": false
+          },
+          {
+            "name": "libUIUI_gv_uIDebugPanelFloatingCombatTextToggle",
+            "default": true
+          },
+          {
+            "name": "libUIUI_gv_uIEndOfMatchAwardsAnyVoteCast",
+            "default": false
+          },
+          {
+            "name": "libUIUI_gv_uIEndOfMatchAwardsMVPSequenceEnded",
+            "default": false
+          },
+          {
+            "name": "libUIUI_gv_uIEndOfMatchAwardsObserverHasSkipped",
+            "default": false
+          },
+          {
+            "name": "libUIUI_gv_floatingCombatText_SuppressLeashingText",
+            "default": false
+          },
+          {
+            "name": "libUIUI_gv_uIHealingFountainsHelpTextShowTextTagforTutorial",
+            "default": false
+          },
+          {
+            "name": "libUIUI_gv_uIHealingFountainsHelpTextEnabled",
+            "default": true
+          },
+          {
+            "name": "libUIUI_gv_heroicsObtainedAutomatedTeamNotificationsAllowed",
+            "default": true
+          },
+          {
+            "name": "libUIUI_gv_useStatusFrames",
+            "default": true
+          },
+          {
+            "name": "libUIUI_gv_uIOnFireDEBUGOnFireDebugEnabled",
+            "default": false
+          },
+          {
+            "name": "libUIUI_gv_uIOnFireOnFireDisplayEnabled",
+            "default": true
+          }
+        ]
+      },
+      {
+        "title": "Sound",
+        "lib": "libSond",
+        "options": [
+          {
+            "name": "libSond_gv_heroVO_Enabled",
+            "default": true
+          },
+          {
+            "name": "libSond_gv_soundtrack_MapSoundtrackPlaying",
+            "default": false
+          },
+          {
+            "name": "libSond_gv_soundtrack_IntroSoundtrackPlaying",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Starting Experience",
+        "lib": "libStEx",
+        "options": [
+          {
+            "name": "libStEx_gv_sE_VOPausedTrickleXP",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_sETutorialCameraLocked",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_tutorialCinematicRestoreSelection",
+            "default": true
+          },
+          {
+            "name": "libStEx_gv_sE_FreezeUnitsGameTimerUnpaused",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_sE_TrainingMode",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_sE_TrainingModeTalentTaught",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_sE_TrainingModeTalentPanelOpened",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_sE_TrainingModeTalentPicked",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_sE_TrainingModeTalentTeachingOpenTheGateTimerPaused",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_sE_TrainingModeTipDisplaying",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_sE_TrainingModeTipHealingFountainDid",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_sE_TrainingModeTipHearthstoneDid",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_sE_TrainingModeTipManaDid",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_encounterActive",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_objectiveTargetDummyUpdateReady",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_tutorialVeteranPanelFlashing",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_targetDummyDamageTimerStarted",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_targetDummyPeaceTimerStarted",
+            "default": false
+          },
+          {
+            "name": "libStEx_gv_automation_Debug",
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Heroes",
+    "libraries": [
+      {
+        "title": "Cho'Gall",
+        "lib": "libHCHO",
+        "options": [
+          {
+            "name": "libHCHO_gv_tryMeChoGallIsSwapping",
+            "default": false
+          },
+          {
+            "name": "libHCHO_gv_tryMeChoGallAIRequiresRestart",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Tracer",
+        "lib": "libTrac",
+        "options": [
+          {
+            "name": "libTrac_gv_tracerRecallDebugMode",
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Maps*",
+    "libraries": [
+      {
+        "title": "Alterac Pass",
+        "lib": "libMMAP",
+        "options": [
+          {
+            "name": "libMMAP_gv_dEBUG_AlliedFlagTargetable",
+            "default": false
+          },
+          {
+            "name": "libMMAP_gv_dEBUG_CampDefendersOn",
+            "default": true
+          },
+          {
+            "name": "libMMAP_gv_firstEventHasHappened",
+            "default": false
+          },
+          {
+            "name": "libMMAP_gv_mapMechanicRewardActive",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Battlefield of Eternity (Mod)",
+        "lib": "libMLBD",
+        "options": [
+          {
+            "name": "libMLBD_gv_mMBOESuppressExplosions",
+            "default": false
+          },
+          {
+            "name": "libMLBD_gv_mMBOELaningPathLineCreated",
+            "default": false
+          },
+          {
+            "name": "libMLBD_gv_mMBOEDebugUsed",
+            "default": false
+          },
+          {
+            "name": "libMLBD_gv_mMBOEShowBossPositions",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Blackheart's Bay (Mod)",
+        "lib": "libBBAY",
+        "options": [
+          {
+            "name": "libBBAY_gv_mMBBCannonballsGhostShipShooting",
+            "default": false
+          },
+          {
+            "name": "libBBAY_gv_mMBBCannonballsTreasureChestIsFirstChest",
+            "default": true
+          },
+          {
+            "name": "libBBAY_gv_mMBBCannonballsTrasmissionPlaying",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Braxis Holdout",
+        "lib": "libSCHO",
+        "options": [
+          {
+            "name": "libSCHO_gv_mMHO_HiveControlBeaconEventActive",
+            "default": false
+          },
+          {
+            "name": "libSCHO_gv_mMHO_ArchangelLanerPathLineCreated",
+            "default": false
+          },
+          {
+            "name": "libSCHO_gv_mMHO_ArchangelElevator_ShouldBeLowered",
+            "default": false
+          },
+          {
+            "name": "libSCHO_gv_mMHO_OrderPlayedAnimation",
+            "default": false
+          },
+          {
+            "name": "libSCHO_gv_mMHO_ChaosPlayedAnimation",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Garden of Terror",
+        "lib": "libGRDN",
+        "options": [
+          {
+            "name": "libGRDN_gv_firstSeedEventWarningPlayed",
+            "default": false
+          },
+          {
+            "name": "libGRDN_gv_firstSeedSpawnTransmissionPlayed",
+            "default": false
+          },
+          {
+            "name": "libGRDN_gv_firstTerrorSpawnTransmissionPlayed",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Hanamura",
+        "lib": "libMHmu",
+        "options": [
+          {
+            "name": "libMHmu_gv_hanamuraUseVisionCamps",
+            "default": true
+          },
+          {
+            "name": "libMHmu_gv_elevator_WaitingToLower",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Haunted Mines",
+        "lib": "libMHtM",
+        "options": [
+          {
+            "name": "libMHtM_gv_mMHM_UseOriginalGolemProgression",
+            "default": false
+          },
+          {
+            "name": "libMHtM_gv_mMUnderworldOpened",
+            "default": false
+          },
+          {
+            "name": "libMHtM_gv_mMHM_OrderBossGoesTopLane",
+            "default": false
+          },
+          {
+            "name": "libMHtM_gv_mMUnderworldSummonedBossRevive",
+            "default": false
+          },
+          {
+            "name": "libMHtM_gv_mMUnderworldMapEventDisabled",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Heaven & Hell",
+        "lib": "libMLHH",
+        "options": [
+          {
+            "name": "libMLHH_gv_hHWeaponRackBroken",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Infernal Shrines (Mod)",
+        "lib": "libMSHE",
+        "options": [
+          {
+            "name": "libMSHE_gv_mMISCursedEvent",
+            "default": false
+          },
+          {
+            "name": "libMSHE_gv_mMISShowOjectiveTimer",
+            "default": false
+          },
+          {
+            "name": "libMSHE_gv_mMISShrineIsActive",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Overwatch Data",
+        "lib": "libOVER",
+        "options": [
+          {
+            "name": "libOVER_gv_overwatchModExtraScalingEnabled",
+            "default": true
+          }
+        ]
+      },
+      {
+        "title": "Sky Temple",
+        "lib": "libMLCP",
+        "options": [
+          {
+            "name": "libMLCP_gv_mMSkyTempleBlessingFirstTime",
+            "default": true
+          },
+          {
+            "name": "libMLCP_gv_mMSkyTempleBlessNextTemples3ed",
+            "default": false
+          },
+          {
+            "name": "libMLCP_gv_mMSkyTempleBlessNextTemples1ed",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Tomb Spider Queen",
+        "lib": "libMSOC",
+        "options": [
+          {
+            "name": "libMSOC_gv_mMTombSpiderQueenFirstActivation",
+            "default": true
+          },
+          {
+            "name": "libMSOC_gv_mMTombSpiderQueenTurnInCompleteFirstTime",
+            "default": true
+          },
+          {
+            "name": "libMSOC_gv_mMTombSpiderQueenScalingStart",
+            "default": false
+          },
+          {
+            "name": "libMSOC_gv_mMTombSpiderQueenHarrisonFinale",
+            "default": false
+          },
+          {
+            "name": "libMSOC_gv_mMTombSpiderQueenEventStartOn",
+            "default": false
+          },
+          {
+            "name": "libMSOC_gv_mMTombSpiderQueenDisableEven",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Towers of Doom",
+        "lib": "libMTOD",
+        "options": [
+          {
+            "name": "libMTOD_gv_mMToDSixTownEventActive",
+            "default": false
+          },
+          {
+            "name": "libMTOD_gv_mMToDFirstEventSpawned",
+            "default": false
+          },
+          {
+            "name": "libMTOD_gv_mMToDSpiritHealerClicked",
+            "default": false
+          },
+          {
+            "name": "libMTOD_gv_mMToDBanterVariable",
+            "default": true
+          },
+          {
+            "name": "libMTOD_gv_mMToDPhaseTwoCheatUsed",
+            "default": false
+          },
+          {
+            "name": "libMTOD_gv_mMToDMapEventDisabled",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Volskaya Mechanics",
+        "lib": "libVLSK",
+        "options": [
+          {
+            "name": "libVLSK_gv_grantStandardCapturePointRewards",
+            "default": true
+          },
+          {
+            "name": "libVLSK_gv_capturePointPlayControllingSounds",
+            "default": false
+          },
+          {
+            "name": "libVLSK_gv_overtimeActive",
+            "default": false
+          },
+          {
+            "name": "libVLSK_gv_useFirstEventVoiceover",
+            "default": true
+          }
+        ]
+      },
+      {
+        "title": "Warhead Junction",
+        "lib": "libMSC2",
+        "options": [
+          {
+            "name": "libMSC2_gv_mMSC2FourWarheadsSpawn",
+            "default": true
+          },
+          {
+            "name": "libMSC2_gv_mMSC2WarheadEventFirstTime",
+            "default": true
+          },
+          {
+            "name": "libMSC2_gv_mMSC2GlobalConversationPlayingdelete",
+            "default": false
+          },
+          {
+            "name": "libMSC2_gv_mMSC2GlobalConversationPlaying",
+            "default": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Brawl*",
+    "libraries": [
+      {
+        "title": "Arena Mode",
+        "lib": "libAREN",
+        "options": [
+          {
+            "name": "ibAREN_gv_OverrideMapShuffleSettings",
+            "default": false
+          },
+          {
+            "name": "ibAREN_gv_gameOver_DetermineWinningTeamHasRun",
+            "default": true
+          },
+          {
+            "name": "ibAREN_gv_aRM_BaseRevealersEnabled",
+            "default": true
+          },
+          {
+            "name": "ibAREN_gv_aRM_VictorySequencePlaying",
+            "default": false
+          },
+          {
+            "name": "ibAREN_gv_aRM_PanCameraToCore",
+            "default": true
+          },
+          {
+            "name": "ibAREN_gv_aRM_PlayCrowdCheerSounds",
+            "default": true
+          },
+          {
+            "name": "ibAREN_gv_showCoreStatusBars",
+            "default": true
+          },
+          {
+            "name": "ibAREN_gv_playRoundOverVO",
+            "default": true
+          },
+          {
+            "name": "ibAREN_gv_aRM_Debug_ShowMultikillCheers",
+            "default": false
+          },
+          {
+            "name": "ibAREN_gv_aRM_Debug_ShowEmittersWhenEmitting",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "ARM_GardenTerror",
+        "lib": "libAMGT",
+        "options": [
+          {
+            "name": "libAMGT_gv_aRMGardenNightFallen",
+            "default": false
+          },
+          {
+            "name": "libAMGT_gv_aRMGardenMapEventDisabled",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Arena Mode (Punisher)",
+        "lib": "AMPU",
+        "options": [
+          {
+            "name": "libAMPU_gv_aRMPunisherPunisherFirstLeapOccurred",
+            "default": false
+          },
+          {
+            "name": "libAMPU_gv_aRMPunisherPunisherRespawning",
+            "default": false
+          },
+          {
+            "name": "libAMPU_gv_aRMPunisherDebugTextEnabled",
+            "default": false
+          },
+          {
+            "name": "libAMPU_gv_aRMPunisherMapEventDisabled",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "ARM_Sky Temple",
+        "lib": "libAMCT",
+        "options": [
+          {
+            "name": "libAMCT_gv_aRMSkyTempleIsFirstTemple",
+            "default": true
+          },
+          {
+            "name": "libAMCT_gv_aRMSkyTempleSecondTempleEventStarted",
+            "default": false
+          },
+          {
+            "name": "libAMCT_gv_aRMSkyTempleOrderCoreBelow50",
+            "default": false
+          },
+          {
+            "name": "libAMCT_gv_aRMSkyTempleOrderCoreBelow20",
+            "default": false
+          },
+          {
+            "name": "libAMCT_gv_aRMSkyTempleChaosCoreBelow50",
+            "default": false
+          },
+          {
+            "name": "libAMCT_gv_aRMSkyTempleChaosCoreBelow20",
+            "default": false
+          },
+          {
+            "name": "libAMCT_gv_aRMTempleMapEventDisabled",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "ARM_Volskaya",
+        "lib": "libAMVS",
+        "options": [
+          {
+            "name": "libAMVS_gv_overrideEvent",
+            "default": false
+          },
+          {
+            "name": "libAMVS_gv_noEnd",
+            "default": false
+          },
+          {
+            "name": "libAMVS_gv_notifiactionUp",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Blackheart's Revenge (Mod)",
+        "lib": "libMDoE",
+        "options": [
+          {
+            "name": "libMDoE_gv_mDoE_Has50PercentProgressAudioPlayed",
+            "default": false
+          },
+          {
+            "name": "libMDoE_gv_mDoE_Has75PercentProgressAudioPlayed",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Deadmans Stand (Mod)",
+        "lib": "libPEB1",
+        "options": [
+          {
+            "name": "libPEB1_gv_noAbathurSecondChance",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_noMurkySecondChance",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_spawnMurkyForFinalHoldout",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_basicWavePaused",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_pauseNydusSpawning",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_archangelRotateClockwise",
+            "default": true
+          },
+          {
+            "name": "libPEB1_gv_holdout1_Started",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_holdout1_Complete",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_holdout1IntroTransmissionFinished",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_holdout2_Started",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_holdout2_Complete",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_holdout2IntroTransmissionFinished",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_holdout3_Started",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_holdout3_Complete",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_holdout3_PingsReady",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_holdout3IntroTransmissionFinished",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_creepCampsRevealed",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_disableZergSpawning",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_cheatsReady",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_skipCheatReady",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_abathurInitialSpawnRight",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_zagaraRegionTwo",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_zergHeroesStage2Ready",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_pauseHeroRevival",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_zergHeroSpawnSoundsEnabled",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_zergSpawningDisabled",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_pauseNydusSpawning",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_pEB1BossFirstWormWave",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_checkpointGate1Opening",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_checkpointGate2Opening",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_holdoutStage1Started",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_holdoutStage2Started",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_holdoutStage2Finished",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_retrying",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_victorySequenceRan",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_objectivesCreated1",
+            "default": false
+          },
+          {
+            "name": "libPEB1_gv_objectivesCreated2",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "PvE Brawl Mod",
+        "lib": "libPVEB",
+        "options": [
+          {
+            "name": "libPVEB_gv_pvEPickupPlacingPreplacedPickups",
+            "default": false
+          },
+          {
+            "name": "libPVEB_gv_pvEWavePaused",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "PvE Brawl Mod (Starcraft)",
+        "lib": "libPESC",
+        "options": [
+          {
+            "name": "libPESC_gv_hMCLDiscovered",
+            "default": false
+          },
+          {
+            "name": "libPESC_gv_hMCLCapturing",
+            "default": false
+          },
+          {
+            "name": "libPESC_gv_hMCLHardModeActive",
+            "default": false
+          },
+          {
+            "name": "libPESC_gv_hMCLHardModeAvailable",
+            "default": true
+          }
+        ]
+      },
+      {
+        "title": "PvE Mod",
+        "lib": "libPVEM",
+        "options": [
+          {
+            "name": "libPVEM_gv_pvEAttackWavePaused",
+            "default": false
+          },
+          {
+            "name": "libPVEM_gv_pvEPickupPlacingPreplacedPickups",
+            "default": false
+          },
+          {
+            "name": "libPVEM_gv_pvEVictorySequenceRan",
+            "default": false
+          },
+          {
+            "name": "libPVEM_gv_pvEDefeatDisabled",
+            "default": false
+          },
+          {
+            "name": "libPVEU_gv_dEBUG_ShowCuratedHeroPickMessages",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "PvE UI",
+        "lib": "libPVEU",
+        "options": [
+          {
+            "name": "libPVEU_gv_dEBUG_ShowCuratedHeroPickMessages",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "LunarFestival",
+        "lib": "libLNYF",
+        "options": [
+          {
+            "name": "libLNYF_gv_endGameTimerStarted",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "One Lane Map Shared",
+        "lib": "libOLMS",
+        "options": [
+          {
+            "name": "libOLMS_gv_allowMutatortoOverrideHeroSelection",
+            "default": false
+          }
+        ]
+      },
+      {
+        "title": "Pull Party",
+        "lib": "libMMPP",
+        "options": [
+          {
+            "name": "libMMPP_gv_tracerVictory",
+            "default": true
+          },
+          {
+            "name": "libMMPP_gv_tychusVictory",
+            "default": true
+          }
+        ]
+      },
+      {
+        "title": "In Game Hero Selection",
+        "lib": "libIGHS",
+        "options": [
+          {
+            "name": "libIGHS_gv_dEBUG_ShuffleDebugEnabled",
+            "default": false
+          },
+          {
+            "name": "libIGHS_gv_dEBUG_ShuffleTimerIsPaused",
+            "default": false
+          }
+        ]
+      }
+    ]
+  }
+]
