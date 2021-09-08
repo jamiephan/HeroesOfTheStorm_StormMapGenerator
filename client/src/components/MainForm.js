@@ -312,12 +312,18 @@ export default function MainForm() {
           </Tab>
           <Tab eventKey="advancedoptions" title="Advanced Options">
             <br />
-            <ul>
-              <li>This section allows you to modify each of the variables in the game (currently only supports <code>Boolean</code> type).</li>
-              <li>The script will be injected into the <code>MapScript.galaxy</code> after all libraries have been initialized.</li>
-              <li>Each of the section belows represent a single library from the game. </li>
-              <li>The default values were gathered via the <code>InitVariables()</code> function.</li>
-            </ul>
+            <Alert variant="warning">
+              <ul style={{ marginBottom: "0" }}>
+                <li>This section allows you to modify each non-constant variables in the game (currently only supports <code>Boolean</code> type).</li>
+                <li>The script will be injected into the <code>MapScript.galaxy</code> after all libraries have been initialized.</li>
+                <li>Each of the sections belows represent a single library from the game. </li>
+                <li>The default values were gathered via the <code>InitVariables()</code> function from their respective library.</li>
+                <hr />
+                <li><b>Note:</b> The settings on this page <b>will not</b> be saved on your browser, refreshing will reset to default.</li>
+                <li><b>Note:</b> Some variables depends on certain variables to function properly or some might not have any effect. You will need to test or study the trigger code manually.</li>
+                <li><b>Note:</b> For <code><b>Maps</b></code> and <code><b>Brawl</b></code> libraries, <b>Make sure your map have the required mods, or the map will crash when launched.</b></li>
+              </ul>
+            </Alert>
             <h4>Changes:</h4>
             <ul>
               {
@@ -341,6 +347,7 @@ export default function MainForm() {
                       : null)
               }
             </ul>
+            <br />
             <Button variant="danger" onClick={() => {
               if (window.confirm("You sure want to reset the options to default?")) {
                 const ol = JSON.parse(JSON.stringify(libsOptions))
@@ -362,7 +369,7 @@ export default function MainForm() {
                   // Each section
                   <React.Fragment key={i}>
                     <hr />
-                    <h4>{s.title}</h4>
+                    <h4>{s.title} Libraries:</h4>
                     <Accordion>
                       {
                         s.libraries.map((l, j) =>
@@ -374,7 +381,7 @@ export default function MainForm() {
                                 l.options.map((o, k) =>
                                   <Form.Check key={`${i}-${j}-${k}`} type="checkbox" label={
                                     o.default === o.value ?
-                                      <code style={{ color: o.value ? "green" : "red" }}>(default) {o.name} = {o.value ? "true" : "false"};</code> :
+                                      <code style={{ color: o.value ? "green" : "red" }}> {o.name} = {o.value ? "true" : "false"};</code> :
                                       <code style={{ color: o.value ? "green" : "red" }}><b><i>* {o.name} = {o.value ? "true" : "false"};</i></b></code>
                                   } checked={o.value} onChange={e => {
                                     setLibsOptions(o => {
