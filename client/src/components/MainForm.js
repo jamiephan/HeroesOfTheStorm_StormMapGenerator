@@ -333,8 +333,8 @@ export default function MainForm() {
                     .reduce((p, n) => p.concat(n))
                     .map(x => x.options)
                     .reduce((p, n) => p.concat(n))
-                    .map(x => x.value !== x.default ?
-                      <li>
+                    .map((x, i) => x.value !== x.default ?
+                      <li key={i}>
                         <code>{x.name} = </code>
                         <code style={{ color: x.default ? "green" : "red" }}>{String(x.default)}</code>
                         {" "}
