@@ -362,7 +362,7 @@ export default function MainForm() {
                   // Each section
                   <React.Fragment key={i}>
                     <hr />
-                    <h1>{s.title}</h1>
+                    <h4>{s.title}</h4>
                     <Accordion>
                       {
                         s.libraries.map((l, j) =>
