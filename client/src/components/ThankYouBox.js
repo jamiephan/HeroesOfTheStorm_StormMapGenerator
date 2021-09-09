@@ -11,7 +11,7 @@ export default function BottomSection() {
         Thank you for using Storm Map Generator!
       </Alert.Heading>
       <p>
-        Please note that the map will take around 5 - 30 seconds (depends on your configuration) to generate. Please be patient.
+        Please note that the map will take around 15 seconds to generate. Please be patient.
       </p>
       <p>
         For instructions on how to run the map, please refer to <a href="https://jamiephan.github.io/HeroesOfTheStorm_TryMode2.0/install.html" target="_blank" rel="noreferrer">jamiephan/TryMode2.0/install.html</a>.
