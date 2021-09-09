@@ -1,5 +1,6 @@
 const fetch = require("node-fetch")
 const util = require('util');
+const logger = require("../helpers/Logger")("GitHub API")
 
 const host = require("./GithubAPIHost")
 const tutorialMaps = require("./TutorialMaps")
@@ -10,15 +11,19 @@ client.set = util.promisify(client.set);
 
 const GithubAPI = async (type) => {
   // Redis Caching
+  logger.debug("Checking Redis Cache: " + type.name)
   const result = await client.get(type.name)
   if (result) {
+    logger.info("Redis Cache Exist: " + type.name)
     return JSON.parse(result)
   } else {
     // Do API
+    logger.info("Redis Cache Expired: " + type.name)
     const response = await fetch(type.url)
     const responseJson = await response.json()
     const parsedData = type.parser(responseJson)
     await client.setex(type.name, parseInt(process.env.REDIS_API_CACHE_EXPIRE || 1800), JSON.stringify(parsedData))
+    logger.debug("Set Redis Cache: " + type.name)
     return parsedData
   }
 }

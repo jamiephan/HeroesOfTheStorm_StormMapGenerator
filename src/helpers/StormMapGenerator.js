@@ -5,6 +5,8 @@ const xml2js = require('xml2js')
 const glob = require("glob")
 const sanitize = require("sanitize-filename");
 
+const loggerGenerator = require("../helpers/Logger")
+
 const writeFile = util.promisify(fs.writeFile)
 const readFile = util.promisify(fs.readFile)
 const mkdir = util.promisify(fs.mkdir)
@@ -54,6 +56,8 @@ const getIndicesOf = (searchStr, str, caseSensitive) => {
 
 class StormMapGenerator {
   constructor(name, msg, localMapPath, XMLFiles, libsOptions) {
+    this.logger = loggerGenerator(`Storm Map Generator (${name})`)
+    this.logger.debug(`Generator Called: ${name}, ${msg}, ${localMapPath}, ${XMLFiles.length}, ${libsOptions.length}`)
     this.name = name
     this.localMapPath = localMapPath
     this.msg = msg
@@ -69,10 +73,11 @@ class StormMapGenerator {
 
     // Extract the whole map first
     const tempMapObj = tmp.dirSync({ unsafeCleanup: true })
+    this.logger.debug(`Extracting ${this.localMapPath} -> ${tempMapObj.name}`)
     await exec(`wine "/app/bin/MPQEditor.exe" e "Z:/${this.localMapPath}" "*" "Z:/${tempMapObj.name}" /fp`)
 
     if (this.XMLFiles.length > 0) {
-
+      this.logger.info(`Patching XML Files`)
       const modDirName = randId().toString() + "-StormMapGenerator"
 
       const baseStormData = glob.sync(`${tempMapObj.name}/base.stormdata`, { nocase: true, })
@@ -101,7 +106,7 @@ class StormMapGenerator {
         // Check is gamedata legit
         if (catalogs && Array.isArray(catalogs)) {
           // Probably legit, then change the data to Parsed
-          console.log("Has Gamedata.Includes.Catalog and its an array")
+          this.logger.debug("Has Gamedata.Includes.Catalog and its an array")
           gameDataXMLContentParsed = await xml2js.parseStringPromise(gameDataXMLContent)
         }
       } else {
@@ -127,6 +132,8 @@ class StormMapGenerator {
     // Patch libs variables or message
 
     if (this.libsOptions.length > 0 || this.msg !== "") {
+
+      this.logger.info(`Patching MapScript File`)
 
       // Extract MapScript.galaxy
       const mapScriptFilePath = glob.sync(`${tempMapObj.name}/mapscript.galaxy`, { nocase: true })[0]
@@ -158,6 +165,7 @@ class StormMapGenerator {
 
     // Patch Map name
 
+    this.logger.info(`Patching Map Name`)
     const mapDisplayName = this.name.replace(/\.stormmap/gi, "")
     // Read it
     const documentHeaderPath = glob.sync(`${tempMapObj.name}/documentheader`, { nocase: true })[0]
@@ -191,9 +199,11 @@ class StormMapGenerator {
 
     // =======================
     // Build the map
+    this.logger.info(`Creating Map`)
     await exec(`wine "/app/bin/MPQEditor.exe" n "Z:/${this.mapFileObj.name}"`)
+    this.logger.info(`Adding Files to Map`)
     await exec(`wine "/app/bin/MPQEditor.exe" a "Z:/${this.mapFileObj.name}" "Z:/${tempMapObj.name}" /c /auto /r`)
-
+    this.logger.info(`Completed Building Map`)
   }
 
   async _readMap() {

@@ -4,6 +4,7 @@ const path = require("path")
 const fetch = require("node-fetch")
 const fs = require("fs")
 const util = require('util');
+const logger = require("../helpers/Logger")("cache-maps")
 
 const writeFile = util.promisify(fs.writeFile)
 const mkdir = util.promisify(fs.mkdir)
@@ -28,23 +29,27 @@ const getCachePath = async (downloadLink, id) => {
 
   // Not Expired, so just return the path
   if (!isExpired(id)) {
+    logger.info(`Map not expired: ${id} ${downloadLink}`)
     return fileExpireMap.get(id).path
   }
+  logger.warn(`Map Expired: ${id} ${downloadLink}`)
 
 
   // Expired, so download and return the file path
 
   // Download Map
+  logger.debug("Downloading Map: " + downloadLink)
   const mapResponse = await fetch(downloadLink)
   const mapData = await mapResponse.arrayBuffer()
 
   // Save to File
   await mkdir(basePath, { recursive: true })
   await writeFile(`${basePath}/${id}.stormmap`, Buffer.from(mapData))
-
+  logger.debug(`Saved Map to ${basePath}/${id}.stormmap`)
   // Update fileExpireMap
   const expiryDate = new Date()
   expiryDate.setSeconds(expiryDate.getSeconds() + parseInt(process.env.MAP_FILE_CACHE_EXPIRE || 3600));
+  logger.debug(`Map Expire on ${expiryDate}`)
 
   fileExpireMap.set(id, {
     path: path.resolve(`${basePath}/${id}.stormmap`),

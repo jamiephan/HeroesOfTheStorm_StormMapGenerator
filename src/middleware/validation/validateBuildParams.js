@@ -2,6 +2,7 @@ const express = require("express")
 const Joi = require('joi');
 const GithubAPI = require("../../helpers/GithubAPI");
 const Error = require("../../Model/Responses/Error");
+const logger = require("../../helpers/Logger")("build-validation")
 
 const buildSchema = async () => {
 
@@ -95,8 +96,19 @@ const buildSchema = async () => {
  * @param {express.NextFunction} next Next
  */
 const validateBuildParams = async (req, res, next) => {
+  logger.info("Validating")
   const { error } = (await buildSchema()).validate(req.body)
-  if (error) return res.status(406).json(Error(error.details[0].message))
+  if (error) {
+    logger.warn("Invalid Body: " + error.details[0].message)
+    return res.status(406).json(Error(error.details[0].message))
+  }
+  logger.debug("Success Validation")
+
+  // Normalise req.body.name
+  let name = req.body.name
+  name = name.replace(/\.stormmap/gi, "")
+  name = name + ".stormmap"
+  req.body.name = name
   next()
 }
 

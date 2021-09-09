@@ -74,6 +74,7 @@ Here are the used environment variable that you can configure:
 | `REDIS_URL` | `"//127.0.0.1"` | The Redis server URL |
 | `REDIS_API_CACHE_EXPIRE` | `1800` | Seconds until the cache expire for Github API calls. (`1800` = 30 minutes) |
 | `MAP_FILE_CACHE_EXPIRE` | `3600` | Seconds until the downloaded map cache expires. (`3600` = 1 hour) |
+| `LOG_LEVEL` | `info` | The logging level: `debug`, `info`, `warn`, `error` |
 
 
 ### Running
