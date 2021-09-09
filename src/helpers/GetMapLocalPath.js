@@ -29,7 +29,7 @@ const getCachePath = async (downloadLink, id) => {
 
   // Not Expired, so just return the path
   if (!isExpired(id)) {
-    logger.info(`Map not expired: ${id} ${downloadLink}`)
+    logger.debug(`Map not expired: ${id} ${downloadLink}`)
     return fileExpireMap.get(id).path
   }
   logger.warn(`Map Expired: ${id} ${downloadLink}`)

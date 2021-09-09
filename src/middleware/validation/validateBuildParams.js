@@ -96,7 +96,7 @@ const buildSchema = async () => {
  * @param {express.NextFunction} next Next
  */
 const validateBuildParams = async (req, res, next) => {
-  logger.info("Validating")
+  logger.info("Validating Build Params")
   const { error } = (await buildSchema()).validate(req.body)
   if (error) {
     logger.warn("Invalid Body: " + error.details[0].message)

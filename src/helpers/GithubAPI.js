@@ -14,7 +14,7 @@ const GithubAPI = async (type) => {
   logger.debug("Checking Redis Cache: " + type.name)
   const result = await client.get(type.name)
   if (result) {
-    logger.info("Redis Cache Exist: " + type.name)
+    logger.debug("Redis Cache Exist: " + type.name)
     return JSON.parse(result)
   } else {
     // Do API
