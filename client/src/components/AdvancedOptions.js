@@ -42,7 +42,6 @@ export default function AdvancedOptions(props) {
 
       for (const variable of variables) {
         if (variable.value !== variable.default) {
-          console.log(variable.name)
           tempChanges.push(variable)
         }
       }
