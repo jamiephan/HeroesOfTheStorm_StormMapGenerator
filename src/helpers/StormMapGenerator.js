@@ -5,8 +5,10 @@ const xml2js = require('xml2js')
 const glob = require("glob")
 const sanitize = require("sanitize-filename");
 
-const loggerGenerator = require("../helpers/Logger")
+const loggerGenerator = require("../helpers/Logger");
+const path = require("path");
 
+const copyFile = util.promisify(fs.copyFile)
 const writeFile = util.promisify(fs.writeFile)
 const readFile = util.promisify(fs.readFile)
 const mkdir = util.promisify(fs.mkdir)
@@ -200,7 +202,7 @@ class StormMapGenerator {
     // =======================
     // Build the map
     this.logger.info(`Creating Map`)
-    await exec(`wine "/app/bin/MPQEditor.exe" n "Z:/${this.mapFileObj.name}"`)
+    await copyFile(path.resolve("./bin/empty.mpq"), this.mapFileObj.name)
     this.logger.info(`Adding Files to Map`)
     await exec(`wine "/app/bin/MPQEditor.exe" a "Z:/${this.mapFileObj.name}" "Z:/${tempMapObj.name}" /c /auto /r`)
     this.logger.info(`Completed Building Map`)
