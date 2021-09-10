@@ -27,7 +27,6 @@ export default function BottomSection() {
               <ul>
                 <li>Reuse an empty MPQ file instead of creating a new one for each request. Result in build time <code>~ 3 - 6</code> seconds faster.</li>
               </ul>
-              <li>1.4</li>
               <li>1.5</li>
               <ul>
                 <li>Separated sections into tabs: General, XML Files and Advanced Options</li>
