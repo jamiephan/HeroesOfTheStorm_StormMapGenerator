@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import {
-  Accordion,
   Alert, Button, Form, Spinner, Tab, Tabs
 } from 'react-bootstrap'
-import { ArrowRight, CheckLg } from 'react-bootstrap-icons'
+import { CheckLg } from 'react-bootstrap-icons'
 import BuildXMLTemplate from '../helpers/BuildXMLTemplate'
 import XMLValidate from "../helpers/XMLValidate"
 import useLocalStorage from '../hooks/useLocalStorage'
+import AdvancedOptions from './AdvancedOptions'
 import FileList from "./FileManager/FileList"
 import FileUploadBar from './FileManager/FileUploadBar'
 
@@ -16,12 +16,9 @@ export default function MainForm() {
   // App States
   const [isUsingTryMode20, setIsUsingTryMode20] = useLocalStorage("isUsingTryMode20", false, "bool")
   const [isUsingAIComp, setIsUsingAIComp] = useLocalStorage("isUsingAIComp", false, "bool")
-  const [libsOptions, setLibsOptions] = useState([])
 
   const [isLoadingMaps, setIsLoadingMaps] = useState(true)
-  const [isLoadingOptions, setIsLoadingOptions] = useState(true)
   const [isGenerating, setIsGenerating] = useState("")
-  const [isShowingAdvancedOptionAlertBox, setIsShowingAdvancedOptionAlertBox] = useState(true)
 
   // Form States
   const [name, setName] = useLocalStorage("name", "", "key")
@@ -29,6 +26,7 @@ export default function MainForm() {
   const [map20, setMap20] = useLocalStorage("map20", "", "key")
   const [ai, setAi] = useLocalStorage("ai", "", "key")
   const [msg, setMsg] = useLocalStorage("msg", "", "key")
+  const [libsOptions, setLibsOptions] = useState([])
 
   // Files
   const [xmlFiles, setXmlFiles] = useLocalStorage("xml", [], "file")
@@ -79,26 +77,6 @@ export default function MainForm() {
 
       setIsLoadingMaps(false)
 
-      // Load Options
-      const optionsResponse = await fetch("/default/libs")
-      let optionsJson = await optionsResponse.json()
-      for (let i = 0; i < optionsJson.length; i++) {
-        const section = optionsJson[i];
-        for (let j = 0; j < section.libraries.length; j++) {
-          const library = section.libraries[j];
-          for (let k = 0; k < library.options.length; k++) {
-            const options = library.options[k];
-            optionsJson[i].libraries[j].options[k] = {
-              value: options.default, name: options.name, default: options.default
-            }
-          }
-        }
-      }
-      setLibsOptions(optionsJson)
-      setIsLoadingOptions(false)
-
-
-
     })()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -121,14 +99,7 @@ export default function MainForm() {
       trymode20: isUsingTryMode20,
       ai: (isUsingTryMode20 || !isUsingAIComp) ? "none" : ai,
       msg,
-      libsOptions: libsOptions
-        .map(s => s.libraries)
-        .reduce((p, n) => p.concat(n))
-        .map(x => x.options)
-        .reduce((p, n) => p.concat(n))
-        .filter(x => x.value !== x.default)
-        .map(x => x.name)
-      ,
+      libsOptions,
       xmlFiles,
     })
 
@@ -329,133 +300,7 @@ export default function MainForm() {
             </Form.Group>
           </Tab>
           <Tab eventKey="advancedoptions" title="Advanced Options">
-            <br />
-            {isShowingAdvancedOptionAlertBox ?
-
-              <Alert variant="warning" dismissible="true" onClose={() => setIsShowingAdvancedOptionAlertBox(false)}>
-                <h5>What is this?</h5>
-                <ul style={{ marginBottom: "0" }}>
-                  <li>This section allows you to modify each non-constant variables in the game (currently only supports <code>Boolean</code> type).</li>
-                  <li>The script will be injected into the <code>MapScript.galaxy</code> after all libraries have been initialized.</li>
-                  <li>Each of the sections belows represent a single library from the game. </li>
-                  <li>The default values were gathered via the <code>InitVariables()</code> function from their respective library.</li>
-                  <hr />
-                </ul>
-                <h5>Notes:</h5>
-                <ul style={{ marginBottom: "0" }}>
-                  <li>The settings on this page <b>will not</b> be saved on your browser, refreshing will reset to default.</li>
-                  <li>Some variables depends on certain variables to function properly or some might not have any effect. You will need to test or study the trigger code manually.</li>
-                  <li>For <code><b>Maps</b></code> and <code><b>Brawl</b></code> libraries, <b>Make sure your map have the required mods, or the map will crash when launched.</b></li>
-                  <hr />
-                </ul>
-                <h5>Useful Options:</h5>
-                <ul style={{ marginBottom: "0" }}>
-                  <li>Core <ArrowRight /> Heroes <ArrowRight /> <code>libCore_gv_dEBUGDebuggingEnabled</code>: Toggle Debug Mode</li>
-                  <li>Core <ArrowRight /> Heroes <ArrowRight /> <code>libCore_gv_dEBUGPingLimitEnabled </code>: Toggle Ping Limit</li>
-                  <li>Core <ArrowRight /> Heroes <ArrowRight /> <code>libCore_gv_sYSMinionSpawningOn</code>: Toggle Minion Waves</li>
-                  <li>Core <ArrowRight /> Game <ArrowRight /> <code>libGame_gv_afk_UseAFKSystem</code>: Toggle AFK detection</li>
-                  <li>Core <ArrowRight /> Support <ArrowRight /> <code>libSprt_gv_dEBUGNoRegen</code>: Toggle HP / Energy Regen</li>
-                  <li>Core <ArrowRight /> AI <ArrowRight /> <code>libAIAI_gv_heroAIDisplayAIStatus</code>: Toggle showing AI status</li>
-                </ul>
-              </Alert> :
-              <><Button variant="warning" onClick={() => { setIsShowingAdvancedOptionAlertBox(true) }}>Show Advanced Option Description</Button><br /><br /></>
-            }
-            <h4>Changes:</h4>
-            <ul>
-              {
-                isLoadingOptions ? <></> :
-                  libsOptions
-                    .map(s => s.libraries)
-                    .reduce((p, n) => p.concat(n))
-                    .map(x => x.options)
-                    .reduce((p, n) => p.concat(n))
-                    .map((x, i) => x.value !== x.default ?
-                      <li key={i}>
-                        <code>{x.name} = </code>
-                        <code style={{ color: x.default ? "green" : "red" }}>{String(x.default)}</code>
-                        {" "}
-                        <ArrowRight />
-                        {" "}
-                        <code style={{ color: x.value ? "green" : "red" }}>
-                          <b>{String(x.value)}</b>
-                        </code>
-                      </li>
-                      : null)
-              }
-            </ul>
-            <br />
-            <Button variant="danger" onClick={() => {
-              if (window.confirm("You sure want to reset the options to default?")) {
-                const ol = JSON.parse(JSON.stringify(libsOptions))
-                ol.forEach(s => {
-                  s.libraries.forEach(d => {
-                    d.options.forEach(o => {
-                      o.value = o.default
-                    })
-                  })
-                })
-                setLibsOptions(ol)
-              }
-            }}
-            >Reset ALL to default</Button>
-
-            {
-              isLoadingOptions ? <></> :
-                libsOptions.map((s, i) =>
-                  // Each section
-                  <React.Fragment key={i}>
-                    <hr />
-                    <h4>{s.title} Libraries:</h4>
-                    <Accordion>
-                      {
-                        s.libraries.map((l, j) =>
-                          <Accordion.Item key={`${i}-${j}`} eventKey={`${i}-${j}`}>
-                            <Accordion.Header><span>{l.title} Library (<code>{l.lib}</code>)</span></Accordion.Header>
-                            <Accordion.Body>
-                              {
-                                // <Form.Group className="mb-3" >
-                                l.options.map((o, k) =>
-                                  <Form.Check key={`${i}-${j}-${k}`}
-                                    type="checkbox"
-                                    id={`options-${o.name}`}
-                                    label={
-                                      o.default === o.value ?
-                                        <code style={{ color: o.value ? "green" : "red" }}> {o.name} = {o.value ? "true" : "false"};</code> :
-                                        <code style={{ color: o.value ? "green" : "red" }}><b><i>* {o.name} = {o.value ? "true" : "false"};</i></b></code>
-                                    }
-                                    checked={o.value}
-                                    onChange={e => {
-                                      setLibsOptions(o => {
-                                        // Sorry
-                                        const ol = JSON.parse(JSON.stringify(o))
-                                        ol[i].libraries[j].options[k].value = e.target.checked
-                                        return ol
-                                      })
-                                    }
-                                    } />
-                                  // </Form.Group>
-                                )
-                              }
-                              <hr />
-                              <Button variant="danger" onClick={() => {
-                                if (window.confirm(`You sure want to reset ${l.title} Library to default?`)) {
-                                  setLibsOptions(o => {
-                                    const ol = JSON.parse(JSON.stringify(o))
-                                    ol[i].libraries[j].options.forEach(o => {
-                                      o.value = o.default
-                                    })
-                                    return ol
-                                  })
-                                }
-                              }}
-                              >{`Reset ${l.title} Library to default`}</Button>
-                            </Accordion.Body>
-                          </Accordion.Item>
-                        )
-                      }
-                    </Accordion>
-                  </React.Fragment>
-                )}
+            <AdvancedOptions set={setLibsOptions} get={libsOptions} />
           </Tab>
         </Tabs>
 
