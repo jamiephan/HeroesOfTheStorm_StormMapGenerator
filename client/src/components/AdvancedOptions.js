@@ -86,6 +86,7 @@ export default function AdvancedOptions(props) {
           <><Button variant="warning" onClick={() => { setIsShowingAdvancedOptionAlertBox(true) }}>Show Advanced Option Description</Button></>
         }
       </div>
+      <hr />
       <h4>Changes:</h4>
       {
         (changes.length > 0) && (!isLoadingOptions) ?
@@ -122,21 +123,20 @@ export default function AdvancedOptions(props) {
 
           </> : <ul><li><i>No changed were made.</i></li></ul>
       }
+      <hr />
       {
         isLoadingOptions ? <></> :
           options.map((s, i) =>
             // Each section
-            <React.Fragment key={i}>
-              <hr />
+            <div key={i} style={{ margin: "20px 0px" }}>
               <h4>{s.title} Libraries:</h4>
-              <Accordion>
+              <Accordion style={{ margin: "20px 0px 20px 20px" }}>
                 {
                   s.libraries.map((l, j) =>
                     <Accordion.Item key={`${i}-${j}`} eventKey={`${i}-${j}`}>
                       <Accordion.Header><span>{l.title} Library (<code>{l.lib}</code>)</span></Accordion.Header>
                       <Accordion.Body>
                         {
-                          // <Form.Group className="mb-3" >
                           l.options.map((o, k) =>
                             <Form.Check key={`${i}-${j}-${k}`}
                               type="checkbox"
@@ -156,7 +156,6 @@ export default function AdvancedOptions(props) {
                                 })
                               }
                               } />
-                            // </Form.Group>
                           )
                         }
                         <hr />
@@ -177,7 +176,7 @@ export default function AdvancedOptions(props) {
                   )
                 }
               </Accordion>
-            </React.Fragment>
+            </div>
           )}
     </>
   )
