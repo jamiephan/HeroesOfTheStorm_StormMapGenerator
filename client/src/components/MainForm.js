@@ -176,7 +176,9 @@ export default function MainForm() {
             {/* is Using Try Mode 2.0 */}
 
             <Form.Group className="mb-3">
-              <Form.Check type="checkbox"
+              <Form.Check
+                type="checkbox"
+                id="isUsingTryMode"
                 label={<>Use <a href="https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0" target="_blank" rel="noreferrer">Try Mode 2.0</a></>}
                 checked={isUsingTryMode20}
                 onChange={e => setIsUsingTryMode20(e.target.checked)} />
@@ -232,7 +234,12 @@ export default function MainForm() {
                 {/* is Using AI Comp  Checkbox*/}
 
                 <Form.Group className="mb-3">
-                  <Form.Check type="checkbox" label="Include AI" checked={isUsingAIComp} onChange={e => setIsUsingAIComp(e.target.checked)} />
+                  <Form.Check
+                    type="checkbox"
+                    id="isIncludeAI"
+                    label="Include AI"
+                    checked={isUsingAIComp}
+                    onChange={e => setIsUsingAIComp(e.target.checked)} />
                   <Form.Text>
                     {
                       isUsingAIComp ?
@@ -408,19 +415,24 @@ export default function MainForm() {
                               {
                                 // <Form.Group className="mb-3" >
                                 l.options.map((o, k) =>
-                                  <Form.Check key={`${i}-${j}-${k}`} type="checkbox" label={
-                                    o.default === o.value ?
-                                      <code style={{ color: o.value ? "green" : "red" }}> {o.name} = {o.value ? "true" : "false"};</code> :
-                                      <code style={{ color: o.value ? "green" : "red" }}><b><i>* {o.name} = {o.value ? "true" : "false"};</i></b></code>
-                                  } checked={o.value} onChange={e => {
-                                    setLibsOptions(o => {
-                                      // Sorry
-                                      const ol = JSON.parse(JSON.stringify(o))
-                                      ol[i].libraries[j].options[k].value = e.target.checked
-                                      return ol
-                                    })
-                                  }
-                                  } />
+                                  <Form.Check key={`${i}-${j}-${k}`}
+                                    type="checkbox"
+                                    id={`options-${o.name}`}
+                                    label={
+                                      o.default === o.value ?
+                                        <code style={{ color: o.value ? "green" : "red" }}> {o.name} = {o.value ? "true" : "false"};</code> :
+                                        <code style={{ color: o.value ? "green" : "red" }}><b><i>* {o.name} = {o.value ? "true" : "false"};</i></b></code>
+                                    }
+                                    checked={o.value}
+                                    onChange={e => {
+                                      setLibsOptions(o => {
+                                        // Sorry
+                                        const ol = JSON.parse(JSON.stringify(o))
+                                        ol[i].libraries[j].options[k].value = e.target.checked
+                                        return ol
+                                      })
+                                    }
+                                    } />
                                   // </Form.Group>
                                 )
                               }
