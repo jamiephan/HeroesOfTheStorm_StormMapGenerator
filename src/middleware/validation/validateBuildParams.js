@@ -3,16 +3,26 @@ const Joi = require('joi');
 const GithubAPI = require("../../helpers/GithubAPI");
 const Error = require("../../Model/Responses/Error");
 const logger = require("../../helpers/Logger")("build-validation")
+const libOptions = require("../../defaultSettings/").libs
+
+const getLibsOptionsByName = name => {
+  for (let i = 0; i < libOptions.length; i++) {
+    const libs = libOptions[i].libraries;
+    for (let j = 0; j < libs.length; j++) {
+      const options = libs[j].options;
+      for (let k = 0; k < options.length; k++) {
+        const option = options[k];
+        if (option.name === name) {
+          return option
+        }
+      }
+    }
+  }
+  return false
+}
 
 const buildSchema = async () => {
 
-  const libsOptions = require("../../defaultSettings/")
-    .libs
-    .map(s => s.libraries)
-    .reduce((p, n) => p.concat(n))
-    .map(x => x.options)
-    .reduce((p, n) => p.concat(n))
-    .map(x => x.name)
 
   const schema = Joi.object({
     // Name must be ASCII
@@ -73,11 +83,19 @@ const buildSchema = async () => {
       .required(),
     libsOptions: Joi.array()
       .items(
-        Joi.string().valid(
-          ...libsOptions
-        ).messages({
-          "any.only": "LibOptions contains invalid variable key"
-        }),
+        Joi.object({
+          name: Joi.string().required(),
+          value: Joi.any().required()
+        }).custom((option, helper) => {
+          const defaultData = getLibsOptionsByName(option.name)
+          console.log(defaultData)
+          // Check if name is a valid variable name
+          if (defaultData === false) return helper.message("LibOptions contains invalid variable key")
+          // Check if value is not default, and correct datatype
+          if (defaultData.value === option.value) return helper.message(`The value of ${defaultData.name} is same as default.`)
+          if (typeof defaultData.default !== typeof option.value) return helper.message(`The type of ${defaultData.name} must be ${String(typeof defaultData.default)}.`)
+          return true
+        })
       )
       .required()
 

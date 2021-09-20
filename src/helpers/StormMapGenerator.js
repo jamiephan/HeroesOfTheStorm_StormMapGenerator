@@ -18,14 +18,6 @@ const exec = util.promisify(require('child_process').exec);
 const getNested = (obj, ...args) => args.reduce((obj, level) => obj && obj[level], obj)
 const randId = () => Math.floor(100000 + Math.random() * 900000)
 
-const defaultLibsOptions = require("../defaultSettings/")
-  .libs
-  .map(s => s.libraries)
-  .reduce((p, n) => p.concat(n))
-  .map(x => x.options)
-  .reduce((p, n) => p.concat(n))
-  .map(x => ({ name: x.name, default: x.default }))
-
 const replace = (buf, a, b) => {
   if (!Buffer.isBuffer(buf)) buf = Buffer(buf);
   const idx = buf.indexOf(a);
@@ -145,10 +137,11 @@ class StormMapGenerator {
       let mapScriptInsertContentArr = []
 
       this.libsOptions.forEach(o => {
-        const defaultLibsOption = defaultLibsOptions.find(x => x.name === o)
-        if (defaultLibsOption) {
-          mapScriptInsertContentArr.push(`    ${o} = ${String(!defaultLibsOption.default)};`)
-        }
+        // const defaultLibsOption = defaultLibsOptions.find(x => x.name === o)
+        // if (defaultLibsOption) {
+        //   mapScriptInsertContentArr.push(`    ${o} = ${String(!defaultLibsOption.default)};`)
+        // }
+        mapScriptInsertContentArr.push(`    ${o.name} = ${String(o.value)};`)
 
       })
 
