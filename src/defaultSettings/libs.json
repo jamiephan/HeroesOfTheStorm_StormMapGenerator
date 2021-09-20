@@ -1,5 +1,36 @@
 [
   {
+    "title": "Built-In",
+    "libraries": [
+      {
+        "title": "Built-In",
+        "lib": "libNtve",
+        "options": [
+          {
+            "name": "libNtve_gv_FloatingCombatTextAutoRandomSeed",
+            "default": 0
+          },
+          {
+            "name": "libNtve_gv__CineModeSavedSpeed",
+            "default": 0
+          },
+          {
+            "name": "libNtve_gv__CineTransitionStyle",
+            "default": 0
+          },
+          {
+            "name": "libNtve_gv_tP_FlashScreenButtonID",
+            "default": 0
+          },
+          {
+            "name": "libNtve_gv_tP_PulseScreenImageID",
+            "default": 0
+          }
+        ]
+      }
+    ]
+  },
+  {
     "title": "Core",
     "libraries": [
       {
@@ -105,6 +136,78 @@
           {
             "name": "libCore_gv_zS_SendTransmissionCampaignChatBubbleOn",
             "default": true
+          },
+          {
+            "name": "libCore_gv_dataAnnouncerVOExtraAnnouncerEventsIndex",
+            "default": 57
+          },
+          {
+            "name": "libCore_gv_dataHeroesNumberOfHeroes",
+            "default": 0
+          },
+          {
+            "name": "libCore_gv_dataMountsMountCount",
+            "default": 0
+          },
+          {
+            "name": "libCore_gv_dataNumberOfTalentsWithCatalogChanges",
+            "default": 0
+          },
+          {
+            "name": "libCore_gv_dataSkinsSkinCount",
+            "default": 0
+          },
+          {
+            "name": "libCore_gv_loot_AnnouncerPackCount",
+            "default": 0
+          },
+          {
+            "name": "libCore_gv_loot_BannerCount",
+            "default": 0
+          },
+          {
+            "name": "libCore_gv_loot_SprayCount",
+            "default": 0
+          },
+          {
+            "name": "libCore_gv_loot_VoiceLineCount",
+            "default": 0
+          },
+          {
+            "name": "libCore_gv_mAPPathNodesBeforeLooping",
+            "default": 0
+          },
+          {
+            "name": "libCore_gv_metagame_DefaultRotationSlots_C",
+            "default": 0
+          },
+          {
+            "name": "libCore_gv_sYSGameMode",
+            "default": 0
+          },
+          {
+            "name": "libCore_gv_sYSHeroStartLevel",
+            "default": 1
+          },
+          {
+            "name": "libCore_gv_segTriggerIndex",
+            "default": 0
+          },
+          {
+            "name": "libCore_gv_segTriggerPlayer",
+            "default": 0
+          },
+          {
+            "name": "libCore_gv_zS_SendTransmissionCampaignIndex",
+            "default": 0
+          },
+          {
+            "name": "libCore_gv_zS_SendTransmissionCampaignPlayingTick",
+            "default": 3
+          },
+          {
+            "name": "libCore_gv_zS_SendTransmissionCampaignPortrait",
+            "default": 0
           }
         ]
       },
@@ -295,6 +398,106 @@
           {
             "name": "libGame_gv_townBasicMinimapHealthMontior",
             "default": true
+          },
+          {
+            "name": "libGame_gv_cameraBound_Count",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_capturePointCurrentCount",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_coreHeroPlayer",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_currentMVPStatSlot",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_gameSpawnHeroCount",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_hatTrickKillCount",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_hatTrickTentativeWinner",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_heroDeathRespawnSetting",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_laneCount",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_mVPManualOverride",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_mVPPlayer",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_minionWaveSpawnCounter",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_minion_PeriodicCatapultsFirstWave",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_onFireWindowStage",
+            "default": 1
+          },
+          {
+            "name": "libGame_gv_scalingTicks",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_spawnedMinionFirstWaypointIndex",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_spawnedMinionLane",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_talents_DebugMaxModifedAbilites",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_teleporters_PetListLength",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_townTownCount",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_watchTowersCurrentCount",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_wheelPingIndexMax",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_wheelPingIndexMin",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_wheelPingOffsetIndex",
+            "default": 0
+          },
+          {
+            "name": "libGame_gv_wheelUnitStatus",
+            "default": 0
           }
         ]
       },
@@ -409,6 +612,42 @@
           {
             "name": "libSprt_gv_gPU2021ExtendedDurationXPGlobesEnabled",
             "default": false
+          },
+          {
+            "name": "libSprt_gv_dEBUGXPBoostTeam",
+            "default": 0
+          },
+          {
+            "name": "libSprt_gv_dEBUGXPPassiveBalancerTeam1Player",
+            "default": 0
+          },
+          {
+            "name": "libSprt_gv_dEBUGXPPassiveBalancerTeam2Player",
+            "default": 0
+          },
+          {
+            "name": "libSprt_gv_dEBUGXPPassiveBoostTeam",
+            "default": 0
+          },
+          {
+            "name": "libSprt_gv_heroMasteryRingsMaxRank",
+            "default": 3
+          },
+          {
+            "name": "libSprt_gv_qACheatsSelectedBehavior",
+            "default": 1
+          },
+          {
+            "name": "libSprt_gv_qACheatsSelectedSpawnUnit",
+            "default": 1
+          },
+          {
+            "name": "libSprt_gv_qACheatsSelectedTeam",
+            "default": 0
+          },
+          {
+            "name": "libSprt_gv_statTrackingPlayers",
+            "default": 0
           }
         ]
       },
@@ -439,6 +678,22 @@
           {
             "name": "libAIAI_gv_heroAIDisplayAIStatus",
             "default": false
+          },
+          {
+            "name": "libAIAI_gv_aITeamDelegateNonEventMapDecreaseAmount",
+            "default": -4
+          },
+          {
+            "name": "libAIAI_gv_aITeamDelegateNonEventMapIncreaseAmount",
+            "default": 1
+          },
+          {
+            "name": "libAIAI_gv_aITeamDelegateNonEventMapValuePeriodicRateChange",
+            "default": 0
+          },
+          {
+            "name": "libAIAI_gv_defenderAIDefenderAIUpperBound",
+            "default": 0
           }
         ]
       },
@@ -489,6 +744,102 @@
           {
             "name": "libMapM_gv_mMDragonballsTransmissionShrinesRechargeFirstTime",
             "default": true
+          },
+          {
+            "name": "libMapM_gv_countOfMMAIUnits",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_jungleCreepCampsCurrentCallbackIndex",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_jungleNumberOfActiveMercGroups",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_jungleNumberOfCreepCamps",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMAnnouncementDialog",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMGardensDragonCurrentState",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMGardensDragonDragonCaptures",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMGardensDragonDragonTowerCount",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMGardensDragonPlayer",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMGardensDragonStatueTextTag",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMGardensDragonStatueTextTagAllyOwned",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMGardensDragonStatueTextTagEnemyOwned",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMIntroCutscenePlayer",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMRavenLastTributeSpawnIndex1",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMRavenLastTributeSpawnIndex2",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMRavenTimerCount",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMRavenTributeSpawnCount",
+            "default": 1
+          },
+          {
+            "name": "libMapM_gv_mMRavenTributeSpawnGroupIndex",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMRavenTributeSpawnPointsCount",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMRavenTributeSpawnTimeVariance",
+            "default": 20
+          },
+          {
+            "name": "libMapM_gv_mMRavenTributesCollected",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mMRunConversationDoneCount",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_mapMechanicsCount",
+            "default": 0
+          },
+          {
+            "name": "libMapM_gv_vehicle_VehicleCount",
+            "default": 0
           }
         ]
       },
@@ -515,6 +866,222 @@
           {
             "name": "libGDHL_gv_ragnarosExists",
             "default": false
+          },
+          {
+            "name": "libGDHL_gv_gPU2020EventPhase",
+            "default": 1
+          },
+          {
+            "name": "libGDHL_gv_heroAbathurTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroAnubarakTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroArtanisTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroArthasTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroAzmodanTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroBarbarianAncientSpearReDirectDistance",
+            "default": 8
+          },
+          {
+            "name": "libGDHL_gv_heroBarbarianTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroButcherFreshMeatMaxMeatCount",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroButcherTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroChenTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroCrusaderTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroDemonHunterTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroDiabloTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroDryadAbolishMagicIncrementer",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroDryadTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroETCTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroFaerieDragonTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroFalstadTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroGreymaneTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroIllidanTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroJainaFrostbiteConstant",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroJainaTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroKaelthasTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroKerriganTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroLeoricTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroLiLiTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroLostVikingsTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroMalfurionTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroMedicTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroMonkTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroMuradinTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroMurkyTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroNecromancerTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroNovaTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroRaynorTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroRehgarTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroRexxarTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroSgtHammerTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroStitchesTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroSylvanasActiveMindControlCounter",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroSylvanasTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroTassadarTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroThrallTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroTinkerTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroTychusThatsTheStuffCastCount",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroTychusTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroTyraelTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroTyrandeTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroUtherTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroWitchDoctorTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroWizardTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroZagaraTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libGDHL_gv_heroZeratulTriggerRegistrationVariable",
+            "default": 0
           }
         ]
       },
@@ -593,6 +1160,86 @@
           {
             "name": "libUIUI_gv_uIOnFireOnFireDisplayEnabled",
             "default": true
+          },
+          {
+            "name": "libUIUI_gv_deathTimerPanelIndex",
+            "default": 1
+          },
+          {
+            "name": "libUIUI_gv_fullscreenStatusPanel",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_helpButtonCount",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_heroSpecificFullUIModContainer",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_heroSpecificStatusContainer",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_killLogPanel",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_killLog_TopOffset_D0A1",
+            "default": 80
+          },
+          {
+            "name": "libUIUI_gv_ping_PingCallbackPingingPlayer",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_ping_PingTargetCount",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_tutorialPanelHighlightFrame",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_tutorialReferenceCount",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_tutorialReferencePanel",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_tutorialReferenceShowHelp",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_uIDebugPanelDebugMetaXPValue",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_uIDebugPanelForcedMinionWaveCompIndex",
+            "default": 1
+          },
+          {
+            "name": "libUIUI_gv_uIOnFireDEBUGDefenseOnFireLevel",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_uIOnFireDEBUGOffenseOnFireLevel",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_uIOnFireDEBUGUtilityOnFireLevel",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_uITargetingHelperPanelNumberOfPlayersUsingPanel",
+            "default": 0
+          },
+          {
+            "name": "libUIUI_gv_uI_BoostFXVisibilityTime",
+            "default": 7
           }
         ]
       },
@@ -611,6 +1258,10 @@
           {
             "name": "libSond_gv_soundtrack_IntroSoundtrackPlaying",
             "default": false
+          },
+          {
+            "name": "libSond_gv_soundtrack_MapSoundtrackIndex",
+            "default": 0
           }
         ]
       },
@@ -693,6 +1344,106 @@
           {
             "name": "libStEx_gv_automation_Debug",
             "default": false
+          },
+          {
+            "name": "libStEx_gv__1A_TargetDummyDamageDealt",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv__1D_WaveCurrent",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_objectiveTargetDummy",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_queryDialogResult",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_HintMsgDialog",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_HintMsgLabel",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_HintMsgPanel",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_MoveMouseButton",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_Player",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_Team",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_TrainingModeRefCardTimes",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_TrainingModeTalentPanelFlashingImage",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_TrainingModeTipDialog",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_VOMsgDialog",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_VOMsgLabel",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_VOMsgPanel",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_VOPausedMsgButton",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_VOPausedMsgDialog",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_VOPausedMsgFramePanel",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_VOPausedMsgIcon",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_VOPausedMsgLabel",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_sE_VOPausedMsgPanel",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_tutorialHeroBtnJaina",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_tutorialHeroBtnMuradin",
+            "default": 0
+          },
+          {
+            "name": "libStEx_gv_tutorialHeroBtnTyrande",
+            "default": 0
           }
         ]
       }
@@ -701,6 +1452,90 @@
   {
     "title": "Heroes",
     "libraries": [
+      {
+        "title": "Alarak",
+        "lib": "libHALA",
+        "options": [
+          {
+            "name": "libHALA_gv_heroAlarakActiveDeadlyChargeCasters",
+            "default": 0
+          },
+          {
+            "name": "libHALA_gv_heroAlarakTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Alexstrasza",
+        "lib": "libHALE",
+        "options": [
+          {
+            "name": "libHALE_gv_heroAlexstraszaTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Amazon",
+        "lib": "libHAMA",
+        "options": [
+          {
+            "name": "libHAMA_gv_amazon_Button05OverridePanel",
+            "default": 0
+          },
+          {
+            "name": "libHAMA_gv_amazon_HeroSpecificCommandCardPanel",
+            "default": 0
+          },
+          {
+            "name": "libHAMA_gv_heroAmazonTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Ana",
+        "lib": "LibHANA",
+        "options": [
+          {
+            "name": "libHANA_gv_heroAnaTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Anduin",
+        "lib": "libHAND",
+        "options": [
+          {
+            "name": "libHAND_gv_heroAnduinTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Auriel",
+        "lib": "libHAUR",
+        "options": [
+          {
+            "name": "libHAUR_gv_heroAurielBestowHopeNumberofActiveProxies",
+            "default": 0
+          },
+          {
+            "name": "libHAUR_gv_heroAurielResurrectActiveSpirits",
+            "default": 0
+          },
+          {
+            "name": "libHAUR_gv_heroAurielResurrectTotalActiveResurrectActions",
+            "default": 0
+          },
+          {
+            "name": "libHAUR_gv_heroAurielTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
       {
         "title": "Cho'Gall",
         "lib": "libHCHO",
@@ -712,6 +1547,358 @@
           {
             "name": "libHCHO_gv_tryMeChoGallAIRequiresRestart",
             "default": false
+          },
+          {
+            "name": "libHCHO_gv_heroChoGallTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libHCHO_gv_shadowBoltVolleyActiveCasters",
+            "default": 0
+          },
+          {
+            "name": "libHCHO_gv_surgingFistActiveCasters",
+            "default": 0
+          },
+          {
+            "name": "libHCHO_gv_tryMe_ChoGall_PairedPlayer_C",
+            "default": 3
+          }
+        ]
+      },
+      {
+        "title": "Chromie",
+        "lib": "libHCHR",
+        "options": [
+          {
+            "name": "libHCHR_gv_heroChromieTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Deathwing",
+        "lib": "libHDEA",
+        "options": [
+          {
+            "name": "libHDEA_gv_heroDeathwingTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Deckard",
+        "lib": "libHDEC",
+        "options": [
+          {
+            "name": "libHDEC_gv_heroDeckardTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Dehaka",
+        "lib": "libHDEH",
+        "options": [
+          {
+            "name": "libHDEH_gv_heroDehakaActiveIsolationTargets",
+            "default": 0
+          },
+          {
+            "name": "libHDEH_gv_heroDehakaTalentEnhancedAgilityMaxTokenStackCount",
+            "default": 0
+          },
+          {
+            "name": "libHDEH_gv_heroDehakaTalentEssenceDevourerMaxTokenCount",
+            "default": 0
+          },
+          {
+            "name": "libHDEH_gv_heroDehakaTalentTissueRegenerationMaxTokenStackCount",
+            "default": 0
+          },
+          {
+            "name": "libHDEH_gv_heroDehakaTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "DVa",
+        "lib": "libHDVA",
+        "options": [
+          {
+            "name": "libHDVA_gv_heroDVaTriggerRegistrationCount",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Fenix",
+        "lib": "libHFEN",
+        "options": [
+          {
+            "name": "libHFEN_gv_heroFenixRapidRechargeRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libHFEN_gv_heroFenixTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Firebat",
+        "lib": "libHFIR",
+        "options": [
+          {
+            "name": "libHFIR_gv_heroFirebatTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Garrosh",
+        "lib": "libHGAR",
+        "options": [
+          {
+            "name": "libHGAR_gv_heroGarroshTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Guldan",
+        "lib": "libHGUL",
+        "options": [
+          {
+            "name": "libHGUL_gv_heroGuldanTriggerRegistrationCount",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Genji",
+        "lib": "libHGen",
+        "options": [
+          {
+            "name": "libHGen_gv_heroGenjiTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Hanzo",
+        "lib": "libHHAN",
+        "options": [
+          {
+            "name": "libHHAN_gv_heroHanzoHanzoTriggerRegistrationCount0",
+            "default": 0
+          },
+          {
+            "name": "libHHAN_gv_heroHanzoScatterArrowImpactCountThreshold",
+            "default": 3
+          }
+        ]
+      },
+      {
+        "title": "Hogger",
+        "lib": "libHHOG",
+        "options": [
+          {
+            "name": "libHHOG_gv_heroHoggerTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Imperius",
+        "lib": "libHIMP",
+        "options": [
+          {
+            "name": "libHIMP_gv_heroImperiusTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Junkrat",
+        "lib": "libHJUN",
+        "options": [
+          {
+            "name": "libHJUN_gv_heroJunkratTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "KelThuzad",
+        "lib": "libHKEL",
+        "options": [
+          {
+            "name": "libHKEL_gv_heroKelThuzadTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Lucio",
+        "lib": "libHLUC",
+        "options": [
+          {
+            "name": "libHLUC_gv_heroLucioTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Maiev",
+        "lib": "libHMAI",
+        "options": [
+          {
+            "name": "libHMAI_gv_heroMaievActiveContainmentDiscTargets",
+            "default": 0
+          },
+          {
+            "name": "libHMAI_gv_heroMaievTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Medivh",
+        "lib": "libHMDV",
+        "options": [
+          {
+            "name": "libHMDV_gv_heroMedivhTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "MeiOW",
+        "lib": "libHMEI",
+        "options": [
+          {
+            "name": "libHMEI_gv_heroMeiOWTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Mephisto",
+        "lib": "libHMEP",
+        "options": [
+          {
+            "name": "libHMEP_gv_heroMephistoTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "MalGanis",
+        "lib": "libHMLG",
+        "options": [
+          {
+            "name": "libHMLG_gv_heroMalGanisActiveNightRushTargets",
+            "default": 0
+          },
+          {
+            "name": "libHMLG_gv_heroMalGanisBlindasaBatTarget",
+            "default": 0
+          },
+          {
+            "name": "libHMLG_gv_heroMalGanisTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Malthael",
+        "lib": "libHMTH",
+        "options": [
+          {
+            "name": "libHMTH_gv_heroMalthaelTouchOfDeathRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libHMTH_gv_heroMalthaelTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Orphea",
+        "lib": "ORPH",
+        "options": [
+          {
+            "name": "libORPH_gv_heroOrpheaTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Ragnaros",
+        "lib": "libHMa",
+        "options": [
+          {
+            "name": "libHMaj_gv_heroRagnarosTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "NexusHunter",
+        "lib": "libHNXH",
+        "options": [
+          {
+            "name": "libHNXH_gv_NexusHunterInitializeNexusHunterCount",
+            "default": 0
+          },
+          {
+            "name": "libHNXH_gv_heroNexusHunterActiveFinalStrikeCasters",
+            "default": 0
+          },
+          {
+            "name": "libHNXH_gv_heroNexusHunterTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Probius",
+        "lib": "libHPRO",
+        "options": [
+          {
+            "name": "libHPRO_gv_heroProbiusPhotonCannonGatherMineralsMaxStacks",
+            "default": 0
+          },
+          {
+            "name": "libHPRO_gv_heroProbiusTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Samuro",
+        "lib": "libHSAM",
+        "options": [
+          {
+            "name": "libHSAM_gv_heroSamuroTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libHSAM_gv_samuro_ControlGroupPanel",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Stukov",
+        "lib": "libHSTU",
+        "options": [
+          {
+            "name": "libHSTU_gv_heroStukovTriggerRegistrationVariable",
+            "default": 0
           }
         ]
       },
@@ -722,6 +1909,90 @@
           {
             "name": "libTrac_gv_tracerRecallDebugMode",
             "default": false
+          },
+          {
+            "name": "libTrac_gv_heroTracerTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Valeera",
+        "lib": "libHVAL",
+        "options": [
+          {
+            "name": "libHVAL_gv_heroValeeraTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Varian",
+        "lib": "libHVAR",
+        "options": [
+          {
+            "name": "libHVAR_gv_heroVarianTriggerRegistrationCount",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Whitemane",
+        "lib": "libHWHI",
+        "options": [
+          {
+            "name": "libHWHI_gv_heroWhitemaneTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Yrel",
+        "lib": "libHYRL",
+        "options": [
+          {
+            "name": "libHYRL_gv_heroYrelArdentDefenderPlayerCount",
+            "default": 0
+          },
+          {
+            "name": "libHYRL_gv_heroYrelAvengingWrathPlayerCount",
+            "default": 0
+          },
+          {
+            "name": "libHYRL_gv_heroYrelRighteousHammerPlayerCount",
+            "default": 0
+          },
+          {
+            "name": "libHYRL_gv_heroYrelTriggerRegistrationVariable",
+            "default": 0
+          },
+          {
+            "name": "libHYRL_gv_heroYrelVindicationPlayerCount",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Zarya",
+        "lib": "libHZAR",
+        "options": [
+          {
+            "name": "libHZAR_gv_heroZaryaTriggerRegistrationVariable",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Zuljin",
+        "lib": "libHZUL",
+        "options": [
+          {
+            "name": "libHZUL_gv_heroZuljinAmaniResilienceCastCount",
+            "default": 0
+          },
+          {
+            "name": "libHZUL_gv_heroZuljinTriggerRegistrationVariable",
+            "default": 0
           }
         ]
       }
@@ -749,6 +2020,22 @@
           {
             "name": "libMMAP_gv_mapMechanicRewardActive",
             "default": false
+          },
+          {
+            "name": "libMMAP_gv_currentCPIndex",
+            "default": 0
+          },
+          {
+            "name": "libMMAP_gv_currentTeamLeader",
+            "default": 0
+          },
+          {
+            "name": "libMMAP_gv_defenderCount",
+            "default": 0
+          },
+          {
+            "name": "libMMAP_gv_transmissionCDTimerDuration_C",
+            "default": 10
           }
         ]
       },
@@ -771,6 +2058,38 @@
           {
             "name": "libMLBD_gv_mMBOEShowBossPositions",
             "default": false
+          },
+          {
+            "name": "libMLBD_gv_mMBOEBossSpawnLocationPairCount",
+            "default": 0
+          },
+          {
+            "name": "libMLBD_gv_mMBOEEventDurationTimer",
+            "default": 0
+          },
+          {
+            "name": "libMLBD_gv_mMBOEEventStage",
+            "default": 0
+          },
+          {
+            "name": "libMLBD_gv_mMBOEEventWinningTeam",
+            "default": 0
+          },
+          {
+            "name": "libMLBD_gv_mMBOELaningPathLine",
+            "default": 0
+          },
+          {
+            "name": "libMLBD_gv_mMBOETimes",
+            "default": 0
+          },
+          {
+            "name": "libMLBD_gv_mMBOE_BossLanerPathCurrentIndex",
+            "default": 1
+          },
+          {
+            "name": "libMLBD_gv_mMBOE_BossLanerPathIndexMax",
+            "default": 1
           }
         ]
       },
@@ -789,6 +2108,38 @@
           {
             "name": "libBBAY_gv_mMBBCannonballsTrasmissionPlaying",
             "default": false
+          },
+          {
+            "name": "libBBAY_gv_mMBBCannonballsGhostShipActivationCount",
+            "default": 0
+          },
+          {
+            "name": "libBBAY_gv_mMBBCannonballsGhostShipLastTeam",
+            "default": 0
+          },
+          {
+            "name": "libBBAY_gv_mMBBCannonballsGhostShipMissileTargetPing",
+            "default": 0
+          },
+          {
+            "name": "libBBAY_gv_mMBBCannonballsGhostShipTotalAmmo",
+            "default": 0
+          },
+          {
+            "name": "libBBAY_gv_mMBBCannonballsTransmissionFiringIndex",
+            "default": 0
+          },
+          {
+            "name": "libBBAY_gv_mMBBCannonballsTransmissionFiringRandomness",
+            "default": 0
+          },
+          {
+            "name": "libBBAY_gv_mMBBMapMechanicsBlackheartsBayCurrentMode",
+            "default": 0
+          },
+          {
+            "name": "libBBAY_gv_mMBB_CannonsFired",
+            "default": 0
           }
         ]
       },
@@ -815,6 +2166,62 @@
           {
             "name": "libSCHO_gv_mMHO_ChaosPlayedAnimation",
             "default": false
+          },
+          {
+            "name": "libSCHO_gv_mMHO_ArchangelAICustomUnitValue",
+            "default": 0
+          },
+          {
+            "name": "libSCHO_gv_mMHO_ArchangelCurrentPathIndex",
+            "default": 1
+          },
+          {
+            "name": "libSCHO_gv_mMHO_ArchangelLanerPathLine",
+            "default": 0
+          },
+          {
+            "name": "libSCHO_gv_mMHO_ArchangelPathIndexMax",
+            "default": 1
+          },
+          {
+            "name": "libSCHO_gv_mMHO_ArchangelWinningTeam",
+            "default": 0
+          },
+          {
+            "name": "libSCHO_gv_mMHO_AttackLane",
+            "default": 0
+          },
+          {
+            "name": "libSCHO_gv_mMHO_AttackLaneHPMiniMapController",
+            "default": 0
+          },
+          {
+            "name": "libSCHO_gv_mMHO_FreeBanelingCount_C",
+            "default": 0
+          },
+          {
+            "name": "libSCHO_gv_mMHO_FreeGuardianCount_C",
+            "default": 0
+          },
+          {
+            "name": "libSCHO_gv_mMHO_FreeHydraliskCount_C",
+            "default": 0
+          },
+          {
+            "name": "libSCHO_gv_mMHO_FreeUltraliskCount_C",
+            "default": 2
+          },
+          {
+            "name": "libSCHO_gv_mMHO_FreeZerglingCount_C",
+            "default": 4
+          },
+          {
+            "name": "libSCHO_gv_mMHO_NumberOfEventsFired",
+            "default": 0
+          },
+          {
+            "name": "libSCHO_gv_mMHO_WaveTracker",
+            "default": 1
           }
         ]
       },
@@ -833,6 +2240,10 @@
           {
             "name": "libGRDN_gv_firstTerrorSpawnTransmissionPlayed",
             "default": false
+          },
+          {
+            "name": "libGRDN_gv_currentSeedSpawnLocation",
+            "default": 0
           }
         ]
       },
@@ -847,6 +2258,18 @@
           {
             "name": "libMHmu_gv_elevator_WaitingToLower",
             "default": false
+          },
+          {
+            "name": "libMHmu_gv_mapMechanic_WarningTimer_Duration",
+            "default": 30
+          },
+          {
+            "name": "libMHmu_gv_missileInFlightCount",
+            "default": 0
+          },
+          {
+            "name": "libMHmu_gv_progress",
+            "default": 0
           }
         ]
       },
@@ -873,6 +2296,38 @@
           {
             "name": "libMHtM_gv_mMUnderworldMapEventDisabled",
             "default": false
+          },
+          {
+            "name": "libMHtM_gv_mMHM_GroundHoleCount",
+            "default": 0
+          },
+          {
+            "name": "libMHtM_gv_mMUnderworldBossGlobeDroppedIndex",
+            "default": 0
+          },
+          {
+            "name": "libMHtM_gv_mMUnderworldBossSkullDroppedIndex",
+            "default": 0
+          },
+          {
+            "name": "libMHtM_gv_mMUnderworldBossSummonEventCounter",
+            "default": 0
+          },
+          {
+            "name": "libMHtM_gv_mMUnderworldMineOpenTimes",
+            "default": 0
+          },
+          {
+            "name": "libMHtM_gv_mMUnderworldMinionGroupCount",
+            "default": 0
+          },
+          {
+            "name": "libMHtM_gv_mMUnderworldScalingTick",
+            "default": 0
+          },
+          {
+            "name": "libMHtM_gv_mMUnderworldSkullTotal",
+            "default": 0
           }
         ]
       },
@@ -883,6 +2338,10 @@
           {
             "name": "libMLHH_gv_hHWeaponRackBroken",
             "default": false
+          },
+          {
+            "name": "libMLHH_gv_hHLootLoopCount_C",
+            "default": 15
           }
         ]
       },
@@ -901,6 +2360,84 @@
           {
             "name": "libMSHE_gv_mMISShrineIsActive",
             "default": false
+          },
+          {
+            "name": "libMSHE_gv_forcedPunisherType",
+            "default": 0
+          },
+          {
+            "name": "libMSHE_gv_mMDiabloShrinesPunisherPushLane",
+            "default": 0
+          },
+          {
+            "name": "libMSHE_gv_mMDiabloShrinesShrineNotificationTimer",
+            "default": 0
+          },
+          {
+            "name": "libMSHE_gv_mMISAffixTimerDuration",
+            "default": 60
+          },
+          {
+            "name": "libMSHE_gv_mMISBuffIndex",
+            "default": 0
+          },
+          {
+            "name": "libMSHE_gv_mMISBuffedTeam",
+            "default": 0
+          },
+          {
+            "name": "libMSHE_gv_mMISCurrentShrine",
+            "default": 0
+          },
+          {
+            "name": "libMSHE_gv_mMISLastBuff",
+            "default": 0
+          },
+          {
+            "name": "libMSHE_gv_mMISLastShrine",
+            "default": 0
+          },
+          {
+            "name": "libMSHE_gv_mMISLastShrineCounter",
+            "default": 0
+          },
+          {
+            "name": "libMSHE_gv_mMISNumberOfShrinesEvents",
+            "default": 0
+          },
+          {
+            "name": "libMSHE_gv_mMISNumberofShrinesAllowed",
+            "default": 3
+          },
+          {
+            "name": "libMSHE_gv_mMISShrineNotificationDelay_C",
+            "default": 44
+          },
+          {
+            "name": "libMSHE_gv_mMISShrineReminderDelay_C",
+            "default": 20
+          },
+          {
+            "name": "libMSHE_gv_mMISTotalShrineCount",
+            "default": 0
+          },
+          {
+            "name": "libMSHE_gv_mMISUnitGroupIndex",
+            "default": 0
+          },
+          {
+            "name": "libMSHE_gv_punisherDuration",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "Infernal Shrines Data (Mod)",
+        "lib": "libMSHD",
+        "options": [
+          {
+            "name": "libMSHD_gv_mMDiabloShrinesPunisherPushLane",
+            "default": 0
           }
         ]
       },
@@ -929,6 +2466,48 @@
           {
             "name": "libMLCP_gv_mMSkyTempleBlessNextTemples1ed",
             "default": false
+          },
+          {
+            "name": "libMLCP_gv_mMSkyTempleBless1TempleRepeatCount",
+            "default": 0
+          },
+          {
+            "name": "libMLCP_gv_mMSkyTempleBless2TemplesRepeatCount",
+            "default": 0
+          },
+          {
+            "name": "libMLCP_gv_mMSkyTempleBlessIndex",
+            "default": 0
+          },
+          {
+            "name": "libMLCP_gv_mMSkyTempleBlessNextTemplesPreviousCount",
+            "default": 0
+          },
+          {
+            "name": "libMLCP_gv_mMSkyTempleCount",
+            "default": 0
+          }
+        ]
+      },
+      {
+        "title": "starcraft - MMSC",
+        "lib": "lib566061C9",
+        "options": [
+          {
+            "name": "lib566061C9_gv_mMSC_TerranRavenSeekerMissileInnerDamageScaling_C",
+            "default": 32
+          },
+          {
+            "name": "lib566061C9_gv_mMSC_TerranRavenSeekerMissileMiddleDamageScaling_C",
+            "default": 16
+          },
+          {
+            "name": "lib566061C9_gv_mMSC_TerranRavenSeekerMissileOuterDamageScaling_C",
+            "default": 8
+          },
+          {
+            "name": "lib566061C9_gv_mMSC_WizardMinionHealingScaling_C",
+            "default": 2
           }
         ]
       },
@@ -959,6 +2538,18 @@
           {
             "name": "libMSOC_gv_mMTombSpiderQueenDisableEven",
             "default": false
+          },
+          {
+            "name": "libMSOC_gv_mMTombSpiderQueenSandGolemInitialTimerDuration_C",
+            "default": 174
+          },
+          {
+            "name": "libMSOC_gv_mMTombSpiderQueenSummoningTeam",
+            "default": 0
+          },
+          {
+            "name": "libMSOC_gv_mMTombSpiderQueenTotalTimesSpawned",
+            "default": 0
           }
         ]
       },
@@ -989,6 +2580,18 @@
           {
             "name": "libMTOD_gv_mMToDMapEventDisabled",
             "default": false
+          },
+          {
+            "name": "libMTOD_gv_mMToDEventCurrentPointGroup",
+            "default": 0
+          },
+          {
+            "name": "libMTOD_gv_mMToDEventNumber",
+            "default": 0
+          },
+          {
+            "name": "libMTOD_gv_mMToDScoringAltarsActive",
+            "default": 0
           }
         ]
       },
@@ -1011,6 +2614,14 @@
           {
             "name": "libVLSK_gv_useFirstEventVoiceover",
             "default": true
+          },
+          {
+            "name": "libVLSK_gv_capturePointCount",
+            "default": 0
+          },
+          {
+            "name": "libVLSK_gv_currentCapturePoint",
+            "default": 0
           }
         ]
       },
@@ -1033,6 +2644,34 @@
           {
             "name": "libMSC2_gv_mMSC2GlobalConversationPlaying",
             "default": false
+          },
+          {
+            "name": "libMSC2_gv_mMSC2BuiltWarheadsWarningEffectCount",
+            "default": 0
+          },
+          {
+            "name": "libMSC2_gv_mMSC2EventState",
+            "default": 0
+          },
+          {
+            "name": "libMSC2_gv_mMSC2EventTracker",
+            "default": 0
+          },
+          {
+            "name": "libMSC2_gv_mMSC2LastDoubleWarheadLane",
+            "default": 0
+          },
+          {
+            "name": "libMSC2_gv_mMSC2LastEmptyWarheadLane",
+            "default": 0
+          },
+          {
+            "name": "libMSC2_gv_mMSC2NukeDamageScalesDone",
+            "default": 0
+          },
+          {
+            "name": "libMSC2_gv_mMSC2SpecialSpawnLane",
+            "default": 0
           }
         ]
       }
@@ -1084,6 +2723,42 @@
           {
             "name": "ibAREN_gv_aRM_Debug_ShowEmittersWhenEmitting",
             "default": false
+          },
+          {
+            "name": "libAREN_gv_aRM_CurrentRoundIndex",
+            "default": 0
+          },
+          {
+            "name": "libAREN_gv_aRM_CurrentWallaLevel",
+            "default": 0
+          },
+          {
+            "name": "libAREN_gv_aRM_MechanicsCount",
+            "default": 0
+          },
+          {
+            "name": "libAREN_gv_aRM_MechanicsPickedCount",
+            "default": 0
+          },
+          {
+            "name": "libAREN_gv_aRM_RoundWinningTeam",
+            "default": 0
+          },
+          {
+            "name": "libAREN_gv_aRM_UI_RoundOverDefeatDialog",
+            "default": 0
+          },
+          {
+            "name": "libAREN_gv_aRM_UI_RoundOverVictoryDialog",
+            "default": 0
+          },
+          {
+            "name": "libAREN_gv_aRM_UI_TeamScorePanel",
+            "default": 0
+          },
+          {
+            "name": "libAREN_gv_victoriesCount",
+            "default": 2
           }
         ]
       },
@@ -1098,6 +2773,30 @@
           {
             "name": "libAMGT_gv_aRMGardenMapEventDisabled",
             "default": false
+          },
+          {
+            "name": "libAMGT_gv_aRMGardenL1MinionSpawnSide",
+            "default": 0
+          },
+          {
+            "name": "libAMGT_gv_aRMGardenL1TerrorSpawnIndex",
+            "default": 0
+          },
+          {
+            "name": "libAMGT_gv_aRMGardenLastSpawnedGroupIndex",
+            "default": 0
+          },
+          {
+            "name": "libAMGT_gv_aRMGardenLevelCount",
+            "default": 0
+          },
+          {
+            "name": "libAMGT_gv_aRMGardenMinionGroupCount",
+            "default": 0
+          },
+          {
+            "name": "libAMGT_gv_aRMGardenTerrorCount",
+            "default": 0
           }
         ]
       },
@@ -1120,6 +2819,34 @@
           {
             "name": "libAMPU_gv_aRMPunisherMapEventDisabled",
             "default": false
+          },
+          {
+            "name": "libAMPU_gv_aRMPunisherLevelCount",
+            "default": 0
+          },
+          {
+            "name": "libAMPU_gv_aRMPunisherPunishState",
+            "default": 0
+          },
+          {
+            "name": "libAMPU_gv_aRMPunisherPunishedHeroIndex",
+            "default": 0
+          },
+          {
+            "name": "libAMPU_gv_aRMPunisherPunisherJumpBackCenterPing",
+            "default": 0
+          },
+          {
+            "name": "libAMPU_gv_aRMPunisherPunisherJumpLocationCount",
+            "default": 0
+          },
+          {
+            "name": "libAMPU_gv_aRMPunisherPunisherJumpLocationIndex",
+            "default": 0
+          },
+          {
+            "name": "libAMPU_gv_aRMPunisherPunisherNextDuelPositionIndex",
+            "default": 0
           }
         ]
       },
@@ -1154,6 +2881,22 @@
           {
             "name": "libAMCT_gv_aRMTempleMapEventDisabled",
             "default": false
+          },
+          {
+            "name": "libAMCT_gv_aRMSkyTempleLevelCount",
+            "default": 0
+          },
+          {
+            "name": "libAMCT_gv_aRMSkyTempleNextTemple",
+            "default": 0
+          },
+          {
+            "name": "libAMCT_gv_aRMSkyTempleTempleCount",
+            "default": 0
+          },
+          {
+            "name": "libAMCT_gv_aRMSkyTempleUI_ScorePanel",
+            "default": 0
           }
         ]
       },
@@ -1172,6 +2915,18 @@
           {
             "name": "libAMVS_gv_notifiactionUp",
             "default": false
+          },
+          {
+            "name": "libAMVS_gv_currentEvent",
+            "default": 0
+          },
+          {
+            "name": "libAMVS_gv_currentRound",
+            "default": 0
+          },
+          {
+            "name": "libAMVS_gv_nextEvent",
+            "default": 0
           }
         ]
       },
@@ -1186,6 +2941,18 @@
           {
             "name": "libMDoE_gv_mDoE_Has75PercentProgressAudioPlayed",
             "default": false
+          },
+          {
+            "name": "libMDoE_gv_gameStartPathingBlockerCount",
+            "default": 0
+          },
+          {
+            "name": "libMDoE_gv_mDoE_LaunchNumber",
+            "default": 1
+          },
+          {
+            "name": "libMDoE_gv_mDoE_WaygateCount",
+            "default": 0
           }
         ]
       },
@@ -1340,6 +3107,178 @@
           {
             "name": "libPEB1_gv_objectivesCreated2",
             "default": false
+          },
+          {
+            "name": "libPEB1_gv_archangelsKilled",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_availableHeroTypesCount",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_availableHeroTypesDefenseCount",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_baseHealthBarWidthBunker",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_baseHealthBarWidthCore",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_baseHealthBarWidthKeep",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_basicWaveEscalationCount",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_currentStage",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_defeatReason",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_defeatTime",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_hatcheryCount",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_holdout1_WaveCurrent",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_holdout2_WaveCurrent",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_itemDropCounter",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_itemTypeCounter",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_killValueNeededToSpawnGlobe",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_marineRescueCount",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_maxActiveZergMinions",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_pEB1SpawnPodsTargetCount",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_pZECurrentStageCurrent",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_pZEMapPanel",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_pZEMinimap",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_pZEMinimapPanel",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_pickupSpawnCounter",
+            "default": 2
+          },
+          {
+            "name": "libPEB1_gv_previousGapIndex",
+            "default": 99
+          },
+          {
+            "name": "libPEB1_gv_regenerationGlobeCounter",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_retryChances",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_scourgeMissileTargetPing",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_stage1CompleteTime",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_stage2CompleteTime",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_victoryTime",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_victoryTimeLoop",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_wavesNeededToEscalate",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_zergCampAggroRange",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_zergHeroGraceCounter",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_zergHeroGracePeriod",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_zergHeroGracePeriodZergHeroDeath",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_zergHeroGracePeriodZergHeroDeathCap",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_zergHeroKillsNeededToSpawnItem",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_zergHeroLevel",
+            "default": 10
+          },
+          {
+            "name": "libPEB1_gv_zergHeroLevelBonus",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_zergHeroReviveCounter",
+            "default": 0
+          },
+          {
+            "name": "libPEB1_gv_zergHeroSpawnCounter",
+            "default": 1
           }
         ]
       },
@@ -1354,6 +3293,58 @@
           {
             "name": "libPVEB_gv_pvEWavePaused",
             "default": false
+          },
+          {
+            "name": "libPVEB_gv_gameOverResult",
+            "default": 0
+          },
+          {
+            "name": "libPVEB_gv_pBHeroCatalogChangePlayerIndex",
+            "default": 0
+          },
+          {
+            "name": "libPVEB_gv_pBNPCHeroLevel",
+            "default": 1
+          },
+          {
+            "name": "libPVEB_gv_pBNPCHeroesCount",
+            "default": 0
+          },
+          {
+            "name": "libPVEB_gv_pBNPCMinionZerglingIndex",
+            "default": 0
+          },
+          {
+            "name": "libPVEB_gv_pB_GameDifficulty",
+            "default": 0
+          },
+          {
+            "name": "libPVEB_gv_pvEPickupCurrentRotationStep",
+            "default": 1
+          },
+          {
+            "name": "libPVEB_gv_pvEPickupPickupsInstantPickupsInitialized",
+            "default": 0
+          },
+          {
+            "name": "libPVEB_gv_pvEPickupPickupsTargetPickupsInitialized",
+            "default": 0
+          },
+          {
+            "name": "libPVEB_gv_pvEPickupPickupsTotalPickupsInitialized",
+            "default": 0
+          },
+          {
+            "name": "libPVEB_gv_pvEPickupRolloverRotationStep",
+            "default": 1
+          },
+          {
+            "name": "libPVEB_gv_pvEResurrectActiveSpirits",
+            "default": 0
+          },
+          {
+            "name": "libPVEB_gv_pvEWaveCount",
+            "default": 0
           }
         ]
       },
@@ -1376,6 +3367,14 @@
           {
             "name": "libPESC_gv_hMCLHardModeAvailable",
             "default": true
+          },
+          {
+            "name": "libPESC_gv_hMCLPlayersCapturing",
+            "default": 0
+          },
+          {
+            "name": "libPESC_gv_hMCLTextTag",
+            "default": 0
           }
         ]
       },
@@ -1402,6 +3401,70 @@
           {
             "name": "libPVEU_gv_dEBUG_ShowCuratedHeroPickMessages",
             "default": false
+          },
+          {
+            "name": "libPVEM_gv_pvEAttackWaveCount",
+            "default": 0
+          },
+          {
+            "name": "libPVEM_gv_pvEDefeatTime",
+            "default": 0
+          },
+          {
+            "name": "libPVEM_gv_pvEGameDifficulty",
+            "default": 0
+          },
+          {
+            "name": "libPVEM_gv_pvEGameOverResult",
+            "default": 0
+          },
+          {
+            "name": "libPVEM_gv_pvEHeroCatalogChangePlayerIndex",
+            "default": 0
+          },
+          {
+            "name": "libPVEM_gv_pvENPCHeroLevel",
+            "default": 1
+          },
+          {
+            "name": "libPVEM_gv_pvENPCHeroesCount",
+            "default": 0
+          },
+          {
+            "name": "libPVEM_gv_pvENPCMinionZerglingIndex",
+            "default": 0
+          },
+          {
+            "name": "libPVEM_gv_pvEPickupsCurrentRotationStep",
+            "default": 1
+          },
+          {
+            "name": "libPVEM_gv_pvEPickupsInstantPickupsInitialized",
+            "default": 0
+          },
+          {
+            "name": "libPVEM_gv_pvEPickupsRolloverRotationStep",
+            "default": 1
+          },
+          {
+            "name": "libPVEM_gv_pvEPickupsTargetPickupsInitialized",
+            "default": 0
+          },
+          {
+            "name": "libPVEM_gv_pvEPickupsTotalPickupsInitialized",
+            "default": 0
+          },
+          {
+            "name": "libPVEM_gv_pvEResurrectActiveSpirits",
+            "default": 0
+          },
+          {
+            "name": "libPVEM_gv_pvEVictoryTime",
+            "default": 0
+          },
+          {
+            "name": "libPVEM_gv_pvEVictoryTimeLoop",
+            "default": 0
           }
         ]
       },
@@ -1412,6 +3475,10 @@
           {
             "name": "libPVEU_gv_dEBUG_ShowCuratedHeroPickMessages",
             "default": false
+          },
+          {
+            "name": "libPVEU_gv_pvEMapPanel",
+            "default": 0
           }
         ]
       },
@@ -1422,6 +3489,14 @@
           {
             "name": "libLNYF_gv_endGameTimerStarted",
             "default": false
+          },
+          {
+            "name": "libLNYF_gv_drivePointsCount",
+            "default": 1
+          },
+          {
+            "name": "libLNYF_gv_time_EndGameTime",
+            "default": 30
           }
         ]
       },
@@ -1460,6 +3535,26 @@
           {
             "name": "libIGHS_gv_dEBUG_ShuffleTimerIsPaused",
             "default": false
+          },
+          {
+            "name": "libIGHS_gv_curatedHeroCount",
+            "default": 0
+          },
+          {
+            "name": "libIGHS_gv_curatedMountCount",
+            "default": 0
+          },
+          {
+            "name": "libIGHS_gv_curatedSkinCount",
+            "default": 0
+          },
+          {
+            "name": "libIGHS_gv_dEBUG_100PicksCheatUsed",
+            "default": 0
+          },
+          {
+            "name": "libIGHS_gv_removedCuratedHeroCount",
+            "default": 0
           }
         ]
       }
