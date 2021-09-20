@@ -39,18 +39,24 @@ export default function AdvancedOptions(props) {
         .reduce((p, n) => p.concat(n))
 
       const tempChanges = []
+      const tempChangesSubmit = []
 
       for (const variable of variables) {
         if (variable.value !== variable.default) {
           tempChanges.push({
             name: variable.name,
-            value: variable.value
+            value: variable.value,
+            default: variable.default
+          })
+          tempChangesSubmit.push({
+            name: variable.name,
+            value: variable.value,
           })
         }
       }
 
       setChanges(tempChanges)
-      props.set(tempChanges)
+      props.set(tempChangesSubmit)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options])
