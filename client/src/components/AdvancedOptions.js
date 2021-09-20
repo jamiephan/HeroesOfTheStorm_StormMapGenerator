@@ -84,7 +84,7 @@ export default function AdvancedOptions(props) {
           }
           } />
       case "number":
-        return <div>
+        return <div key={`${i}-${j}-${k}`}>
           {
             o.default === o.value ?
               <code>{o.name} = </code> :
@@ -116,7 +116,7 @@ export default function AdvancedOptions(props) {
           <code>;</code>
         </div>
       default:
-        return <code style={{ color: "red" }}>Invalid Type</code>
+        return <code key={`${i}-${j}-${k}`} style={{ color: "red" }}>Invalid Type</code>
     }
   }
 
@@ -131,7 +131,6 @@ export default function AdvancedOptions(props) {
             for (let k = 0; k < options.length; k++) {
               const option = options[k];
               if (option.name === key) {
-                console.log(ol[i].libraries[j].options[k].value, ol[i].libraries[j].options[k].default)
                 ol[i].libraries[j].options[k].value = ol[i].libraries[j].options[k].default
                 continue;
               }
