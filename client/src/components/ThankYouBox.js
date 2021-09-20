@@ -23,6 +23,13 @@ export default function BottomSection() {
             <hr />
             Changelog:
             <ul>
+              <li>1.6</li>
+              <ul>
+                <li>Added the ability to tweak <code>Integer</code> type variables in Advanced Options</li>
+                <li>Updated Backend validation and functionality to handle this change</li>
+                <li>Description Box in Advanced Option will now be remembered when you close it</li>
+                <li>Minor UI Update to Advanced Options Menu</li>
+              </ul>
               <li>1.5.1</li>
               <ul>
                 <li>Reuse an empty MPQ file instead of creating a new one for each request. Result in build time <code>~3-6</code> seconds faster.</li>
@@ -30,7 +37,7 @@ export default function BottomSection() {
               <li>1.5</li>
               <ul>
                 <li>Separated sections into tabs: General, XML Files and Advanced Options</li>
-                <li>Added Advanced Options to tweak each variables in game (currently only Boolean values)</li>
+                <li>Added Advanced Options to tweak each variables in game (currently only <code>Boolean</code> values)</li>
                 <li>Debug option have been removed. Enable <code>libCore_gv_dEBUGDebuggingEnabled</code> for the same result in Advanced Options.</li>
               </ul>
               <li>1.4</li>
