@@ -150,10 +150,10 @@ export default function AdvancedOptions(props) {
           <Alert variant="info" dismissible="true" onClose={() => setIsShowingAdvancedOptionAlertBox(false)}>
             <h5>What is this?</h5>
             <ul style={{ marginBottom: "0" }}>
-              <li>This section allows you to modify each non-constant variables in the game (currently only supports <code>Boolean</code> type).</li>
+              <li>This section allows you to modify each non-constant variables in the game (currently only supports <code>Boolean</code> and <code>Integer</code> type).</li>
               <li>The script will be injected into the <code>MapScript.galaxy</code> after all libraries have been initialized.</li>
               <li>Each of the sections belows represent a single library from the game. </li>
-              <li>The default values were gathered via the <code>InitVariables()</code> function from their respective library.</li>
+              <li>The default values were gathered via the <code>InitVariables()</code> function from their respective library. (Therefore it will not track initial map launch trigger changes to the variables)</li>
               <hr />
             </ul>
             <h5>Notes:</h5>
