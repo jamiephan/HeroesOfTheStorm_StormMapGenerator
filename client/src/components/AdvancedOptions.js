@@ -147,7 +147,7 @@ export default function AdvancedOptions(props) {
       <div style={{ margin: "20px 0px" }}>
         {isShowingAdvancedOptionAlertBox ?
 
-          <Alert variant="warning" dismissible="true" onClose={() => setIsShowingAdvancedOptionAlertBox(false)}>
+          <Alert variant="info" dismissible="true" onClose={() => setIsShowingAdvancedOptionAlertBox(false)}>
             <h5>What is this?</h5>
             <ul style={{ marginBottom: "0" }}>
               <li>This section allows you to modify each non-constant variables in the game (currently only supports <code>Boolean</code> type).</li>
