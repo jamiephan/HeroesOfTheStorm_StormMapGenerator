@@ -162,6 +162,7 @@ export default function AdvancedOptions(props) {
               <li>The settings on this page <b>will not</b> be saved on your browser, refreshing will reset to default.</li>
               <li>Some variables depends on certain variables to function properly or some might not have any effect. You will need to test or study the trigger code manually.</li>
               <li>For <code><b>Maps</b></code> and <code><b>Brawl</b></code> libraries, <b>Make sure your map have the required mods, or the map will crash when launched.</b></li>
+              <li>In the changes section below, you can click on each of the variables and reset it to default.</li>
               <hr />
             </ul>
             <h5>Useful Options:</h5>
@@ -179,59 +180,62 @@ export default function AdvancedOptions(props) {
         }
       </div>
       <hr />
-      <h4>Changes:</h4>
-      {
-        (changes.length > 0) && (!isLoadingOptions) ?
-          <>
-            <ul>
-              {changes.map(x =>
-                <li key={x.name} onClick={() => resetKeyToDefault(x.name)} style={{ cursor: "pointer" }}>
-                  <code>{x.name} = </code>
-                  {
-                    typeof x.default === "boolean" ?
-                      <><code style={{ color: x.default ? "green" : "red" }}>{String(x.default)}</code>
-                        {" "}
-                        <ArrowRight />
-                        {" "}
-                        <code style={{ color: x.value ? "green" : "red" }}>
-                          <b>{String(x.value)}</b>
-                        </code>
-                      </> : <></>
-                  }
-                  {
-                    typeof x.default === "number" ?
-                      <>
-                        <code>{String(x.default)}</code>
-                        {" "}
-                        <ArrowRight />
-                        {" "}
-                        <code>
-                          <b>{x.value}</b>
-                        </code>
-                      </> : <></>
-                  }
+      <Alert variant="primary">
 
-                </li>
-              )}
-            </ul>
+        <h4>Changes:</h4>
+        {
+          (changes.length > 0) && (!isLoadingOptions) ?
+            <>
+              <ul>
+                {changes.map(x =>
+                  <li key={x.name} onClick={() => resetKeyToDefault(x.name)} style={{ cursor: "pointer" }}>
+                    <code>{x.name} = </code>
+                    {
+                      typeof x.default === "boolean" ?
+                        <><code style={{ color: x.default ? "green" : "red" }}>{String(x.default)}</code>
+                          {" "}
+                          <ArrowRight />
+                          {" "}
+                          <code style={{ color: x.value ? "green" : "red" }}>
+                            <b>{String(x.value)}</b>
+                          </code>
+                        </> : <></>
+                    }
+                    {
+                      typeof x.default === "number" ?
+                        <>
+                          <code>{String(x.default)}</code>
+                          {" "}
+                          <ArrowRight />
+                          {" "}
+                          <code>
+                            <b>{x.value}</b>
+                          </code>
+                        </> : <></>
+                    }
 
-            <Button variant="danger" onClick={() => {
-              if (window.confirm("You sure want to reset the options to default?")) {
-                const ol = JSON.parse(JSON.stringify(options))
-                ol.forEach(s => {
-                  s.libraries.forEach(d => {
-                    d.options.forEach(o => {
-                      o.value = o.default
+                  </li>
+                )}
+              </ul>
+
+              <Button variant="danger" onClick={() => {
+                if (window.confirm("You sure want to reset the options to default?")) {
+                  const ol = JSON.parse(JSON.stringify(options))
+                  ol.forEach(s => {
+                    s.libraries.forEach(d => {
+                      d.options.forEach(o => {
+                        o.value = o.default
+                      })
                     })
                   })
-                })
-                setOptions(ol)
-              }
-            }}
-            >Reset ALL to default</Button>
+                  setOptions(ol)
+                }
+              }}
+              >Reset ALL to default</Button>
 
-          </> : <ul><li><i>No changed were made.</i></li></ul>
-      }
+            </> : <ul><li><i>No changed were made.</i></li></ul>
+        }
+      </Alert>
       <hr />
       {
         isLoadingOptions ? <></> :
