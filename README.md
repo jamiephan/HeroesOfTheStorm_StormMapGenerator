@@ -21,6 +21,7 @@ Heroes of the Storm's map file is `*.StormMap`, which is a modified, but shares 
 - Custom Map Name (Shown on Loading Screen)
 - Use [Try Mode 2.0](https://jamiephan.github.io/HeroesOfTheStorm_TryMode2.0/) Maps or official maps as template
 - Toggle any in game boolean variables
+- Edit any game integer variables
 - Include various AI composition (Based on [AI Maps](https://github.com/jamiephan/HeroesOfTheStorm_AIMaps))
 - Custom Welcome Message when map was loaded
 - Settings are stored in `localStorage`, which persist after a `F5` refresh
