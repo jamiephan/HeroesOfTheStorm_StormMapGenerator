@@ -77,7 +77,6 @@ export default function AdvancedOptions(props) {
           checked={o.value}
           onChange={e => {
             setOptions(o => {
-              // Sorry
               const ol = JSON.parse(JSON.stringify(o))
               ol[i].libraries[j].options[k].value = e.target.checked
               return ol
@@ -105,7 +104,6 @@ export default function AdvancedOptions(props) {
             onChange={e => {
               if (parseInt(e.target.value) >= e.target.min && parseInt(e.target.value) <= e.target.max) {
                 setOptions(o => {
-                  // Sorry
                   const ol = JSON.parse(JSON.stringify(o))
                   ol[i].libraries[j].options[k].value = parseInt(e.target.value)
                   return ol
