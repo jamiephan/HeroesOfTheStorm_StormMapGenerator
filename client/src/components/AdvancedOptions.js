@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Accordion, Alert, Button, Form } from 'react-bootstrap'
 import { ArrowRight } from 'react-bootstrap-icons'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 export default function AdvancedOptions(props) {
 
   const [isLoadingOptions, setIsLoadingOptions] = useState(true)
-  const [isShowingAdvancedOptionAlertBox, setIsShowingAdvancedOptionAlertBox] = useState(true)
+  const [isShowingAdvancedOptionAlertBox, setIsShowingAdvancedOptionAlertBox] = useLocalStorage("isShowingAdvancedOptionAlertBox", false, "bool")
   const [options, setOptions] = useState([])
   const [changes, setChanges] = useState([])
 
@@ -174,7 +175,7 @@ export default function AdvancedOptions(props) {
               <li>Core <ArrowRight /> AI <ArrowRight /> <code>libAIAI_gv_heroAIDisplayAIStatus</code>: Toggle showing AI status</li>
             </ul>
           </Alert> :
-          <><Button variant="warning" onClick={() => { setIsShowingAdvancedOptionAlertBox(true) }}>Show Advanced Option Description</Button></>
+          <><Button variant="warning" onClick={() => { setIsShowingAdvancedOptionAlertBox(true) }}>What is Advanced Option?</Button></>
         }
       </div>
       <hr />
