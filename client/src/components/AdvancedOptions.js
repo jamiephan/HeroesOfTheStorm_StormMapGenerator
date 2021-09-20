@@ -42,15 +42,100 @@ export default function AdvancedOptions(props) {
 
       for (const variable of variables) {
         if (variable.value !== variable.default) {
-          tempChanges.push(variable)
+          tempChanges.push({
+            name: variable.name,
+            value: variable.value
+          })
         }
       }
 
       setChanges(tempChanges)
-      props.set(tempChanges.map(v => v.name))
+      props.set(tempChanges)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [options])
+
+
+  const renderType = (o, i, j, k) => {
+    switch (typeof o.default) {
+      case "boolean":
+        return <Form.Check key={`${i}-${j}-${k}`}
+          type="checkbox"
+          id={`options-${o.name}`}
+          label={
+            o.default === o.value ?
+              <code style={{ color: o.value ? "green" : "red" }}> {o.name} = {o.value ? "true" : "false"};</code> :
+              <code style={{ color: o.value ? "green" : "red" }}><b><i>* {o.name} = {o.value ? "true" : "false"};</i></b></code>
+          }
+          checked={o.value}
+          onChange={e => {
+            setOptions(o => {
+              // Sorry
+              const ol = JSON.parse(JSON.stringify(o))
+              ol[i].libraries[j].options[k].value = e.target.checked
+              return ol
+            })
+          }
+          } />
+      case "number":
+        return <div>
+          {
+            o.default === o.value ?
+              <code>{o.name} = </code> :
+              <code style={{ fontWeight: "bolder", fontStyle: "italic" }}>* {o.name} = </code>
+          }
+          <Form.Control
+            type="number"
+            min="-2147483648"
+            max="2147483648"
+            style={{
+              width: "100px",
+              display: "inline-block",
+              fontSize: "80%",
+              padding: "2px",
+            }}
+            value={o.value}
+            onChange={e => {
+              if (parseInt(e.target.value) >= e.target.min && parseInt(e.target.value) <= e.target.max) {
+                setOptions(o => {
+                  // Sorry
+                  const ol = JSON.parse(JSON.stringify(o))
+                  ol[i].libraries[j].options[k].value = parseInt(e.target.value)
+                  return ol
+                })
+              }
+            }
+            }
+          />
+          <code>;</code>
+        </div>
+      default:
+        return <code style={{ color: "red" }}>Invalid Type</code>
+    }
+  }
+
+  const resetKeyToDefault = key => {
+    if (window.confirm(`Reset ${key} to default?`)) {
+      setOptions(o1 => {
+        const ol = JSON.parse(JSON.stringify(o1))
+        for (let i = 0; i < ol.length; i++) {
+          const libs = ol[i].libraries;
+          for (let j = 0; j < libs.length; j++) {
+            const options = libs[j].options;
+            for (let k = 0; k < options.length; k++) {
+              const option = options[k];
+              if (option.name === key) {
+                console.log(ol[i].libraries[j].options[k].value, ol[i].libraries[j].options[k].default)
+                ol[i].libraries[j].options[k].value = ol[i].libraries[j].options[k].default
+                continue;
+              }
+            }
+          }
+        }
+        return ol
+      })
+    }
+  }
 
   return (
     <>
@@ -93,15 +178,32 @@ export default function AdvancedOptions(props) {
           <>
             <ul>
               {changes.map(x =>
-                <li key={x.name}>
+                <li key={x.name} onClick={() => resetKeyToDefault(x.name)} style={{ cursor: "pointer" }}>
                   <code>{x.name} = </code>
-                  <code style={{ color: x.default ? "green" : "red" }}>{String(x.default)}</code>
-                  {" "}
-                  <ArrowRight />
-                  {" "}
-                  <code style={{ color: x.value ? "green" : "red" }}>
-                    <b>{String(x.value)}</b>
-                  </code>
+                  {
+                    typeof x.default === "boolean" ?
+                      <><code style={{ color: x.default ? "green" : "red" }}>{String(x.default)}</code>
+                        {" "}
+                        <ArrowRight />
+                        {" "}
+                        <code style={{ color: x.value ? "green" : "red" }}>
+                          <b>{String(x.value)}</b>
+                        </code>
+                      </> : <></>
+                  }
+                  {
+                    typeof x.default === "number" ?
+                      <>
+                        <code>{String(x.default)}</code>
+                        {" "}
+                        <ArrowRight />
+                        {" "}
+                        <code>
+                          <b>{x.value}</b>
+                        </code>
+                      </> : <></>
+                  }
+
                 </li>
               )}
             </ul>
@@ -137,26 +239,7 @@ export default function AdvancedOptions(props) {
                       <Accordion.Header><span>{l.title} Library (<code>{l.lib}</code>)</span></Accordion.Header>
                       <Accordion.Body>
                         {
-                          l.options.map((o, k) =>
-                            <Form.Check key={`${i}-${j}-${k}`}
-                              type="checkbox"
-                              id={`options-${o.name}`}
-                              label={
-                                o.default === o.value ?
-                                  <code style={{ color: o.value ? "green" : "red" }}> {o.name} = {o.value ? "true" : "false"};</code> :
-                                  <code style={{ color: o.value ? "green" : "red" }}><b><i>* {o.name} = {o.value ? "true" : "false"};</i></b></code>
-                              }
-                              checked={o.value}
-                              onChange={e => {
-                                setOptions(o => {
-                                  // Sorry
-                                  const ol = JSON.parse(JSON.stringify(o))
-                                  ol[i].libraries[j].options[k].value = e.target.checked
-                                  return ol
-                                })
-                              }
-                              } />
-                          )
+                          l.options.map((o, k) => renderType(o, i, j, k))
                         }
                         <hr />
                         <Button variant="danger" onClick={() => {
