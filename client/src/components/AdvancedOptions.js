@@ -174,7 +174,7 @@ export default function AdvancedOptions(props) {
               <li>Core <ArrowRight /> AI <ArrowRight /> <code>libAIAI_gv_heroAIDisplayAIStatus</code>: Toggle showing AI status</li>
             </ul>
           </Alert> :
-          <><Button variant="warning" onClick={() => { setIsShowingAdvancedOptionAlertBox(true) }}>What is Advanced Option?</Button></>
+          <><Button variant="info" onClick={() => { setIsShowingAdvancedOptionAlertBox(true) }}>What is Advanced Option?</Button></>
         }
       </div>
       <hr />
