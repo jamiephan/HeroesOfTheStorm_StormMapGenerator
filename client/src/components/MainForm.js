@@ -13,13 +13,14 @@ import GeneralSettings from './GeneralSettings'
 export default function MainForm() {
 
   // Settings
-  const generalSettings = useRef({ isLoadingMaps: true })
+  const generalSettings = useRef({})
   // XML Files
   const [xmlFiles, setXmlFiles] = useLocalStorage("xml", [], "file")
   // Advanced Options
   const libsOptions = useRef([])
 
-
+  // Button States
+  const [isLoadingMap, setIsLoadingMap] = useState(true)
   const [isGenerating, setIsGenerating] = useState(false)
 
   // Status Alert box
@@ -81,7 +82,7 @@ export default function MainForm() {
           {/* General Settings */}
           <Tab eventKey="general" title="General Settings">
             <h3 style={{ margin: "20px 0px" }}>General Settings</h3>
-            <GeneralSettings onChange={gs => generalSettings.current = gs} />
+            <GeneralSettings onChange={gs => generalSettings.current = gs} loadingMap={setIsLoadingMap} />
           </Tab>
 
           {/* XMl File Manager */}
@@ -131,7 +132,7 @@ export default function MainForm() {
         {/* Generate Button */}
         <Form.Group>
           {
-            generalSettings.current.isLoadingMaps ?
+            isLoadingMap ?
               <Button variant="outline-info" type="submit" disabled={true}>
                 <><Spinner animation="border" size="sm" /> Loading Map Templates...</>
               </Button> :

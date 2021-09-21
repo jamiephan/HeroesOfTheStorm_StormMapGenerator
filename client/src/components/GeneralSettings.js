@@ -25,6 +25,9 @@ export default function GeneralSettings(props) {
   useEffect(() => {
 
     (async () => {
+
+      props.loadingMap(true)
+
       // Load live maps
       const mapsResponse = await fetch("/list/maps")
       const mapsJson = await mapsResponse.json()
@@ -53,7 +56,7 @@ export default function GeneralSettings(props) {
         setAi(aiJson[0])
       }
 
-      setIsLoadingMaps(false)
+      props.loadingMap(false)
 
     })()
 
@@ -63,14 +66,12 @@ export default function GeneralSettings(props) {
 
   useEffect(() => {
 
-    if (props.onChange) {
-      props.onChange({
-        name, map, map20, ai, msg, isUsingTryMode20, isUsingAIComp, isLoadingMaps
-      })
-    }
+    props.onChange({
+      name, map, map20, ai, msg, isUsingTryMode20, isUsingAIComp
+    })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [name, map, map20, ai, msg, isUsingTryMode20, isUsingAIComp, isLoadingMaps])
+  }, [name, map, map20, ai, msg, isUsingTryMode20, isUsingAIComp])
 
   return (
     <>
