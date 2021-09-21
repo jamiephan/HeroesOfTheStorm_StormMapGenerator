@@ -114,10 +114,10 @@ export default function MainForm() {
         <Form.Group>
           {
             generalSettings.current.isLoadingMaps ?
-              <Button variant="outline-success" type="submit" disabled={true}>
+              <Button variant="outline-info" type="submit" disabled={true}>
                 <><Spinner animation="border" size="sm" /> Loading Map Templates...</>
               </Button> :
-              <Button variant={isGenerating ? "outline-success" : "success"} type="submit" disabled={isGenerating}>
+              <Button variant={isGenerating ? "outline-info" : "info"} type="submit" disabled={isGenerating}>
                 {isGenerating ? <><Spinner animation="border" size="sm" /> Generating Map File...</> : <><CheckLg /> Generate</>}
               </Button>
           }
