@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import {
-  Alert, Button, Form, Spinner, Tab, Tabs
+  Alert, Button, Fade, Form, Spinner, Tab, Tabs
 } from 'react-bootstrap'
 import { CheckLg } from 'react-bootstrap-icons'
 import BuildXMLTemplate from '../helpers/BuildXMLTemplate'
@@ -13,14 +13,14 @@ import GeneralSettings from './GeneralSettings'
 export default function MainForm() {
 
   // Settings
-  const generalSettings = useRef({})
+  const generalSettings = useRef({ isLoadingMaps: true })
   // XML Files
   const [xmlFiles, setXmlFiles] = useLocalStorage("xml", [], "file")
   // Advanced Options
   const libsOptions = useRef([])
 
 
-  const [isGenerating, setIsGenerating] = useState("")
+  const [isGenerating, setIsGenerating] = useState(false)
 
   // Status Alert box
   const [alertBox, setAlertBox] = useState({ show: false, variant: "warning", message: "Why do people use light mode??", dismissible: true })
@@ -76,7 +76,7 @@ export default function MainForm() {
     <>
       <Form onSubmit={handleSubmit}>
 
-        <Tabs style={{ marginBottom: "20px" }}>
+        <Tabs style={{ marginBottom: "20px" }} transition={Fade} >
 
           {/* General Settings */}
           <Tab eventKey="general" title="General Settings">
