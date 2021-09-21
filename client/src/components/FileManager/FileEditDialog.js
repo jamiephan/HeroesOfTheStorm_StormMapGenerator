@@ -32,7 +32,7 @@ export default function FileEditDialog(props) {
   }
 
   const onSave = () => {
-    if (props.validateOnSave) {
+    if (props.validateOnSave && props.validateFn !== undefined) {
       const result = props.validateFn(props.file.content)
       if (result.error) {
         if (!window.confirm([
@@ -57,23 +57,25 @@ export default function FileEditDialog(props) {
   }
 
   const onValidate = () => {
-    const result = props.validateFn(props.file.content)
-    if (result.error) {
-      alert(result.message)
-    } else {
-      alert(`${props.language.toUpperCase()} syntax validation success!`)
+    if (props.validateFn !== undefined) {
+      const result = props.validateFn(props.file.content)
+      if (result.error) {
+        alert(result.message)
+      } else {
+        alert(`${props.language.toUpperCase()} syntax validation success!`)
+      }
     }
   }
 
   return (
     <Modal show={props.show} fullscreen={props.fullscreen} onHide={onClose} variant="dark">
       <Modal.Header closeButton>
-        <Modal.Title>Editing <code>{props.file.name}</code></Modal.Title>
+        <Modal.Title>Editing <code>{props.file.name}</code> {props.editorSyntax} </Modal.Title>
       </Modal.Header>
       <Modal.Body style={{ padding: "0", overflowY: "hidden" }}>
         <Editor
           height="100%"
-          defaultLanguage={props.language}
+          defaultLanguage={props.editorSyntax}
           defaultValue={props.file.content}
           theme={isEditorDarkTheme ? "vs-dark" : "light"}
           onChange={onChange}
@@ -110,21 +112,25 @@ export default function FileEditDialog(props) {
           <XLg /> Close
         </TooltipButton>
 
+        {
+          props.validateFn !== undefined ?
+            <TooltipButton
+              tooltip={`Check the ${props.language.toUpperCase()} syntax and report if any error was found.`}
+              variant="secondary"
+              onClick={onValidate}
+            >
+              <QuestionCircle /> Validate
+            </TooltipButton>
+            : <></>
+        }
         <TooltipButton
-          tooltip={`Check the ${props.language.toUpperCase()} syntax and report if any error was found.`}
-          variant="secondary"
-          onClick={onValidate}
-        >
-          <QuestionCircle /> Validate
-        </TooltipButton>
-        <TooltipButton
-          tooltip={props.validateOnSave ? "Perform syntax check and save the file" : "Save the file"}
+          tooltip={props.validateOnSave && props.validateFn !== undefined ? "Perform syntax check and save the file" : "Save the file"}
           onClick={onSave}
         >
           <Save2 /> Save
         </TooltipButton>
         <TooltipButton
-          tooltip={props.validateOnSave ? "Perform syntax check, save the file and exit the editor" : "Save the file and exit the editor"}
+          tooltip={props.validateOnSave && props.validateFn !== undefined ? "Perform syntax check, save the file and exit the editor" : "Save the file and exit the editor"}
           variant="success"
           onClick={onSaveAndEdit}
         >

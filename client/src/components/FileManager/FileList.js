@@ -99,6 +99,7 @@ export default function FileList(props) {
         validateFn={props.editorValidatorFn}
         validateOnSave={true}
         language={props.fileType.toLowerCase()}
+        editorSyntax={props.editorSyntax}
         promptUnedited={true}
         file={editingFile}
         setFile={setEditingFile}

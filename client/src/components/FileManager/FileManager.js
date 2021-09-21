@@ -13,7 +13,8 @@ export default function FileManager(props) {
         <FileList
           files={props.files}
           setFiles={props.setFiles}
-          fileType="xml"
+          fileType={props.fileType}
+          editorSyntax={props.editorSyntax || props.fileType.toLowerCase()}
           editorValidatorFn={props.validator}
         />
 
