@@ -7,6 +7,14 @@
         "lib": "libNtve",
         "options": [
           {
+            "name": "libNtve_gv__CineModeGlobalOn",
+            "default": false
+          },
+          {
+            "name": "libNtve_gv__CineModeSavedAIPaused",
+            "default": false
+          },
+          {
             "name": "libNtve_gv_FloatingCombatTextAutoRandomSeed",
             "default": 0
           },
