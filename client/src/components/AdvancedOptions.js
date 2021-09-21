@@ -70,9 +70,13 @@ export default function AdvancedOptions(props) {
           type="checkbox"
           id={`options-${o.name}`}
           label={
-            o.default === o.value ?
-              <code style={{ color: o.value ? "green" : "red" }}> {o.name} = {o.value ? "true" : "false"};</code> :
-              <code style={{ color: o.value ? "green" : "red" }}><b><i>* {o.name} = {o.value ? "true" : "false"};</i></b></code>
+            <span style={{ cursor: "pointer" }}>
+              {
+                o.default === o.value ?
+                  <code style={{ color: o.value ? "green" : "red" }}> {o.name} = {o.value ? "true" : "false"};</code> :
+                  <code style={{ color: o.value ? "green" : "red" }}><b><i>* {o.name} = {o.value ? "true" : "false"};</i></b></code>
+              }
+            </span>
           }
           checked={o.value}
           onChange={e => {
