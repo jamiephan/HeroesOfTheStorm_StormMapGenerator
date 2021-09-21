@@ -23,6 +23,13 @@ export default function BottomSection() {
             <hr />
             Changelog:
             <ul>
+              <li>1.8</li>
+              <ul>
+                <li>Increased Advanced Option performance by rewriting the page logic</li>
+                <li>Wrapped Top Level libraries in Advanced Option into a drop down menu</li>
+                <li>Added path to show top libraries separation</li>
+                <li>Minor UI update</li>
+              </ul>
               <li>1.7</li>
               <ul>
                 <li>The site now uses Dark Mode 🌑!</li>
@@ -47,8 +54,8 @@ export default function BottomSection() {
               </ul>
               <li>1.4</li>
               <ul>
-                <li>Server Side: Implement API caching. Fetching map list and AI compositions should see a significant improvement</li>
-                <li>Server Side: Implement Map caching and updated map generation logic, map build time should now <code>~50%</code> faster.</li>
+                <li>Server Side: Implemented API caching. Fetching map list and AI compositions should see a significant improvement</li>
+                <li>Server Side: Implemented Map caching and updated map generation logic, map build time should now <code>~50%</code> faster.</li>
                 <li><a href="https://github.com/jamiephan/HeroesOfTheStorm_StormMapGenerator" target="_blank" rel="noreferrer">Now open source!</a></li>
               </ul>
               <li>1.3.1</li>
@@ -73,17 +80,17 @@ export default function BottomSection() {
               </ul>
               <li>1.1</li>
               <ul>
-                <li>Now Patches the <code>DocumentHeader</code> binary to show map name during loading screen</li>
+                <li>Now patches the <code>DocumentHeader</code> binary to show map name during loading screen</li>
                 <li>Allowing enable debug mode</li>
                 <li>Allow adding custom welcome message on the Debug Area when map launched</li>
                 <li>Added XML syntax validation functionality</li>
-                <li>Added XML Examples for beginners</li>
+                <li>Added XML examples for beginner modders</li>
                 <li>Minor UI improvements</li>
                 <li>All XML files now saves on <code>LocalStorage</code>, which persists after F5 refresh</li>
               </ul>
               <li>1.0</li>
               <ul>
-                <li>Initial App Publish</li>
+                <li>Initial app publish</li>
               </ul>
             </ul>
           </> : <><Button variant="secondary" onClick={() => setShowChangelog(true)}>Show Changelog</Button></>
