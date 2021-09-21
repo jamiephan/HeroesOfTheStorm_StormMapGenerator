@@ -51,8 +51,8 @@ export default function AdvancedOptions(props) {
     const currentValue = flattedOptions[index].value
 
 
-    switch (typeof o.default) {
-      case "boolean":
+    switch (o.type) {
+      case "bool":
         return <Form.Check key={`${i}-${j}-${k}`}
           type="checkbox"
           id={`options-${o.name}`}
@@ -74,7 +74,7 @@ export default function AdvancedOptions(props) {
             })
           }
           } />
-      case "number":
+      case "int":
 
         return <div key={`${i}-${j}-${k}`}>
           {
@@ -172,7 +172,7 @@ export default function AdvancedOptions(props) {
                   <li key={x.name} onClick={() => resetKeyToDefault(x.name)} style={{ cursor: "pointer" }}>
                     <code>{x.name} = </code>
                     {
-                      typeof x.default === "boolean" ?
+                      x.type === "bool" ?
                         <><code style={{ color: x.default ? "green" : "red" }}>{String(x.default)}</code>
                           {" "}
                           <ArrowRight />
@@ -183,7 +183,7 @@ export default function AdvancedOptions(props) {
                         </> : <></>
                     }
                     {
-                      typeof x.default === "number" ?
+                      x.type === "int" ?
                         <>
                           <code>{String(x.default)}</code>
                           {" "}
