@@ -12,7 +12,6 @@ export default function GeneralSettings(props) {
 
   const [isUsingTryMode20, setIsUsingTryMode20] = useLocalStorage("isUsingTryMode20", false, "bool")
   const [isUsingAIComp, setIsUsingAIComp] = useLocalStorage("isUsingAIComp", false, "bool")
-  const [isLoadingMaps, setIsLoadingMaps] = useState(true)
 
   // Form States
   const [name, setName] = useLocalStorage("name", "", "key")
