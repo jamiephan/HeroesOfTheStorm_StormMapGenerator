@@ -76,15 +76,17 @@ export default function MainForm() {
     <>
       <Form onSubmit={handleSubmit}>
 
-        <Tabs>
+        <Tabs style={{ marginBottom: "20px" }}>
 
           {/* General Settings */}
           <Tab eventKey="general" title="General Settings">
+            <h3 style={{ margin: "20px 0px" }}>General Settings</h3>
             <GeneralSettings onChange={gs => generalSettings.current = gs} />
           </Tab>
 
           {/* XMl File Manager */}
           <Tab eventKey="xmlfile" title="XML Files">
+            <h3 style={{ margin: "20px 0px" }}>XML Files</h3>
             <FileManager files={xmlFiles} setFiles={setXmlFiles} fileType="xml" mimeType="application/xml" validator={XMLValidate} template={BuildXMLTemplate}>
               The additional <code>XML</code> (Game Data) files that will be loaded into your custom map.
               <ul>
@@ -103,6 +105,7 @@ export default function MainForm() {
 
           {/* Advanced Options */}
           <Tab eventKey="advancedoptions" title="Advanced Options">
+            <h3 style={{ margin: "20px 0px" }}>Advanced Options</h3>
             <AdvancedOptions onChange={ao => libsOptions.current = ao} />
           </Tab>
 
