@@ -219,41 +219,46 @@ export default function AdvancedOptions(props) {
       <hr />
       {
         isLoadingOptions ? <></> :
-          options.current.map((s, i) =>
-            // Each section
-            <div key={i} style={{ margin: "20px 0px" }}>
-              <h4>{s.title} Libraries:</h4>
-              <Accordion style={{ margin: "20px 0px 20px 20px" }}>
-                {
-                  s.libraries.map((l, j) =>
-                    <Accordion.Item key={`${i}-${j}`} eventKey={`${i}-${j}`}>
-                      <Accordion.Header><span>{l.title} Library (<code>{l.lib}</code>)</span></Accordion.Header>
-                      <Accordion.Body>
-                        {
-                          l.options.map((o, k) => renderType(o, i, j, k))
-                        }
-                        <hr />
-                        <Button variant="danger" onClick={() => {
-                          if (window.confirm(`You sure want to reset ${l.title} Library to default?`)) {
-                            setFlattedOptions(fo => {
-                              const cp = Array.from(fo)
-                              for (let index = 0; index < cp.length; index++) {
-                                if (cp[index].name.startsWith(l.lib)) {
-                                  cp[index].value = cp[index].default
-                                }
+          <Accordion>{
+            options.current.map((s, i) =>
+              // Each section
+              <Accordion.Item key={`${i}`} eventKey={`${i}`}>
+                <Accordion.Header style={{ margin: "0px 0px" }}><h5>{s.title} Libraries (<code>{s.lib}</code>)</h5></Accordion.Header>
+                <Accordion.Body>
+                  <Accordion style={{ margin: "0px" }}>
+                    {
+                      s.libraries.map((l, j) =>
+                        <Accordion.Item key={`${i}-${j}`} eventKey={`${i}-${j}`}>
+                          <Accordion.Header><span>{l.title} Library (<code>{l.lib}</code>)</span></Accordion.Header>
+                          <Accordion.Body>
+                            {
+                              l.options.map((o, k) => renderType(o, i, j, k))
+                            }
+                            <hr />
+                            <Button variant="danger" onClick={() => {
+                              if (window.confirm(`You sure want to reset ${l.title} Library to default?`)) {
+                                setFlattedOptions(fo => {
+                                  const cp = Array.from(fo)
+                                  for (let index = 0; index < cp.length; index++) {
+                                    if (cp[index].name.startsWith(l.lib)) {
+                                      cp[index].value = cp[index].default
+                                    }
+                                  }
+                                  return cp
+                                })
                               }
-                              return cp
-                            })
-                          }
-                        }}
-                        >{`Reset ${l.title} Library to default`}</Button>
-                      </Accordion.Body>
-                    </Accordion.Item>
-                  )
-                }
-              </Accordion>
-            </div>
-          )}
+                            }}
+                            >{`Reset ${l.title} Library to default`}</Button>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      )
+                    }
+                  </Accordion>
+                </Accordion.Body>
+              </Accordion.Item>
+            )}
+          </Accordion>
+      }
     </>
   )
 }
