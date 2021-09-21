@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Accordion, Alert, Button, Form } from 'react-bootstrap'
 import { ArrowRight } from 'react-bootstrap-icons'
 import useLocalStorage from '../hooks/useLocalStorage'
@@ -7,63 +7,50 @@ export default function AdvancedOptions(props) {
 
   const [isLoadingOptions, setIsLoadingOptions] = useState(true)
   const [isShowingAdvancedOptionAlertBox, setIsShowingAdvancedOptionAlertBox] = useLocalStorage("isShowingAdvancedOptionAlertBox", false, "bool")
-  const [options, setOptions] = useState([])
-  const [changes, setChanges] = useState([])
+
+  const options = useRef([])
+  const [flattedOptions, setFlattedOptions] = useState([])
 
   useEffect(() => {
     (async () => {
       // Load Options
       const optionsResponse = await fetch("/default/libs")
-      let optionsJson = await optionsResponse.json()
-      for (let i = 0; i < optionsJson.length; i++) {
-        const section = optionsJson[i];
-        for (let j = 0; j < section.libraries.length; j++) {
-          const library = section.libraries[j];
-          for (let k = 0; k < library.options.length; k++) {
-            const options = library.options[k];
-            optionsJson[i].libraries[j].options[k] = {
-              value: options.default, name: options.name, default: options.default
-            }
-          }
-        }
-      }
-      setOptions(optionsJson)
+      const optionsJson = await optionsResponse.json()
+      options.current = optionsJson
+
+      setFlattedOptions(optionsJson.map(s => s.libraries)
+        .reduce((p, n) => p.concat(n))
+        .map(x => x.options)
+        .reduce((p, n) => p.concat(n))
+        .map(x => {
+          return { ...x, value: x.default }
+        }))
+
       setIsLoadingOptions(false)
     })()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
     if (!isLoadingOptions) {
-      const variables = options.map(s => s.libraries)
-        .reduce((p, n) => p.concat(n))
-        .map(x => x.options)
-        .reduce((p, n) => p.concat(n))
 
-      const tempChanges = []
-      const tempChangesSubmit = []
+      // Both Array.from and [...flattedOptions] causes some weird glitch...
+      const obj = JSON.parse(JSON.stringify(flattedOptions))
+        .filter(o => o.default !== o.value)
+        .map(x => { delete x.default; return x })
 
-      for (const variable of variables) {
-        if (variable.value !== variable.default) {
-          tempChanges.push({
-            name: variable.name,
-            value: variable.value,
-            default: variable.default
-          })
-          tempChangesSubmit.push({
-            name: variable.name,
-            value: variable.value,
-          })
-        }
-      }
-
-      setChanges(tempChanges)
-      props.set(tempChangesSubmit)
+      props.onChange(obj)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [options])
+  }, [flattedOptions])
 
 
   const renderType = (o, i, j, k) => {
+
+    const index = flattedOptions.findIndex(x => x.name === o.name)
+    const currentValue = flattedOptions[index].value
+
+
     switch (typeof o.default) {
       case "boolean":
         return <Form.Check key={`${i}-${j}-${k}`}
@@ -72,25 +59,26 @@ export default function AdvancedOptions(props) {
           label={
             <span style={{ cursor: "pointer" }}>
               {
-                o.default === o.value ?
-                  <code style={{ color: o.value ? "green" : "red" }}> {o.name} = {o.value ? "true" : "false"};</code> :
-                  <code style={{ color: o.value ? "green" : "red" }}><b><i>* {o.name} = {o.value ? "true" : "false"};</i></b></code>
+                o.default === currentValue ?
+                  <code style={{ color: currentValue ? "green" : "red" }}> {o.name} = {currentValue ? "true" : "false"};</code> :
+                  <code style={{ color: currentValue ? "green" : "red" }}><b><i>* {o.name} = {currentValue ? "true" : "false"};</i></b></code>
               }
             </span>
           }
-          checked={o.value}
+          checked={currentValue}
           onChange={e => {
-            setOptions(o => {
-              const ol = JSON.parse(JSON.stringify(o))
-              ol[i].libraries[j].options[k].value = e.target.checked
-              return ol
+            setFlattedOptions(fo => {
+              const cp = Array.from(fo)
+              cp[index].value = e.target.checked
+              return cp
             })
           }
           } />
       case "number":
+
         return <div key={`${i}-${j}-${k}`}>
           {
-            o.default === o.value ?
+            o.default === currentValue ?
               <code>{o.name} = </code> :
               <code style={{ fontWeight: "bolder", fontStyle: "italic" }}>* {o.name} = </code>
           }
@@ -104,13 +92,13 @@ export default function AdvancedOptions(props) {
               fontSize: "80%",
               padding: "2px",
             }}
-            value={o.value}
+            value={currentValue}
             onChange={e => {
               if (parseInt(e.target.value) >= e.target.min && parseInt(e.target.value) <= e.target.max) {
-                setOptions(o => {
-                  const ol = JSON.parse(JSON.stringify(o))
-                  ol[i].libraries[j].options[k].value = parseInt(e.target.value)
-                  return ol
+                setFlattedOptions(fo => {
+                  const cp = Array.from(fo)
+                  cp[index].value = parseInt(e.target.value)
+                  return cp
                 })
               }
             }
@@ -125,22 +113,14 @@ export default function AdvancedOptions(props) {
 
   const resetKeyToDefault = key => {
     if (window.confirm(`Reset ${key} to default?`)) {
-      setOptions(o1 => {
-        const ol = JSON.parse(JSON.stringify(o1))
-        for (let i = 0; i < ol.length; i++) {
-          const libs = ol[i].libraries;
-          for (let j = 0; j < libs.length; j++) {
-            const options = libs[j].options;
-            for (let k = 0; k < options.length; k++) {
-              const option = options[k];
-              if (option.name === key) {
-                ol[i].libraries[j].options[k].value = ol[i].libraries[j].options[k].default
-                continue;
-              }
-            }
-          }
-        }
-        return ol
+
+      const index = flattedOptions.findIndex(x => x.name === key)
+      if (index === -1) return
+
+      setFlattedOptions(fo => {
+        const cp = Array.from(fo)
+        cp[index].value = cp[index].default
+        return cp
       })
     }
   }
@@ -186,10 +166,10 @@ export default function AdvancedOptions(props) {
 
         <h4>Changes:</h4>
         {
-          (changes.length > 0) && (!isLoadingOptions) ?
+          (flattedOptions.filter(o => o.default !== o.value).length > 0) && (!isLoadingOptions) ?
             <>
               <ul>
-                {changes.map(x =>
+                {flattedOptions.filter(o => o.default !== o.value).map(x =>
                   <li key={x.name} onClick={() => resetKeyToDefault(x.name)} style={{ cursor: "pointer" }}>
                     <code>{x.name} = </code>
                     {
@@ -221,16 +201,14 @@ export default function AdvancedOptions(props) {
               </ul>
 
               <Button variant="danger" onClick={() => {
-                if (window.confirm("You sure want to reset the options to default?")) {
-                  const ol = JSON.parse(JSON.stringify(options))
-                  ol.forEach(s => {
-                    s.libraries.forEach(d => {
-                      d.options.forEach(o => {
-                        o.value = o.default
-                      })
-                    })
+                if (window.confirm("You sure want to reset ALL the options to default?")) {
+                  setFlattedOptions(fo => {
+                    const cp = Array.from(fo)
+                    for (let index = 0; index < cp.length; index++) {
+                      cp[index].value = cp[index].default
+                    }
+                    return cp
                   })
-                  setOptions(ol)
                 }
               }}
               >Reset ALL to default</Button>
@@ -241,7 +219,7 @@ export default function AdvancedOptions(props) {
       <hr />
       {
         isLoadingOptions ? <></> :
-          options.map((s, i) =>
+          options.current.map((s, i) =>
             // Each section
             <div key={i} style={{ margin: "20px 0px" }}>
               <h4>{s.title} Libraries:</h4>
@@ -257,12 +235,14 @@ export default function AdvancedOptions(props) {
                         <hr />
                         <Button variant="danger" onClick={() => {
                           if (window.confirm(`You sure want to reset ${l.title} Library to default?`)) {
-                            setOptions(o => {
-                              const ol = JSON.parse(JSON.stringify(o))
-                              ol[i].libraries[j].options.forEach(o => {
-                                o.value = o.default
-                              })
-                              return ol
+                            setFlattedOptions(fo => {
+                              const cp = Array.from(fo)
+                              for (let index = 0; index < cp.length; index++) {
+                                if (cp[index].name.startsWith(l.lib)) {
+                                  cp[index].value = cp[index].default
+                                }
+                              }
+                              return cp
                             })
                           }
                         }}

@@ -12,13 +12,12 @@ import GeneralSettings from './GeneralSettings'
 
 export default function MainForm() {
 
-
   // Settings
   const generalSettings = useRef({})
   // XML Files
   const [xmlFiles, setXmlFiles] = useLocalStorage("xml", [], "file")
   // Advanced Options
-  const [libsOptions, setLibsOptions] = useState([])
+  const libsOptions = useRef([])
 
 
   const [isGenerating, setIsGenerating] = useState("")
@@ -44,7 +43,7 @@ export default function MainForm() {
       trymode20: isUsingTryMode20,
       ai: (isUsingTryMode20 || !isUsingAIComp) ? "none" : ai,
       msg,
-      libsOptions,
+      libsOptions: libsOptions.current,
       xmlFiles,
     })
 
@@ -104,7 +103,7 @@ export default function MainForm() {
 
           {/* Advanced Options */}
           <Tab eventKey="advancedoptions" title="Advanced Options">
-            <AdvancedOptions set={setLibsOptions} get={libsOptions} />
+            <AdvancedOptions onChange={ao => libsOptions.current = ao} />
           </Tab>
 
         </Tabs>
