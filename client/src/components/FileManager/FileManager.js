@@ -6,7 +6,7 @@ import FileUploadBar from './FileUploadBar'
 export default function FileManager(props) {
   return (
     <>
-      <Form.Group className="mb-3" style={{ marginTop: "20px" }}>
+      <Form.Group className="mb-3">
 
         {/* File List */}
         <Form.Label>Additional <code>{props.fileType.toUpperCase()}</code> Files:</Form.Label>

@@ -74,7 +74,6 @@ export default function GeneralSettings(props) {
 
   return (
     <>
-      <br />
       {/* Map Name */}
       <Form.Group className="mb-3">
         <Form.Label>The name of the map:</Form.Label>
