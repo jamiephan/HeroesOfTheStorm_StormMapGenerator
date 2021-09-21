@@ -107,7 +107,7 @@ export default function AdvancedOptions(props) {
           <code>;</code>
         </div>
       default:
-        return <code key={`${i}-${j}-${k}`} style={{ color: "red" }}>Invalid Type</code>
+        return <div><code key={`${i}-${j}-${k}`} style={{ color: "red" }}>Invalid Type: {o.name}</code></div>
     }
   }
 
