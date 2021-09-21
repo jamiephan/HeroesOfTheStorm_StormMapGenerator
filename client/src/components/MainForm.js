@@ -23,7 +23,7 @@ export default function MainForm() {
   const [isGenerating, setIsGenerating] = useState("")
 
   // Status Alert box
-  const [alertBox, setAlertBox] = useState({ show: false, variant: "warning", message: "Why do people use light mode??" })
+  const [alertBox, setAlertBox] = useState({ show: false, variant: "warning", message: "Why do people use light mode??", dismissible: true })
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -35,7 +35,7 @@ export default function MainForm() {
     } = generalSettings.current
 
     const mapName = name.toLowerCase().endsWith(".stormmap") ? name : name + ".stormmap"
-    setAlertBox({ show: true, variant: "info", message: `Generating ${mapName} ...` })
+    setAlertBox({ show: true, variant: "info", message: `Generating ${mapName} ...`, dismissible: false })
 
     const body = JSON.stringify({
       name: mapName,
@@ -62,10 +62,10 @@ export default function MainForm() {
       a.download = mapName
       a.click()
       a.remove()
-      setAlertBox({ show: true, variant: "success", message: `Downloaded ${mapName}!` })
+      setAlertBox({ show: true, variant: "success", message: `Downloaded ${mapName}!`, dismissible: true })
     } else {
       const json = await response.json()
-      setAlertBox({ show: true, variant: "danger", message: json.message })
+      setAlertBox({ show: true, variant: "danger", message: json.message, dismissible: true })
     }
 
     setIsGenerating(false)
@@ -110,6 +110,21 @@ export default function MainForm() {
 
         <hr />
 
+        {/* Alert box (status) */}
+        <Alert
+          show={alertBox.show}
+          style={{ margin: "20px 0px" }}
+          variant={alertBox.variant}
+          dismissible={alertBox.dismissible}
+          onClose={() => setAlertBox(b => {
+            const bc = Object.assign({}, b)
+            bc.show = false
+            return bc
+          })}
+        >
+          {alertBox.message}
+        </Alert>
+
         {/* Generate Button */}
         <Form.Group>
           {
@@ -124,15 +139,6 @@ export default function MainForm() {
         </Form.Group>
       </Form>
 
-      {/* Alert box (status) */}
-      <Alert
-        show={alertBox.show}
-        style={{ margin: "20px 0px" }}
-        variant={alertBox.variant}
-        onClose={() => setAlertBox(b => b.show = false)}
-      >
-        {alertBox.message}
-      </Alert>
     </>
   )
 }
