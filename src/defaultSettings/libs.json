@@ -1,6 +1,7 @@
 [
   {
     "title": "Built-In",
+    "lib": "core.stormmod",
     "libraries": [
       {
         "title": "Built-In",
@@ -40,6 +41,7 @@
   },
   {
     "title": "Core",
+    "lib": "heroesdata.stormmod",
     "libraries": [
       {
         "title": "Heroes",
@@ -1459,6 +1461,7 @@
   },
   {
     "title": "Heroes",
+    "lib": "heromods/*.stormmod",
     "libraries": [
       {
         "title": "Alarak",
@@ -2008,6 +2011,7 @@
   },
   {
     "title": "Maps",
+    "lib": "heroesmapmods/battlegroundmapmods/*.stormmod",
     "libraries": [
       {
         "title": "Alterac Pass",
@@ -2687,6 +2691,7 @@
   },
   {
     "title": "Brawl",
+    "lib": "heroesbrawlmods/*.stormmod",
     "libraries": [
       {
         "title": "Arena Mode",
