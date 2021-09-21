@@ -28,7 +28,6 @@ export default function FileManager(props) {
           files={props.files}
           setFiles={props.setFiles}
           fileType={props.fileType}
-          mimeType={props.mimeType}
           templateFn={props.template}
         />
       </Form.Group>
