@@ -10,9 +10,7 @@ export default function App() {
     <>
       <TitleBar />
       <Container>
-        <br />
-        <h1>Storm Map Generator</h1>
-        <br />
+        <h1 style={{ margin: "15px 0" }}>Storm Map Generator</h1>
         <MainForm />
         <ThankYouBox />
       </Container>
