@@ -23,6 +23,11 @@ export default function BottomSection() {
             <hr />
             Changelog:
             <ul>
+              <li>1.7</li>
+              <ul>
+                <li>The site now uses Dark Mode 🌑!</li>
+                <li>Fixed Page flickering when switching between tabs with scrollbar present</li>
+              </ul>
               <li>1.6</li>
               <ul>
                 <li>Added the ability to tweak <code>Integer</code> type variables in Advanced Options</li>
