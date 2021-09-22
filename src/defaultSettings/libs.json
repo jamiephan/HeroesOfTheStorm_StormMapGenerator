@@ -4138,7 +4138,7 @@
       },
       {
         "title": "Arena Mode (Punisher)",
-        "lib": "AMPU",
+        "lib": "libAMPU",
         "options": [
           {
             "name": "libAMPU_gv_aRMPunisherPunisherFirstLeapOccurred",
@@ -5005,11 +5005,6 @@
           },
           {
             "name": "libPVEM_gv_pvEDefeatDisabled",
-            "default": false,
-            "type": "bool"
-          },
-          {
-            "name": "libPVEU_gv_dEBUG_ShowCuratedHeroPickMessages",
             "default": false,
             "type": "bool"
           },
