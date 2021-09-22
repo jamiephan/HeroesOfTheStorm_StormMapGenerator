@@ -169,30 +169,39 @@ export default function AdvancedOptions(props) {
 
         <Alert variant="info" dismissible="true" onClose={() => setIsShowingAdvancedOptionAlertBox(false)}>
           <h5>What is this?</h5>
-          <ul style={{ marginBottom: "0" }}>
-            <li>This section allows you to modify each non-constant variables in the game (currently only supports <code>Boolean</code> and <code>Integer</code> type).</li>
-            <li>The script will be injected into the <code>MapScript.galaxy</code> after all libraries have been initialized.</li>
-            <li>Each of the sections belows represent a single library from the game. </li>
-            <li>The default values were gathered via the <code>InitVariables()</code> function from their respective library. (Therefore it will not track initial map launch trigger changes to the variables)</li>
-            <hr />
+          <ul>
+            <li>This section allows you to modify each non-constant variables in the game (currently only supports <code>Boolean</code>, <code>Integer</code> and <code>Decimal</code> type).</li>
+            <li>The script will be added into the <code>MapScript.galaxy</code> after all libraries have been initialized (<code>InitLibs()</code>).</li>
+            <li>The default values were gathered via the <code>InitVariables()</code> function from their respective library. Therefore it will not track any changes afterwards.</li>
           </ul>
           <h5>Notes:</h5>
-          <ul style={{ marginBottom: "0" }}>
+          <ul>
             <li>The settings on this page <b>will not</b> be saved on your browser, refreshing will reset to default.</li>
             <li>Some variables depends on certain variables to function properly or some might not have any effect. You will need to test or study the trigger code manually.</li>
             <li>For <code><b>Maps</b></code> and <code><b>Brawl</b></code> libraries, <b>Make sure your map have the required mods, or the map will crash when launched.</b></li>
-            <li>In the changes section below, you can click on each of the variables and reset it to default.</li>
-            <hr />
+            <li>For Integer (<code>int</code>) variables, the maximum is <code>2147483648</code> and the minimum is <code>-2147483648</code>.</li>
+            <li>For Decimal (<code>fixed</code>) variables, the maximum is <code>524287</code> and the minimum is <code>-524287</code>. Note that the game only accepts maximum <code>4</code> decimal digit, smaller digits will be rounded.</li>
           </ul>
-          <h5>Useful Options:</h5>
-          <ul style={{ marginBottom: "0" }}>
-            <li>Core <ArrowRight /> Heroes <ArrowRight /> <code>libCore_gv_dEBUGDebuggingEnabled</code>: Toggle Debug Mode</li>
-            <li>Core <ArrowRight /> Heroes <ArrowRight /> <code>libCore_gv_dEBUGPingLimitEnabled </code>: Toggle Ping Limit</li>
-            <li>Core <ArrowRight /> Heroes <ArrowRight /> <code>libCore_gv_sYSMinionSpawningOn</code>: Toggle Minion Waves</li>
-            <li>Core <ArrowRight /> Heroes <ArrowRight /> <code>libCore_gv_sYSHeroStartLevel</code>: Set the starting Level</li>
-            <li>Core <ArrowRight /> Game <ArrowRight /> <code>libGame_gv_afk_UseAFKSystem</code>: Toggle AFK detection</li>
-            <li>Core <ArrowRight /> Support <ArrowRight /> <code>libSprt_gv_dEBUGNoRegen</code>: Toggle HP / Energy Regen</li>
-            <li>Core <ArrowRight /> AI <ArrowRight /> <code>libAIAI_gv_heroAIDisplayAIStatus</code>: Toggle showing AI status</li>
+          <h5>How to use this page?</h5>
+          <ul>
+            <li>All libraries are separated into sections. Click on of of them to expand it.</li>
+            <li>Click on each of the libraries to expand all the possible variables to be configured.</li>
+            <li>The variable names and default values are identical in game. The data type will be appended to the variable name.</li>
+            <li>For <code>boolean</code> type, click on it to toggle <code style={{ color: "green" }}>true</code> or <code style={{ color: "red" }}>false</code> and can be easily identified with its color.</li>
+            <li>For both <code>int</code> and <code>fixed</code> type, You can change the value by typing on the textbox. If its over the min/max, it will reset to its type's min/max.</li>
+            <li>Any value that is not the same as the default value will be considered as "changed".</li>
+            <li>You can track the changes on the "Changes" box below. Click on each of the variable inside the changes box to discard the changes.</li>
+          </ul>
+          <h5>Some Useful Options:</h5>
+          <ul>
+            <li>Core <ArrowRight /> Heroes <ArrowRight /> <code>bool libCore_gv_dEBUGDebuggingEnabled</code>: Toggle Debug Mode</li>
+            <li>Core <ArrowRight /> Heroes <ArrowRight /> <code>bool libCore_gv_dEBUGPingLimitEnabled </code>: Toggle Ping Limit</li>
+            <li>Core <ArrowRight /> Heroes <ArrowRight /> <code>bool libCore_gv_sYSMinionSpawningOn</code>: Toggle Minion Waves</li>
+            <li>Core <ArrowRight /> Heroes <ArrowRight /> <code>int libCore_gv_sYSHeroStartLevel</code>: Set the starting Level</li>
+            <li>Core <ArrowRight /> Heroes <ArrowRight /> <code>fixed libCore_gv_bALDeathTimeOverride</code>: Override Respawn Timer (Note: The smallest timer is <code>0.0625</code>)</li>
+            <li>Core <ArrowRight /> Game <ArrowRight /> <code>bool libGame_gv_afk_UseAFKSystem</code>: Toggle AFK detection</li>
+            <li>Core <ArrowRight /> Support <ArrowRight /> <code>bool libSprt_gv_dEBUGNoRegen</code>: Toggle HP / Energy Regen</li>
+            <li>Core <ArrowRight /> AI <ArrowRight /> <code>bool libAIAI_gv_heroAIDisplayAIStatus</code>: Toggle showing AI status</li>
           </ul>
         </Alert> :
         <><Button variant="info" onClick={() => { setIsShowingAdvancedOptionAlertBox(true) }}>What is Advanced Option?</Button></>
