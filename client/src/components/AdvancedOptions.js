@@ -106,6 +106,39 @@ export default function AdvancedOptions(props) {
           />
           <code>;</code>
         </div>
+      case "fixed":
+
+        return <div key={`${i}-${j}-${k}`}>
+          {
+            o.default === currentValue ?
+              <code>{o.name} = </code> :
+              <code style={{ fontWeight: "bolder", fontStyle: "italic" }}>* {o.name} = </code>
+          }
+          <Form.Control
+            type="number"
+            min="-2147483648"
+            max="2147483648"
+            step="0.01"
+            style={{
+              width: "100px",
+              display: "inline-block",
+              fontSize: "80%",
+              padding: "2px",
+            }}
+            value={currentValue}
+            onChange={e => {
+              if (parseFloat(e.target.value) >= e.target.min && parseFloat(e.target.value) <= e.target.max) {
+                setFlattedOptions(fo => {
+                  const cp = Array.from(fo)
+                  cp[index].value = parseFloat(e.target.value)
+                  return cp
+                })
+              }
+            }
+            }
+          />
+          <code>;</code>
+        </div>
       default:
         return <div><code key={`${i}-${j}-${k}`} style={{ color: "red" }}>Invalid Type: {o.name}</code></div>
     }
@@ -183,7 +216,7 @@ export default function AdvancedOptions(props) {
                         </> : <></>
                     }
                     {
-                      x.type === "int" ?
+                      x.type === "int" || x.type === "fixed" ?
                         <>
                           <code>{String(x.default)}</code>
                           {" "}
