@@ -2240,7 +2240,7 @@
       },
       {
         "title": "Ana",
-        "lib": "LibHANA",
+        "lib": "libHANA",
         "options": [
           {
             "name": "libHANA_gv_heroAnaTriggerRegistrationVariable",
@@ -2706,7 +2706,7 @@
       },
       {
         "title": "Orphea",
-        "lib": "ORPH",
+        "lib": "libORPH",
         "options": [
           {
             "name": "libORPH_gv_heroOrpheaTriggerRegistrationVariable",
