@@ -23,6 +23,12 @@ export default function BottomSection() {
             <hr />
             Changelog:
             <ul>
+              <li>1.9</li>
+              <ul>
+                <li>Added the ability to tweak <code>Integer</code> type variables in Advanced Options</li>
+                <li>Updated Advanced Option's description box</li>
+                <li>Minor UI update on Advanced Option Page</li>
+              </ul>
               <li>1.8</li>
               <ul>
                 <li>Increased Advanced Option performance by rewriting the page logic</li>
