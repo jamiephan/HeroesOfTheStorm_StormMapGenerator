@@ -60,8 +60,8 @@ export default function AdvancedOptions(props) {
             <span style={{ cursor: "pointer" }}>
               {
                 o.default === currentValue ?
-                  <code style={{ color: currentValue ? "green" : "red" }}> {o.name} = {currentValue ? "true" : "false"};</code> :
-                  <code style={{ color: currentValue ? "green" : "red" }}><b><i>* {o.name} = {currentValue ? "true" : "false"};</i></b></code>
+                  <code style={{ color: currentValue ? "green" : "red" }}> {o.type} {o.name} = {currentValue ? "true" : "false"};</code> :
+                  <code style={{ color: currentValue ? "green" : "red" }}><b><i>* {o.type} {o.name} = {currentValue ? "true" : "false"};</i></b></code>
               }
             </span>
           }
@@ -79,8 +79,8 @@ export default function AdvancedOptions(props) {
         return <div key={`${i}-${j}-${k}`}>
           {
             o.default === currentValue ?
-              <code>{o.name} = </code> :
-              <code style={{ fontWeight: "bolder", fontStyle: "italic" }}>* {o.name} = </code>
+              <code>{o.type} {o.name} = </code> :
+              <code style={{ fontWeight: "bolder", fontStyle: "italic" }}>* {o.type} {o.name} = </code>
           }
           <Form.Control
             type="number"
@@ -111,14 +111,14 @@ export default function AdvancedOptions(props) {
         return <div key={`${i}-${j}-${k}`}>
           {
             o.default === currentValue ?
-              <code>{o.name} = </code> :
-              <code style={{ fontWeight: "bolder", fontStyle: "italic" }}>* {o.name} = </code>
+              <code>{o.type} {o.name} = </code> :
+              <code style={{ fontWeight: "bolder", fontStyle: "italic" }}>* {o.type} {o.name} = </code>
           }
           <Form.Control
             type="number"
-            min="-2147483648"
-            max="2147483648"
-            step="0.01"
+            min="-524287"
+            max="524287"
+            step="0.1"
             style={{
               width: "100px",
               display: "inline-block",
