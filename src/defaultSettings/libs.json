@@ -87,12 +87,12 @@
           {
             "name": "libCore_gv_dEBUGDeathRecapEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libCore_gv_dEBUGPingLimitEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libCore_gv_dEBUGSoloXPOn",
@@ -107,7 +107,7 @@
           {
             "name": "libCore_gv_sYSStartGame",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libCore_gv_sYSDisplayIntroCutscene",
@@ -127,7 +127,7 @@
           {
             "name": "libCore_gv_sYSMinionSpawningOn",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libCore_gv_sYSCustomMinionsEnabled",
@@ -137,7 +137,7 @@
           {
             "name": "libCore_gv_sYSTalentsOn",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libCore_gv_sYSTowerAI",
@@ -157,17 +157,17 @@
           {
             "name": "libCore_gv_sYSUseEncouragementPanel",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libCore_gv_sYSDataMiningListenForData",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libCore_gv_sYSXPOn",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libCore_gv_tUTTalentsAutobuyOn",
@@ -197,7 +197,7 @@
           {
             "name": "libCore_gv_zS_SendTransmissionCampaignChatBubbleOn",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libCore_gv_dataAnnouncerVOExtraAnnouncerEventsIndex",
@@ -443,7 +443,7 @@
           {
             "name": "libGame_gv_afk_UseAFKSystem",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_afk_UseBrawlAFKSystem",
@@ -458,12 +458,12 @@
           {
             "name": "libGame_gv_announcement_SystemEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_towerMapPlaysCoreWarning",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_endofMatchAwardsDisabled",
@@ -478,7 +478,7 @@
           {
             "name": "libGame_gv_heroSpawnReady",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_heroPickDone",
@@ -488,7 +488,7 @@
           {
             "name": "libGame_gv_gateTimerReady",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_heroSpawnBlockGame",
@@ -503,12 +503,12 @@
           {
             "name": "libGame_gv_randomizeMountsAndSkins",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_shufflePickEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_gameOver_DetermineWinningTeamHasRun",
@@ -518,27 +518,27 @@
           {
             "name": "libGame_gv_dEBUG_PercentScalingEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_heroDeath_UpdateStats",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_heroDeath_RespawnMounted",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_heroDeath_RunDeathUIUpdates",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_heroDeathMultikillTimerEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_loot_DropBannerInTownHallRubble",
@@ -598,12 +598,12 @@
           {
             "name": "libGame_gv_onFireEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_onFirePrintingEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_onFireUpdating",
@@ -623,7 +623,7 @@
           {
             "name": "libGame_gv_talents_PlayChooseATalentSound",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_townMidLateGamePowerTransitionOn",
@@ -633,7 +633,7 @@
           {
             "name": "libGame_gv_townBasicMinimapHealthMontior",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGame_gv_cameraBound_Count",
@@ -834,22 +834,22 @@
           {
             "name": "libSprt_gv_dEBUGXPSourceHero",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libSprt_gv_dEBUGXPSourceMinion",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libSprt_gv_dEBUGXPSourceStructure",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libSprt_gv_dEBUGXPSourceCreep",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libSprt_gv_dEBUGSelectionEnabled",
@@ -864,7 +864,7 @@
           {
             "name": "libSprt_gv_dEBUGCombatTextEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libSprt_gv_dEBUGXPTextEnabled",
@@ -889,7 +889,7 @@
           {
             "name": "libSprt_gv_dEBUGDebugMessagesEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libSprt_gv_dEBUGCinematicsModeEnabled",
@@ -899,7 +899,7 @@
           {
             "name": "libSprt_gv_dEBUGMapTextEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libSprt_gv_dEBUGBonusMinionXP",
@@ -1050,7 +1050,7 @@
           {
             "name": "libAIAI_gv_heroAIAIChoosesTalents",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libAIAI_gv_heroAIDisplayAIStatus",
@@ -1059,7 +1059,8 @@
           },
           {
             "name": "libAIAI_gv_aITeamDelegateNonEventMapDecreaseAmount",
-            "default": -4
+            "default": -4,
+            "type": "int"
           },
           {
             "name": "libAIAI_gv_aITeamDelegateNonEventMapIncreaseAmount",
@@ -1115,7 +1116,7 @@
           {
             "name": "libMapM_gv_mMRavenUseTributePreviews",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libMapM_gv_mMRavenCurseLifted",
@@ -1130,17 +1131,17 @@
           {
             "name": "libMapM_gv_mMRavenEventFirstTime",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libMapM_gv_mMGardensDragonSpawnFirstTime",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libMapM_gv_mMDragonballsTransmissionShrinesRechargeFirstTime",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libMapM_gv_countOfMMAIUnits",
@@ -1331,7 +1332,7 @@
           {
             "name": "libGDHL_gv_gPU2020EventEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libGDHL_gv_gPU2020Force01Rando",
@@ -1767,7 +1768,7 @@
           {
             "name": "libUIUI_gv_uIDebugPanelFloatingCombatTextToggle",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libUIUI_gv_uIEndOfMatchAwardsAnyVoteCast",
@@ -1797,17 +1798,17 @@
           {
             "name": "libUIUI_gv_uIHealingFountainsHelpTextEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libUIUI_gv_heroicsObtainedAutomatedTeamNotificationsAllowed",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libUIUI_gv_useStatusFrames",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libUIUI_gv_uIOnFireDEBUGOnFireDebugEnabled",
@@ -1817,7 +1818,7 @@
           {
             "name": "libUIUI_gv_uIOnFireOnFireDisplayEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libUIUI_gv_deathTimerPanelIndex",
@@ -1933,7 +1934,7 @@
           {
             "name": "libSond_gv_heroVO_Enabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libSond_gv_soundtrack_MapSoundtrackPlaying",
@@ -1969,7 +1970,7 @@
           {
             "name": "libStEx_gv_tutorialCinematicRestoreSelection",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libStEx_gv_sE_FreezeUnitsGameTimerUnpaused",
@@ -2969,7 +2970,7 @@
           {
             "name": "libMMAP_gv_dEBUG_CampDefendersOn",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libMMAP_gv_firstEventHasHappened",
@@ -3101,7 +3102,7 @@
           {
             "name": "libBBAY_gv_mMBBCannonballsTreasureChestIsFirstChest",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libBBAY_gv_mMBBCannonballsTrasmissionPlaying",
@@ -3294,7 +3295,7 @@
           {
             "name": "libMHmu_gv_hanamuraUseVisionCamps",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libMHmu_gv_elevator_WaitingToLower",
@@ -3575,7 +3576,7 @@
           {
             "name": "libOVER_gv_overwatchModExtraScalingEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libOVER_gv_data_XP_BossCampCapture",
@@ -3606,7 +3607,7 @@
           {
             "name": "libMLCP_gv_mMSkyTempleBlessingFirstTime",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libMLCP_gv_mMSkyTempleBlessNextTemples3ed",
@@ -3698,12 +3699,12 @@
           {
             "name": "libMSOC_gv_mMTombSpiderQueenFirstActivation",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libMSOC_gv_mMTombSpiderQueenTurnInCompleteFirstTime",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libMSOC_gv_mMTombSpiderQueenScalingStart",
@@ -3774,7 +3775,7 @@
           {
             "name": "libMTOD_gv_mMToDBanterVariable",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libMTOD_gv_mMToDPhaseTwoCheatUsed",
@@ -3836,7 +3837,7 @@
           {
             "name": "libVLSK_gv_grantStandardCapturePointRewards",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libVLSK_gv_capturePointPlayControllingSounds",
@@ -3851,7 +3852,7 @@
           {
             "name": "libVLSK_gv_useFirstEventVoiceover",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libVLSK_gv_capturePointCount",
@@ -3897,12 +3898,12 @@
           {
             "name": "libMSC2_gv_mMSC2FourWarheadsSpawn",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libMSC2_gv_mMSC2WarheadEventFirstTime",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libMSC2_gv_mMSC2GlobalConversationPlayingdelete",
@@ -3995,12 +3996,12 @@
           {
             "name": "libAREN_gv_gameOver_DetermineWinningTeamHasRun",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libAREN_gv_aRM_BaseRevealersEnabled",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libAREN_gv_aRM_VictorySequencePlaying",
@@ -4010,22 +4011,22 @@
           {
             "name": "libAREN_gv_aRM_PanCameraToCore",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libAREN_gv_aRM_PlayCrowdCheerSounds",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libAREN_gv_showCoreStatusBars",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libAREN_gv_playRoundOverVO",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libAREN_gv_aRM_Debug_ShowMultikillCheers",
@@ -4203,7 +4204,7 @@
           {
             "name": "libAMCT_gv_aRMSkyTempleIsFirstTemple",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libAMCT_gv_aRMSkyTempleSecondTempleEventStarted",
@@ -4366,7 +4367,7 @@
           {
             "name": "libPEB1_gv_archangelRotateClockwise",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libPEB1_gv_holdout1_Started",
@@ -4938,7 +4939,7 @@
           {
             "name": "libPESC_gv_hMCLHardModeAvailable",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libPESC_gv_hMCLPlayersCapturing",
@@ -5159,12 +5160,12 @@
           {
             "name": "libMMPP_gv_tracerVictory",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           },
           {
             "name": "libMMPP_gv_tychusVictory",
             "default": true,
-            "type:": "bool"
+            "type": "bool"
           }
         ]
       },
