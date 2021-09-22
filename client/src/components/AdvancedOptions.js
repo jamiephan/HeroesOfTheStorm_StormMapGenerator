@@ -37,7 +37,7 @@ export default function AdvancedOptions(props) {
       // Both Array.from and [...flattedOptions] causes some weird glitch...
       const obj = JSON.parse(JSON.stringify(flattedOptions))
         .filter(o => o.default !== o.value)
-        .map(x => { delete x.default; return x })
+        .map(x => { delete x.default; delete x.type; return x })
 
       props.onChange(obj)
     }
@@ -94,18 +94,20 @@ export default function AdvancedOptions(props) {
             }}
             value={currentValue}
             onChange={e => {
-              if (parseInt(e.target.value) >= e.target.min && parseInt(e.target.value) <= e.target.max) {
-                setFlattedOptions(fo => {
-                  const cp = Array.from(fo)
-                  cp[index].value = parseInt(e.target.value)
-                  return cp
-                })
-              }
+              if (parseInt(e.target.value) < parseInt(e.target.min)) e.target.value = e.target.min
+              if (parseInt(e.target.value) > parseInt(e.target.max)) e.target.value = e.target.max
+              setFlattedOptions(fo => {
+                const cp = Array.from(fo)
+                cp[index].value = parseInt(e.target.value)
+                return cp
+              })
+
             }
             }
           />
           <code>;</code>
         </div>
+
       case "fixed":
 
         return <div key={`${i}-${j}-${k}`}>
@@ -116,9 +118,10 @@ export default function AdvancedOptions(props) {
           }
           <Form.Control
             type="number"
+            // From SC2 Editor
             min="-524287"
             max="524287"
-            step="0.1"
+            step="0.0001"
             style={{
               width: "100px",
               display: "inline-block",
@@ -127,13 +130,14 @@ export default function AdvancedOptions(props) {
             }}
             value={currentValue}
             onChange={e => {
-              if (parseFloat(e.target.value) >= e.target.min && parseFloat(e.target.value) <= e.target.max) {
-                setFlattedOptions(fo => {
-                  const cp = Array.from(fo)
-                  cp[index].value = parseFloat(e.target.value)
-                  return cp
-                })
-              }
+              if (parseFloat(e.target.value) < parseFloat(e.target.min)) e.target.value = e.target.min
+              if (parseFloat(e.target.value) > parseFloat(e.target.max)) e.target.value = e.target.max
+              setFlattedOptions(fo => {
+                const cp = Array.from(fo)
+                cp[index].value = parseFloat(e.target.value)
+                return cp
+              })
+
             }
             }
           />
