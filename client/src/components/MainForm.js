@@ -34,7 +34,7 @@ export default function MainForm() {
     setIsGenerating(true)
 
     const {
-      name, map, map20, ai, msg, isUsingTryMode20, isUsingAIComp
+      name, map, map20, ai, msg, mods, isUsingTryMode20, isUsingAIComp
     } = generalSettings.current
 
     const { mods } = additionalMods.current
