@@ -1,14 +1,14 @@
-// MPQ Editor requires reading from a path, so kinda pointless to store maps in redis.
+// MPQ Editor requires reading from a path, so kinda pointless to store files in redis.
 const crypto = require('crypto')
 const path = require("path")
 const fetch = require("node-fetch")
 const fs = require("fs")
 const util = require('util');
-const logger = require("../helpers/Logger")("cache-maps")
+const logger = require("../helpers/Logger")("cache-files")
 
 const writeFile = util.promisify(fs.writeFile)
 const mkdir = util.promisify(fs.mkdir)
-const basePath = path.resolve("./_cache_maps")
+const basePath = path.resolve("./_cache_files")
 
 const fileExpireMap = new Map()
 
@@ -29,30 +29,31 @@ const getCachePath = async (downloadLink, id) => {
 
   // Not Expired, so just return the path
   if (!isExpired(id)) {
-    logger.debug(`Map not expired: ${id} ${downloadLink}`)
+    logger.debug(`File not expired: ${id} ${downloadLink}`)
     return fileExpireMap.get(id).path
   }
-  logger.warn(`Map Expired: ${id} ${downloadLink}`)
+  logger.warn(`File Expired: ${id} ${downloadLink}`)
 
 
   // Expired, so download and return the file path
 
-  // Download Map
-  logger.debug("Downloading Map: " + downloadLink)
-  const mapResponse = await fetch(downloadLink)
-  const mapData = await mapResponse.arrayBuffer()
+  // Download File
+  logger.debug("Downloading File: " + downloadLink)
+  const fileResponse = await fetch(downloadLink)
+  const fileData = await fileResponse.arrayBuffer()
 
   // Save to File
   await mkdir(basePath, { recursive: true })
-  await writeFile(`${basePath}/${id}.stormmap`, Buffer.from(mapData))
-  logger.debug(`Saved Map to ${basePath}/${id}.stormmap`)
+  await writeFile(`${basePath}/${id}`, Buffer.from(fileData))
+  logger.debug(`Saved File to ${basePath}/${id}`)
+
   // Update fileExpireMap
   const expiryDate = new Date()
   expiryDate.setSeconds(expiryDate.getSeconds() + parseInt(process.env.MAP_FILE_CACHE_EXPIRE || 3600));
-  logger.debug(`Map Expire on ${expiryDate}`)
+  logger.debug(`File Expire on ${expiryDate}`)
 
   fileExpireMap.set(id, {
-    path: path.resolve(`${basePath}/${id}.stormmap`),
+    path: path.resolve(`${basePath}/${id}`),
     expire: expiryDate
   })
 
@@ -82,4 +83,9 @@ const getMapLocalPath = async (isTryMode, mapName, aiComp) => {
 
 }
 
-module.exports = getMapLocalPath
+const getModsLocalPath = async (modName) => {
+  const downloadLink = `https://github.com/jamiephan/HeroesOfTheStorm_S2MA/raw/main/mods/${encodeURIComponent(modName)}`
+  return getCachePath(downloadLink, getCombinationId(modName))
+}
+
+module.exports = {getMapLocalPath, getModsLocalPath}
