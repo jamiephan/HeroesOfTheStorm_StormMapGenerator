@@ -227,7 +227,7 @@ export default function GeneralSettings(props) {
             <Dropdown.Menu>
               {
                 listMods.map((m, i) => (
-                  <Dropdown.Item key={i} onClick={() => setMods(v => { let a = [...new Set([...v, m])]; a.sort(); return a })}>{m.replace(".stormod", "")}</Dropdown.Item>
+                  <Dropdown.Item key={i} onClick={() => setMods(v => { let a = [...new Set([...v, m])]; a.sort(); return a })}>{m.replace(".stormmod", "")}</Dropdown.Item>
                 ))
               }
             </Dropdown.Menu>
