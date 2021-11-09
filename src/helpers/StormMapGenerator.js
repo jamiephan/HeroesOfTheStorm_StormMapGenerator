@@ -49,7 +49,7 @@ const getIndicesOf = (searchStr, str, caseSensitive) => {
 
 
 class StormMapGenerator {
-  constructor(name, msg, localMapPath, XMLFiles, libsOptions) {
+  constructor(name, msg, localModsPath, localMapPath, XMLFiles, libsOptions) {
     this.logger = loggerGenerator(`Storm Map Generator (${name})`)
     this.logger.debug(`Generator Called: ${name}, ${msg}, ${localMapPath}, ${XMLFiles.length}, ${libsOptions.length}`)
     this.name = name
@@ -121,6 +121,11 @@ class StormMapGenerator {
       // Save the gamedata file
       await writeFile(`${gameDataXMLPath}`, gameDataXMLContent, { encoding: "utf-8" })
 
+    }
+
+    if(this.localMapPath.length > 0) {
+      this.logger.info("Patching Mods File")
+      // TODO: Add support for mods
     }
 
     // Patch libs variables or message
