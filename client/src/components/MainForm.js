@@ -32,7 +32,7 @@ export default function MainForm() {
     setIsGenerating(true)
 
     const {
-      name, map, map20, ai, msg, isUsingTryMode20, isUsingAIComp
+      name, map, map20, ai, msg, mods, isUsingTryMode20, isUsingAIComp
     } = generalSettings.current
 
     const mapName = name.toLowerCase().endsWith(".stormmap") ? name : name + ".stormmap"
@@ -44,6 +44,7 @@ export default function MainForm() {
       trymode20: isUsingTryMode20,
       ai: (isUsingTryMode20 || !isUsingAIComp) ? "none" : ai,
       msg,
+      mods,
       libsOptions: libsOptions.current,
       xmlFiles,
     })
