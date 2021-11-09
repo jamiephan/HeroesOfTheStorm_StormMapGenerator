@@ -10,6 +10,7 @@ export default function GeneralSettings(props) {
   const [listMaps, setListMaps] = useState([])
   const [listTryMode20Maps, setListTryMode20Maps] = useState([])
   const [listAIComps, setListAIComps] = useState([])
+  const [listMods, setListMods] = useState([])
 
   const [isUsingTryMode20, setIsUsingTryMode20] = useLocalStorage("isUsingTryMode20", false, "bool")
   const [isUsingAIComp, setIsUsingAIComp] = useLocalStorage("isUsingAIComp", false, "bool")
@@ -20,6 +21,7 @@ export default function GeneralSettings(props) {
   const [map20, setMap20] = useLocalStorage("map20", "", "key")
   const [ai, setAi] = useLocalStorage("ai", "", "key")
   const [msg, setMsg] = useLocalStorage("msg", "", "key")
+  const [mods, setMods] = useLocalStorage("mods", [], "array")
 
   // When site loaded
   useEffect(() => {
@@ -43,6 +45,12 @@ export default function GeneralSettings(props) {
       const aiJson = await aiResponse.json()
       setListAIComps(aiJson)
 
+      // Load mods
+      const modsResponse = await fetch("/list/mods")
+      const modsJson = await modsResponse.json()
+      setListMods(modsJson)
+
+
       // Self heal states default to first index
       if (mapsJson.findIndex(m => m === map) === -1) {
         setMap(mapsJson[0])
@@ -56,6 +64,13 @@ export default function GeneralSettings(props) {
         setAi(aiJson[0])
       }
 
+      // Self healing mods and remove invalid mods
+      setMods(m => {
+        m.map(x => listMods.includes(x) ? x : false).filter(x => x !== false)
+        return m
+      })
+
+
       props.loadingMap(false)
 
     })()
@@ -67,11 +82,11 @@ export default function GeneralSettings(props) {
   useEffect(() => {
 
     props.onChange({
-      name, map, map20, ai, msg, isUsingTryMode20, isUsingAIComp
+      name, map, map20, ai, msg, mods, isUsingTryMode20, isUsingAIComp
     })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [name, map, map20, ai, msg, isUsingTryMode20, isUsingAIComp])
+  }, [name, map, map20, ai, msg, mods, isUsingTryMode20, isUsingAIComp])
 
   return (
     <>
@@ -189,6 +204,43 @@ export default function GeneralSettings(props) {
         </>
         // End Section for official Map
       }
+
+      {/* Extra Storm Mods */}
+      <Form.Group className="mb-3">
+        <Form.Label>Extra Internal <code>*.stormmods</code> (optional):</Form.Label>
+        <div style={{ margin: "5px" }}>
+          {
+            mods.length > 0 ? <>
+              <ul>
+                {
+                  mods.map((m, i) => (
+                    <li key={i}><b>{m.replace(".stormmod", "")}</b>{"  "}<Button variant="danger" onClick={() => setMods(x => { let a = Array.from(x); a.splice(i, 1); return a })}><Trash /></Button></li>
+                  ))
+                }
+              </ul>
+            </> : <></>
+          }
+          <Dropdown>
+            <Dropdown.Toggle variant="primary">
+              Add Mods
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {
+                listMods.map((m, i) => (
+                  <Dropdown.Item key={i} onClick={() => setMods(v => { let a = [...new Set([...v, m])]; a.sort(); return a })}>{m.replace(".stormod", "")}</Dropdown.Item>
+                ))
+              }
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+        <Form.Text>
+          Extra <code>*.stormmod</code> to be included into the map. This can e.g include BoE mods into Cursed Hollow for units and behaviors.
+          <br />
+          Note that this might crash some maps if incorrect mods were included.
+          <br />
+          The <code>*.stormmod</code> files are from <a href="https://github.com/jamiephan/HeroesOfTheStorm_S2MA" target="_blank" rel="noreferrer">jamiephan/s2ma</a>,
+        </Form.Text>
+      </Form.Group>
 
       {/* Welcome Message */}
       <Form.Group className="mb-3">
