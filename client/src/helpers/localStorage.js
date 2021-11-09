@@ -101,6 +101,27 @@ const localStorageBoolSaver = (type, content) => window.localStorage.setItem(loc
 const localStorageBoolName = type => "bool_" + type.toLocaleLowerCase()
 const localStorageBoolResetter = type => localStorageBoolSaver(type, false)
 
+// ===========================
+
+const localStorageArrayParser = type => {
+  type = type.toLowerCase()
+  try {
+    // return Boolean(parseInt(localStorage.getItem(localStorageArrayName(type))))
+    const result = JSON.parse(localStorage.getItem(localStorageArrayName(type)))
+    if (Array.isArray(result)) {
+      return result
+    }
+    localStorageArrayResetter(type)
+    return []
+  } catch (e) {
+    localStorageArrayResetter(type)
+    return false
+  }
+}
+const localStorageArraySaver = (type, content) => window.localStorage.setItem(localStorageArrayName(type), JSON.stringify(content))
+const localStorageArrayName = type => "array_" + type.toLocaleLowerCase()
+const localStorageArrayResetter = type => localStorageArraySaver(type, JSON.stringify([]))
+
 
 export const LSFiles = {
   Name: localStorageFilesName,
@@ -121,5 +142,12 @@ export const LSBool = {
   Get: localStorageBoolParser,
   Save: localStorageBoolSaver,
   Reset: localStorageBoolResetter
+}
+
+export const LSArray = {
+  Name: localStorageArrayName,
+  Get: localStorageArrayParser,
+  Save: localStorageArraySaver,
+  Reset: localStorageArrayResetter
 }
 
