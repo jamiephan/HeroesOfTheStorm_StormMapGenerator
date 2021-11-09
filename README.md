@@ -24,8 +24,9 @@ Heroes of the Storm's map file is `*.StormMap`, which is a modified, but shares 
 - Custom Map Name (Shown on Loading Screen)
 - Use [Try Mode 2.0](https://jamiephan.github.io/HeroesOfTheStorm_TryMode2.0/) Maps or official maps as template
 - Toggle any in game boolean variables
-- Edit any game integer variables
+- Edit any game integer, boolean, real numbers variables
 - Include various AI composition (Based on [AI Maps](https://github.com/jamiephan/HeroesOfTheStorm_AIMaps))
+- Include any internal `*.stormmod` files (Based on [S2MA/mods](https://github.com/jamiephan/HeroesOfTheStorm_S2MA/tree/main/mods))
 - Custom Welcome Message when map was loaded
 - Settings are stored in `localStorage`, which persist after a `F5` refresh
 - Full XML Modding Editor
@@ -60,6 +61,7 @@ Then open your browser and go to http://localhost:8080
 
 - Linux
   - Currently will not work on Windows due to some hard coded path. However you can run the application with Docker in Windows.
+  - > TODO: Fix hard coded path
 - [Wine](https://www.winehq.org/)
 - [NodeJS + npm](https://nodejs.org/en/)
 
