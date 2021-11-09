@@ -41,4 +41,10 @@ GithubAPI.trymode20 = {
   parser: j => j[0].assets.map(m => m.name)
 }
 
+GithubAPI.mods = {
+  name: "mods",
+  url: `https://${host}/repos/jamiephan/HeroesOfTheStorm_S2MA/contents/mods`,
+  parser: j => j.map(m => m.name)
+}
+
 module.exports = GithubAPI
