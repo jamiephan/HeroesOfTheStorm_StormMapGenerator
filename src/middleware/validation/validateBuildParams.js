@@ -88,7 +88,6 @@ const buildSchema = async () => {
           value: Joi.any().required()
         }).custom((option, helper) => {
           const defaultData = getLibsOptionsByName(option.name)
-          console.log(defaultData)
           // Check if name is a valid variable name
           if (defaultData === false) return helper.message("LibOptions contains invalid variable key")
           // Check if value is not default, and correct datatype

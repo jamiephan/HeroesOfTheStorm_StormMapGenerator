@@ -29,7 +29,6 @@ const localStorageFilesParser = type => {
       // Check name Duplicate
       if ([...new Set(localStorageFiles.map(x => x.name.toLowerCase()))].length !== localStorageFiles.length) {
         // Same name
-        // console.log("LS error: Same name")
         localStorageFilesResetter(type, [])
         return []
       }
@@ -38,14 +37,12 @@ const localStorageFilesParser = type => {
 
     } else {
       // Not array
-      // console.log("LS error: Not Array")
       localStorageFilesResetter(type, [])
       return []
     }
 
   } catch (e) {
     // Not JSON
-    // console.log("LS error: Not JSON")
     localStorageFilesResetter(type, [])
     return []
   }
