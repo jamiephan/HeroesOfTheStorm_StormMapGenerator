@@ -1,4 +1,3 @@
-// MPQ Editor requires reading from a path, so kinda pointless to store files in redis.
 const crypto = require('crypto')
 const path = require("path")
 const fetch = require("node-fetch")
