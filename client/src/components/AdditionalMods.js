@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { Form, Button, Dropdown, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Form, Button, Dropdown, ListGroup, ListGroupItem, Spinner } from 'react-bootstrap'
 import { PlusLg, Trash } from 'react-bootstrap-icons'
 import useLocalStorage from '../hooks/useLocalStorage'
 
@@ -11,12 +11,13 @@ export default function AdditionalMods(props) {
 
     // Form States
     const [mods, setMods] = useLocalStorage("mods", [], "array")
+    const [loadedModsList, setLoadedModsList] = useState(false)
 
     // When site loaded
     useEffect(() => {
 
         (async () => {
-
+            setLoadedModsList(false)
             // Load mods
             const modsResponse = await fetch("/list/mods")
             const modsJson = await modsResponse.json()
@@ -27,6 +28,8 @@ export default function AdditionalMods(props) {
                 m.map(x => listMods.includes(x) ? x : false).filter(x => x !== false)
                 return m
             })
+
+            setLoadedModsList(true)
 
         })()
 
@@ -74,8 +77,11 @@ export default function AdditionalMods(props) {
                     </ul>
                 </Form.Text>
                 <Dropdown>
-                    <Dropdown.Toggle variant="primary">
-                        <PlusLg /> Add Mods
+                    <Dropdown.Toggle variant="primary" disabled={!loadedModsList}>
+                        {
+                            loadedModsList ?
+                                <><PlusLg /> Add Mods</> : <><Spinner animation="border" size="sm" /> Loading Mod list...</>
+                        }
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         {
