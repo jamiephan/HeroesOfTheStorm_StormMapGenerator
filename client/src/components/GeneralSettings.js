@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { Form, Button, Dropdown } from 'react-bootstrap'
-import { Trash } from 'react-bootstrap-icons'
+import { Form } from 'react-bootstrap'
 import useLocalStorage from '../hooks/useLocalStorage'
 
 export default function GeneralSettings(props) {
