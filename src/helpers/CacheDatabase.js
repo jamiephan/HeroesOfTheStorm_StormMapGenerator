@@ -10,7 +10,7 @@ class CacheDatabase {
     }
 
     refreshExpiry(key) {
-        this.cacheExpire.set(key, new Date().getTime() + parseInt(process.env.REDIS_API_CACHE_EXPIRE || 1800) * 1000);
+        this.cacheExpire.set(key, new Date().getTime() + parseInt(process.env.API_CACHE_EXPIRE || 1800) * 1000);
     }
 
     isExpired(key) {
