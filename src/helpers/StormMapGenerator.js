@@ -132,7 +132,7 @@ class StormMapGenerator {
 
       const baseStormData = glob.sync(`${tempMapObj.name}/base.stormdata`, { nocase: true, })
 
-      // Get Gamedata File Name
+      // Get includes.xml File Name
       const includesFilesArr = glob.sync(`${baseStormData}/includes.xml`, { nocase: true, })
       let includesXMLPath = includesFilesArr.length > 0 ? includesFilesArr[0] : null
 
@@ -149,13 +149,13 @@ class StormMapGenerator {
         }
       }
 
-      // if Gamedata.xml exist
+      // if includes.xml exist
       if (includesXMLPath) {
         includesXMLContent = await readFile(`${includesXMLPath}`, { encoding: "utf-8" })
         const _includesXMLContentParsedTemp = await xml2js.parseStringPromise(includesXMLContent)
 
         const paths = getNested(_includesXMLContentParsedTemp, "Includes", "Path")
-        // Check is gamedata legit
+        // Check is includes legit
         if (paths && Array.isArray(paths)) {
           // Probably legit, then change the data to Parsed
           this.logger.debug("Has Includes.Includes.Catalog and its an array")
