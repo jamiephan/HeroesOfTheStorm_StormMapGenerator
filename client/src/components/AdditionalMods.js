@@ -31,7 +31,7 @@ export default function AdditionalMods(props) {
             })
 
             setLoadedModsList(true)
-            setSelectedMod(listMods.length > 0 ? listMods[0] : "")
+            setSelectedMod(modsJson.length > 0 ? modsJson[0] : "")
 
         })()
 
