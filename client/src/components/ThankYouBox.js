@@ -36,7 +36,7 @@ export default function BottomSection() {
               </ul>
               <li>1.9</li>
               <ul>
-                <li>Added the ability to tweak <code>Integer</code> type variables in Advanced Options</li>
+                <li>Added the ability to tweak <code>fixed (decimal)</code> type variables in Advanced Options</li>
                 <li>Updated Advanced Option's description box</li>
                 <li>Minor UI update on Advanced Option Page</li>
               </ul>
