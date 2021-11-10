@@ -13,7 +13,7 @@ const basePath = path.resolve("./_cache_files")
 const fileExpireMap = new Map()
 
 const getCombinationId = (...args) => {
-  const hash = crypto.createHash('sha1')
+  const hash = crypto.createHash('md5')
   hash.update(args.map(x => x.toString()).join("-"))
   return hash.digest('hex')
 }
