@@ -14,7 +14,7 @@ export default function GeneralSettings(props) {
   const [isUsingAIComp, setIsUsingAIComp] = useLocalStorage("isUsingAIComp", false, "bool")
 
   // Form States
-  const [name, setName] = useLocalStorage("name", "", "key")
+  const [name, setName] = useLocalStorage("name", "My Map", "key")
   const [map, setMap] = useLocalStorage("map", "", "key")
   const [map20, setMap20] = useLocalStorage("map20", "", "key")
   const [ai, setAi] = useLocalStorage("ai", "", "key")
@@ -77,9 +77,9 @@ export default function GeneralSettings(props) {
       {/* Map Name */}
       <Form.Group className="mb-3">
         <Form.Label>The name of the map:</Form.Label>
-        <Form.Control type="text" placeholder="My Map" required value={name} onChange={e => setName(e.target.value)} />
+        <Form.Control type="text" placeholder="My Map" required value={name} onChange={e => setName(e.target.value)} onBlur={e => e.target.value === "" ? setName("My Map") : null} />
         <Form.Text className="text-muted">
-          This is the name of the map during the loading screen (the title text showing "<code>Welcome to {name === "" ? "My Map" : name}</code>"), as well as the downloaded filename (<code>{name === "" ? "My Map" : name}.stormmap</code>) for your map.
+          This is the name of the map during the loading screen (the title text showing "<code>Welcome to {name}</code>"), as well as the downloaded filename (<code>{name}.stormmap</code>) for your map.
         </Form.Text>
       </Form.Group>
 
