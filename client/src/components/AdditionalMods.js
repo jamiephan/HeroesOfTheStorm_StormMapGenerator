@@ -24,15 +24,13 @@ export default function AdditionalMods(props) {
             const modsJson = await modsResponse.json()
             setListMods(modsJson)
 
-            // Self healing mods and remove invalid mods
-            setMods(m => {
-                m.map(x => listMods.includes(x) ? x : false).filter(x => x !== false)
-                return m
-            })
-
-            setLoadedModsList(true)
+            // Remove invalid mods from initial LS state
+            setMods(m => m.filter(x => modsJson.includes(x)))
+            
+            // Auto select the first mod in list
             setSelectedMod(modsJson.length > 0 ? modsJson[0] : "")
-
+            
+            setLoadedModsList(true)
         })()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
