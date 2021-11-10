@@ -6,6 +6,7 @@ import { CheckLg } from 'react-bootstrap-icons'
 import BuildXMLTemplate from '../helpers/BuildXMLTemplate'
 import XMLValidate from "../helpers/XMLValidate"
 import useLocalStorage from '../hooks/useLocalStorage'
+import AdditionalMods from './AdditionalMods'
 import AdvancedOptions from './AdvancedOptions'
 import FileManager from './FileManager/FileManager'
 import GeneralSettings from './GeneralSettings'
@@ -14,6 +15,7 @@ export default function MainForm() {
 
   // Settings
   const generalSettings = useRef({})
+  const additionalMods = useRef([])
   // XML Files
   const [xmlFiles, setXmlFiles] = useLocalStorage("xml", [], "file")
   // Advanced Options
@@ -32,8 +34,10 @@ export default function MainForm() {
     setIsGenerating(true)
 
     const {
-      name, map, map20, ai, msg, mods, isUsingTryMode20, isUsingAIComp
+      name, map, map20, ai, msg, isUsingTryMode20, isUsingAIComp
     } = generalSettings.current
+
+    const { mods } = additionalMods.current
 
     const mapName = name.toLowerCase().endsWith(".stormmap") ? name : name + ".stormmap"
     setAlertBox({ show: true, variant: "info", message: `Generating ${mapName} ...`, dismissible: false })
@@ -86,6 +90,12 @@ export default function MainForm() {
             <GeneralSettings onChange={gs => generalSettings.current = gs} loadingMap={setIsLoadingMap} />
           </Tab>
 
+          {/* Additional Mods */}
+          <Tabs eventKey="additionalmods" title="Additional Mods">
+            <h3 style={{ margin: "20px 0px" }}>Additional Mods</h3>
+            <AdditionalMods onChange={am => additionalMods.current = am} />
+          </Tabs>
+
           {/* XMl File Manager */}
           <Tab eventKey="xmlfile" title="XML Files">
             <h3 style={{ margin: "20px 0px" }}>XML Files</h3>
@@ -110,7 +120,7 @@ export default function MainForm() {
             <h3 style={{ margin: "20px 0px" }}>Advanced Options</h3>
             <AdvancedOptions onChange={ao => libsOptions.current = ao} />
           </Tab>
-
+          
         </Tabs>
 
         <hr />
