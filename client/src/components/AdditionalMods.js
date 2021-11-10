@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-import { Form, Button, Dropdown, ListGroup, ListGroupItem, Spinner } from 'react-bootstrap'
+import { Form, Button, ListGroup, ListGroupItem, Spinner } from 'react-bootstrap'
 import { PlusLg, Trash } from 'react-bootstrap-icons'
 import useLocalStorage from '../hooks/useLocalStorage'
 
@@ -10,7 +10,8 @@ export default function AdditionalMods(props) {
     const [listMods, setListMods] = useState([])
 
     // Form States
-    const [mods, setMods] = useLocalStorage("mods", [], "array")
+    const [mods, setMods] = useLocalStorage("mods`", [], "array")
+    const [selectedMod, setSelectedMod] = useState("")
     const [loadedModsList, setLoadedModsList] = useState(false)
 
     // When site loaded
@@ -30,6 +31,7 @@ export default function AdditionalMods(props) {
             })
 
             setLoadedModsList(true)
+            setSelectedMod(listMods.length > 0 ? listMods[0] : "")
 
         })()
 
@@ -76,21 +78,27 @@ export default function AdditionalMods(props) {
                         <li>The <code>*.stormmod</code> files are from <a href="https://github.com/jamiephan/HeroesOfTheStorm_S2MA" target="_blank" rel="noreferrer">jamiephan/s2ma</a>, which are the offical mods in-game.</li>
                     </ul>
                 </Form.Text>
-                <Dropdown>
-                    <Dropdown.Toggle variant="primary" disabled={!loadedModsList}>
-                        {
-                            loadedModsList ?
-                                <><PlusLg /> Add Mods</> : <><Spinner animation="border" size="sm" /> Loading Mod list...</>
-                        }
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        {
-                            listMods.map((m, i) => (
-                                <Dropdown.Item key={i} onClick={() => setMods(v => { let a = [...new Set([...v, m])]; a.sort(); return a })}>{m.replace(".stormmod", "")}</Dropdown.Item>
-                            ))
-                        }
-                    </Dropdown.Menu>
-                </Dropdown>
+                <Form.Select value={selectedMod} onChange={e => setSelectedMod(e.target.value)}>
+                    {!loadedModsList ?
+                        <option>Loading...</option> :
+                        <>
+                            {
+                                listMods.map((x, i) => (
+                                    <option key={i} value={x}>{x.replace(".stormmod", "")}</option>
+                                ))
+                            }
+                        </>
+                    }
+
+                </Form.Select>
+                <Button disabled={!loadedModsList} style={{ marginTop: "15px" }} onClick={
+                    () => setMods(v => { let a = [...new Set([...v, selectedMod])]; a.sort(); return a })
+                }>
+                    {
+                        loadedModsList ?
+                            <><PlusLg />{' '}Add Mod</> : <><Spinner animation="border" size="sm" /> Loading Mod list...</>
+                    }
+                </Button>
             </Form.Group>
         </>
     )
