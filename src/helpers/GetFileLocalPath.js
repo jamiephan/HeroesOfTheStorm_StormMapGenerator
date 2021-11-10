@@ -22,6 +22,12 @@ const getCombinationId = (...args) => {
 const isExpired = (id) => {
   const value = fileExpireMap.get(id)
   if (!value) return true;
+
+  // Check if cache file exist
+  if (!fs.existsSync(`${basePath}/${id}`)) {
+    logger.debug(`Cache file ${id} does not exist.`)
+    return true;
+  }
   return value.expire <= new Date()
 }
 
