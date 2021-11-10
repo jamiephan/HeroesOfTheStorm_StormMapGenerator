@@ -14,7 +14,15 @@ class CacheDatabase {
     }
 
     isExpired(key) {
-        return this.cacheExpire.get(key) < new Date().getTime();
+        if (this.keyExist(key)) {
+            return this.cacheExpire.get(key) < new Date().getTime();
+        } else {
+            return true
+        }
+    }
+
+    keyExist(key) {
+        return this.cache.has(key);
     }
 
     get(key) {
