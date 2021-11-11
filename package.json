@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "build": "cd client && npm ci && npm run build && cp -r \"./client/build/\" \"./public\" && cd ..",
+    "build": "cd client && npm ci && npm run build && cp -r \"./build/\" \"../public\" && cd ..",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
