@@ -7,6 +7,8 @@ WORKDIR /app
 COPY "." "."
 
 RUN npm ci
+RUN npm run build
+RUN rm -rf client
 
 EXPOSE 8080
 
