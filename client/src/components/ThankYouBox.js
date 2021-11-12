@@ -26,9 +26,9 @@ export default function BottomSection() {
             <li>1.10.1</li>
               <ul>
                 <li>Setup CI for automated deployment</li>
-                <li>Auto push to changes to <a href="https://stormmap.herokuapp.com" target="_blank">https://stormmap.herokuapp.com/</a></li>
-                <li>Setup <a href="https://hub.docker.com/repository/docker/jamiephan/stormmap" target="_blank">jamiephan/stormmap</a> Docker image</li>
-                <li>Auto push to changes to <a href="https://hub.docker.com/repository/docker/jamiephan/stormmap" target="_blank">jamiephan/stormmap</a> image</li>
+                <li>Auto push to changes to <a href="https://stormmap.herokuapp.com" target="_blank" rel="noreferrer">https://stormmap.herokuapp.com/</a></li>
+                <li>Setup <a href="https://hub.docker.com/repository/docker/jamiephan/stormmap" target="_blank" rel="noreferrer">jamiephan/stormmap</a> Docker image</li>
+                <li>Auto push to changes to <a href="https://hub.docker.com/repository/docker/jamiephan/stormmap" target="_blank" rel="noreferrer">jamiephan/stormmap</a> image</li>
               </ul>
               <li>1.10</li>
               <ul>
