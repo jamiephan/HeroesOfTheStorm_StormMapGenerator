@@ -77,7 +77,8 @@ const buildSchema = async () => {
       .items(Joi.string()
         .valid(...await GithubAPI(GithubAPI.mods)).messages({
           "any.only": "Mods name should be one of: " + (await GithubAPI(GithubAPI.mods)).join(", ")
-        })),
+        }))
+        .required(),
     xmlFiles: Joi.array()
       .items(Joi.object({
         name: Joi.string().pattern(/^[\x20-\x7E]*\.xml$/i).required(),
