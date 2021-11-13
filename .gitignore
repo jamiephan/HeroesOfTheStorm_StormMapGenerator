@@ -121,3 +121,4 @@ dist
 public
 !client/public
 _cache_maps
+!client/.env
