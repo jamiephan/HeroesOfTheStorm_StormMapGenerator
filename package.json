@@ -4,9 +4,10 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
+    "postinstall": "cd client && npm install",
+    "build": "cd client && npm run build",
     "start": "node src/index.js",
-    "build": "cd client && npm ci && npm run build && cp -r \"./build/\" \"../public\" && cd ..",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start:client": "cd client && npm start"
   },
   "keywords": [],
   "author": "Jamie Phan",
