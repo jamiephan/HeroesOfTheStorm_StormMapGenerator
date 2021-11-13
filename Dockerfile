@@ -6,10 +6,10 @@ WORKDIR /app
 
 COPY "." "."
 
-RUN npm config set unsafe-perm true
-RUN npm install
-RUN npm run build
-RUN rm -rf client
+RUN npm config set unsafe-perm true && \
+    npm install && \
+    npm run build && \
+    rm -rf client
 
 EXPOSE 8080
 
