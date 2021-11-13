@@ -4,25 +4,22 @@ An online Storm Map file generator for Heroes of the Storm!
 
 Try it online: https://stormmap.herokuapp.com/
 
----
 
-## What is this app?
+# What is this app?
 
 This repo contains both server and client side code that allows for generating a `*.StormMap` file completely online without any editor or application installed on your computer. Simply use the web interface and you can generate your own custom map for Heroes of the Storm based on various templates.
 
 This app is build on ExpressJS as the server and ReactJS as the front-end.
 
----
 
-## What is a Storm Map?
+# What is a Storm Map?
 
 Heroes of the Storm is based on a StarCraft 2 Engine, which supports modding and have a map editor. Therefore, Heroes of the Storm inherited some modding features even was not documented.
 
 Heroes of the Storm's map file is `*.StormMap`, which is a modified, but shares a similar structure to a StarCaft 2 Map (`*.SC2Map`). However, due to its a modified engine, you cannot directly export the maps from StarCraft 2 Editor into Heroes of the Storm, which you need to do some manual tweaking.
 
----
 
-## Features
+# Features
 
 - Custom Map Name (Shown on Loading Screen)
 - Use [Try Mode 2.0](https://jamiephan.github.io/HeroesOfTheStorm_TryMode2.0/) Maps or official maps as template
@@ -44,13 +41,12 @@ Heroes of the Storm's map file is `*.StormMap`, which is a modified, but shares 
     - Syntax Validation
     - Toggle Light/Dark theme
 
----
 
-## Running the App
+# Running the App
 
-### Docker
+## Docker
 
-The easiest method to run the app is to use [Docker](https://www.docker.com/).
+The easiest way to run the app is to use [Docker](https://www.docker.com/).
 
 ```bash
 docker run -d -p 8080:8080 jamiephan/stormmap
@@ -58,9 +54,9 @@ docker run -d -p 8080:8080 jamiephan/stormmap
 
 Then open your browser and go to http://localhost:8080
 
-### Non-Docker
+## Non-Docker
 
-#### Prerequisite
+### Prerequisite
 
 - Linux
   - Currently will not work on Windows due to some hard coded path. However you can run the application with Docker in Windows.
@@ -85,43 +81,43 @@ npm start
 
 Then open your browser and go to http://localhost:8080
 
----
 
+# Development
 
-## Development
-
-First clone the repo:
+1. Clone the repo:
 
 ```bash
-# Clone the repo and cd into it
 git clone https://github.com/jamiephan/HeroesOfTheStorm_StormMapGenerator.git
 cd HeroesOfTheStorm_StormMapGenerator
 ```
 
-### Starting Server
+2. Install both server and client dependencies:
+
 ```bash
 npm install
-npm run build
+```
+
+3. Starting Server:
+```bash
 npm start
 ```
 
-### Starting Client 
+>Since we have a seperate instance of client running below, it is not necessary to build the client via `npm run build`. The client (`localhost:3000`) will proxy the API request to the server (`localhost:8080`).
 
-On another terminal/CMD:
-```
-cd client
-npm install
-npm start
+4. Starting Client: 
+
+```bash
+# On another terminal/CMD:
+npm run start:client
 ```
 
-Now you should have two server running:
+Now you should have two servers running:
 
 - http://localhost:8080 = The server 
-- http://localhost:3000 = The react client hot reload server, which proxy request to the server
+- http://localhost:3000 = The react client hot reload server, which proxy request to the server above
 
----
 
-### Environment Variables
+## Server Environment Variables
 
 All Environment Variables configuration is stored in the `.env` file.
 
@@ -133,32 +129,33 @@ Here are the used environment variable that you can configure:
 
 | Variable | Default | Usage |
 |---|---|---|
-| `PORT` | `8080` | The port of the sever running on |
+| `PORT` | `8080` | The port of the server running on |
 | `API_CACHE_EXPIRE` | `1800` | Seconds until the cache expire for Github API calls. (`1800` = 30 minutes) |
 | `MAP_FILE_CACHE_EXPIRE` | `3600` | Seconds until the downloaded map cache expires. (`3600` = 1 hour) |
 | `LOG_LEVEL` | `info` | The logging level: `debug`, `info`, `warn`, `error` |
 
----
+# Building
 
-### Building Docker image
+## Build the app
 
 ```bash
-docker build . -t stormmap
+# Build the client
+npm run build
+# Start the server
+npm start
 ```
 
-Then run the app with
+## Building the Docker image
 
 ```bash
+# Build a docker image with the tag name "stormmap"
+docker build . -t stormmap
+# Start the docker container at port 8080
 docker run -d -p 8080:8080 stormmap
 ```
+> The image name is `stormmap` and the port is 8080, which you can change to whatever you desire, e.g to `80:8080` for port `80`)
 
-The app name is `stormmap`, which you need to change it if you wish to deploy to your own app.
-
-https://stormmap.herokuapp.com should show up a while later.
-
----
-
-## Legal Stuff
+# Legal Stuff
 
 Licence: MIT
 
