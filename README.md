@@ -58,11 +58,8 @@ Then open your browser and go to http://localhost:8080
 
 ### Prerequisite
 
-- Linux
-  - Currently will not work on Windows due to some hard coded path. However you can run the application with Docker in Windows.
-  - > TODO: Fix hard coded path
-- [Wine](https://www.winehq.org/)
-- [NodeJS + npm](https://nodejs.org/en/)
+- [NodeJS](https://nodejs.org/en/)
+- [Wine](https://www.winehq.org/) *(Only Required if using **non-windows** such as Linux or MacOS)*
 
 After installed the prerequisites, run the following commands:
 
@@ -84,7 +81,7 @@ Then open your browser and go to http://localhost:8080
 
 # Development
 
-1. Clone the repo:
+1. Clone the repo and cd into it:
 
 ```bash
 git clone https://github.com/jamiephan/HeroesOfTheStorm_StormMapGenerator.git
@@ -123,6 +120,7 @@ All Environment Variables configuration is stored in the `.env` file.
 
 You can either rename `.env.example` to `.env`, or by setting the environment variable from your shell:
 
+
 `SET PORT=80`
 
 Here are the used environment variable that you can configure:
@@ -133,6 +131,8 @@ Here are the used environment variable that you can configure:
 | `API_CACHE_EXPIRE` | `1800` | Seconds until the cache expire for Github API calls. (`1800` = 30 minutes) |
 | `MAP_FILE_CACHE_EXPIRE` | `3600` | Seconds until the downloaded map cache expires. (`3600` = 1 hour) |
 | `LOG_LEVEL` | `info` | The logging level: `debug`, `info`, `warn`, `error` |
+
+>Note: this only applies to the root directory of the project, it **does not** applies to the client's `.env` file which located at `client/.env`.
 
 # Building
 
