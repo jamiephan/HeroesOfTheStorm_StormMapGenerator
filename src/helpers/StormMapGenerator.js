@@ -76,10 +76,10 @@ class StormMapGenerator {
       this.logger.info(`Patching XML Files`)
       const modDirName = randId().toString() + "-StormMapGenerator"
 
-      const baseStormData = glob.sync(`${tempMapObj.name}/base.stormdata`, { nocase: true, })
+      const baseStormData = glob.sync(`${tempMapObj.name}/base.stormdata`, { nocase: process.platform !== "win32", })
 
       // Get Gamedata File Name
-      const gameDataFilesArr = glob.sync(`${baseStormData}/gamedata.xml`, { nocase: true, })
+      const gameDataFilesArr = glob.sync(`${baseStormData}/gamedata.xml`, { nocase: process.platform !== "win32", })
       let gameDataXMLPath = gameDataFilesArr.length > 0 ? gameDataFilesArr[0] : null
 
       // Make the dir for saving mods
@@ -131,10 +131,10 @@ class StormMapGenerator {
 
       const stormmodDirName = randId().toString() + "-StormMods-StormMapGenerator"
 
-      const baseStormData = glob.sync(`${tempMapObj.name}/base.stormdata`, { nocase: true, })
+      const baseStormData = glob.sync(`${tempMapObj.name}/base.stormdata`, { nocase: process.platform !== "win32", })
 
       // Get includes.xml File Name
-      const includesFilesArr = glob.sync(`${baseStormData}/includes.xml`, { nocase: true, })
+      const includesFilesArr = glob.sync(`${baseStormData}/includes.xml`, { nocase: process.platform !== "win32", })
       let includesXMLPath = includesFilesArr.length > 0 ? includesFilesArr[0] : null
 
       // Make the dir for saving mods
@@ -193,7 +193,7 @@ class StormMapGenerator {
       this.logger.info(`Patching MapScript File`)
 
       // Extract MapScript.galaxy
-      const mapScriptFilePath = glob.sync(`${tempMapObj.name}/mapscript.galaxy`, { nocase: true })[0]
+      const mapScriptFilePath = glob.sync(`${tempMapObj.name}/mapscript.galaxy`, { nocase: process.platform !== "win32" })[0]
       let mapScriptFileContent = await readFile(`${mapScriptFilePath}`, { encoding: "utf-8" })
 
       // Read it
@@ -220,7 +220,7 @@ class StormMapGenerator {
     this.logger.info(`Patching Map Name`)
     const mapDisplayName = this.name.replace(/\.stormmap/gi, "")
     // Read it
-    const documentHeaderPath = glob.sync(`${tempMapObj.name}/documentheader`, { nocase: true })[0]
+    const documentHeaderPath = glob.sync(`${tempMapObj.name}/documentheader`, { nocase: process.platform !== "win32" })[0]
     let documentHeaderContent = await readFile(`${documentHeaderPath}`)
     // ==================
     const documentHeaderArray = [...new Uint8Array(documentHeaderContent)].map(s => ('0' + s.toString(16)).slice(-2))
