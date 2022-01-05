@@ -1,18 +1,18 @@
-const tmp = require("tmp")
 const fs = require("fs")
-const util = require('util');
-const xml2js = require('xml2js')
 const glob = require("glob")
 const sanitize = require("sanitize-filename");
+const path = require("path");
+const tmp = require("tmp")
+const util = require('util');
+const xml2js = require('xml2js')
 
 const loggerGenerator = require("../helpers/Logger");
-const path = require("path");
+const MPQEditor = require("./MPQEditor")
 
 const copyFile = util.promisify(fs.copyFile)
 const writeFile = util.promisify(fs.writeFile)
 const readFile = util.promisify(fs.readFile)
 const mkdir = util.promisify(fs.mkdir)
-const exec = util.promisify(require('child_process').exec);
 
 // Get nested obj, stolen from https://stackoverflow.com/questions/2631001/test-for-existence-of-nested-javascript-object-key
 const getNested = (obj, ...args) => args.reduce((obj, level) => obj && obj[level], obj)
@@ -62,6 +62,7 @@ class StormMapGenerator {
 
     this.mapFileObj = tmp.fileSync({ unsafeCleanup: true })
     this.mapBinary = null
+    this.mpqeditor = new MPQEditor()
   }
 
   async _patchMap() {
@@ -69,7 +70,7 @@ class StormMapGenerator {
     // Extract the whole map first
     const tempMapObj = tmp.dirSync({ unsafeCleanup: true })
     this.logger.debug(`Extracting ${this.localMapPath} -> ${tempMapObj.name}`)
-    await exec(`wine "/app/bin/MPQEditor.exe" e "Z:/${this.localMapPath}" "*" "Z:/${tempMapObj.name}" /fp`)
+    await this.mpqeditor.extractMPQ(this.localMapPath, tempMapObj.name, "*")
 
     if (this.XMLFiles.length > 0) {
       this.logger.info(`Patching XML Files`)
@@ -259,7 +260,7 @@ class StormMapGenerator {
     this.logger.info(`Creating Map`)
     await copyFile(path.resolve("./bin/empty.mpq"), this.mapFileObj.name)
     this.logger.info(`Adding Files to Map`)
-    await exec(`wine "/app/bin/MPQEditor.exe" a "Z:/${this.mapFileObj.name}" "Z:/${tempMapObj.name}" /c /auto /r`)
+    await this.mpqeditor.createMPQ(this.mapFileObj.name, tempMapObj.name)
     this.logger.info(`Completed Building Map`)
   }
 
