@@ -49,11 +49,12 @@ const getIndicesOf = (searchStr, str, caseSensitive) => {
 
 
 class StormMapGenerator {
-  constructor(name, msg, localMapPath, XMLFiles, libsOptions) {
+  constructor(name, msg, localModsPath, localMapPath, XMLFiles, libsOptions) {
     this.logger = loggerGenerator(`Storm Map Generator (${name})`)
     this.logger.debug(`Generator Called: ${name}, ${msg}, ${localMapPath}, ${XMLFiles.length}, ${libsOptions.length}`)
     this.name = name
     this.localMapPath = localMapPath
+    this.localModsPath = localModsPath
     this.msg = msg
     this.libsOptions = libsOptions
     // Sanitize XML file name + random id
@@ -120,6 +121,67 @@ class StormMapGenerator {
 
       // Save the gamedata file
       await writeFile(`${gameDataXMLPath}`, gameDataXMLContent, { encoding: "utf-8" })
+
+    }
+
+    // Add stormmods into map file
+    if (this.localModsPath.length > 0) {
+      this.logger.info("Patching StormMod Files, mods=" + this.localModsPath.length)
+
+      const stormmodDirName = randId().toString() + "-StormMods-StormMapGenerator"
+
+      const baseStormData = glob.sync(`${tempMapObj.name}/base.stormdata`, { nocase: true, })
+
+      // Get includes.xml File Name
+      const includesFilesArr = glob.sync(`${baseStormData}/includes.xml`, { nocase: true, })
+      let includesXMLPath = includesFilesArr.length > 0 ? includesFilesArr[0] : null
+
+      // Make the dir for saving mods
+      await mkdir(`${baseStormData}/${stormmodDirName}`)
+
+
+      let includesXMLContent
+      let includesXMLContentParsed = {
+        //   Add id
+        Includes: {
+          $: { id: "Mods/HeroesData.StormMod" },
+          Path: []
+        }
+      }
+
+      // if includes.xml exist
+      if (includesXMLPath) {
+        includesXMLContent = await readFile(`${includesXMLPath}`, { encoding: "utf-8" })
+        const _includesXMLContentParsedTemp = await xml2js.parseStringPromise(includesXMLContent)
+
+        const paths = getNested(_includesXMLContentParsedTemp, "Includes", "Path")
+        // Check is includes legit
+        if (paths && Array.isArray(paths)) {
+          // Probably legit, then change the data to Parsed
+          this.logger.debug("Has Includes.Includes.Catalog and its an array")
+          includesXMLContentParsed = await xml2js.parseStringPromise(includesXMLContent)
+        }
+      } else {
+        includesXMLPath = `${baseStormData}/includes.xml`
+      }
+
+
+      // Loop each stormmod file
+      this.localModsPath.forEach(f => {
+
+        const filename = randId().toString() + "-" + "StormMods" + "-" + sanitize(f.name).replace(/ /g, "")
+
+        // Copy f.path to stormmodDirName with the new sanitized name
+        fs.copyFileSync(f.path, `${baseStormData}/${stormmodDirName}/${filename}`)
+
+        // Push to catalog includes.xml
+        includesXMLContentParsed.Includes.Path.push({ '$': { value: `${stormmodDirName}/${filename}` } })
+      });
+
+      includesXMLContent = new xml2js.Builder().buildObject(includesXMLContentParsed)
+
+      // Save the includex.xml file
+      await writeFile(`${includesXMLPath}`, includesXMLContent, { encoding: "utf-8" })
 
     }
 

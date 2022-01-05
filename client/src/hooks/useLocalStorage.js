@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { LSFiles, LSKey, LSBool } from "../helpers/localStorage"
+import { LSFiles, LSKey, LSBool, LSArray } from "../helpers/localStorage"
 
 const dataTypes = new Map()
 
 
 function useLocalStorage(key, defaultValue, type) {
-  if (!(type === "key" || type === "file" || type === "bool")) throw new Error("useLocalStorage() type must be either file,  key or bool")
+  if (!(type === "key" || type === "file" || type === "bool" || type === "array")) throw new Error("useLocalStorage() type must be either file, key, bool or array")
 
   const [storedValue, setStoredValue] = useState(() => {
     dataTypes.set(key, type)
@@ -38,6 +38,17 @@ function useLocalStorage(key, defaultValue, type) {
       return LSBool.Get(key)
     }
 
+    if (type === "array") {
+      const LSArrayValue = LSArray.Get(key)
+
+      if (Array.isArray(LSArrayValue) && LSArrayValue.length > 0) {
+        return LSArrayValue
+      } else {
+        LSArray.Save(key, defaultValue)
+        return defaultValue
+      }
+    }
+
   });
 
   const setValue = (value) => {
@@ -53,6 +64,9 @@ function useLocalStorage(key, defaultValue, type) {
     }
     if (type === "bool") {
       LSBool.Save(key, savingValue)
+    }
+    if (type === "array") {
+      LSArray.Save(key, savingValue)
     }
     setStoredValue(savingValue);
 

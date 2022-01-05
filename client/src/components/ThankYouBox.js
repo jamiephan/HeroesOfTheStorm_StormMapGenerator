@@ -23,12 +23,17 @@ export default function BottomSection() {
             <hr />
             Changelog:
             <ul>
-            <li>1.10.1</li>
+              <li>2.0.0</li>
+              <ul>
+                <li>Added the ability to include <code>stormmod</code> files!</li>
+                <li><code>stormmod</code> files are listed from <a href="https://github.com/jamiephan/HeroesOfTheStorm_S2MA/tree/main/mods" target="_blank" rel="noreferer">jamiephan/s2ma</a></li>
+              </ul>
+              <li>1.10.1</li>
               <ul>
                 <li>Setup CI for automated deployment</li>
-                <li>Auto push to changes to <a href="https://stormmap.herokuapp.com" target="_blank">https://stormmap.herokuapp.com/</a></li>
-                <li>Setup <a href="https://hub.docker.com/repository/docker/jamiephan/stormmap" target="_blank">jamiephan/stormmap</a> Docker image</li>
-                <li>Auto push to changes to <a href="https://hub.docker.com/repository/docker/jamiephan/stormmap" target="_blank">jamiephan/stormmap</a> image</li>
+                <li>Auto push to changes to <a href="https://stormmap.herokuapp.com" target="_blank" rel="noreferrer">https://stormmap.herokuapp.com/</a></li>
+                <li>Setup <a href="https://hub.docker.com/repository/docker/jamiephan/stormmap" target="_blank" rel="noreferrer">jamiephan/stormmap</a> Docker image</li>
+                <li>Auto push to changes to <a href="https://hub.docker.com/repository/docker/jamiephan/stormmap" target="_blank" rel="noreferrer">jamiephan/stormmap</a> image</li>
               </ul>
               <li>1.10</li>
               <ul>
@@ -36,7 +41,7 @@ export default function BottomSection() {
               </ul>
               <li>1.9</li>
               <ul>
-                <li>Added the ability to tweak <code>Integer</code> type variables in Advanced Options</li>
+                <li>Added the ability to tweak <code>fixed (decimal)</code> type variables in Advanced Options</li>
                 <li>Updated Advanced Option's description box</li>
                 <li>Minor UI update on Advanced Option Page</li>
               </ul>
