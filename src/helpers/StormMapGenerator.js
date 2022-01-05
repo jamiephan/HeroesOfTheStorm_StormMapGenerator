@@ -200,12 +200,7 @@ class StormMapGenerator {
       let mapScriptInsertContentArr = []
 
       this.libsOptions.forEach(o => {
-        // const defaultLibsOption = defaultLibsOptions.find(x => x.name === o)
-        // if (defaultLibsOption) {
-        //   mapScriptInsertContentArr.push(`    ${o} = ${String(!defaultLibsOption.default)};`)
-        // }
         mapScriptInsertContentArr.push(`    ${o.name} = ${String(o.value)};`)
-
       })
 
       if (this.msg !== "") mapScriptInsertContentArr.push(`    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("${this.msg.replace(/\"/g, "'")}"));`)
@@ -218,7 +213,6 @@ class StormMapGenerator {
 
       // Save it
       await writeFile(`${mapScriptFilePath}`, mapScriptFileContent, { encoding: "utf-8" })
-
     }
 
     // Patch Map name
@@ -270,11 +264,11 @@ class StormMapGenerator {
     this.mapFileObj = null
   }
 
-
   async get() {
     await this._patchMap()
     await this._readMap()
     return this.mapBinary
   }
 }
+
 module.exports = StormMapGenerator
