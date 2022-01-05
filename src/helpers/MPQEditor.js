@@ -12,17 +12,15 @@ class MPQEditor {
             logger.debug("MPQEditor path: " + path);
         } catch (e) {
             logger.error(e.message);
-            process.exit(1);
         }
         this.mpqEditorPath = path;
         this.isWindows = process.platform === "win32";
 
         if (!this.isWindows) {
             try {
-                this.winePath = execSync("which wine");;
+                this.winePath = execSync("which wine", { encoding: "utf8" }).replace(/\n/g, "");
             } catch (e) {
                 logger.error(e.message);
-                process.exit(1);
             }
         }
     }
@@ -31,8 +29,7 @@ class MPQEditor {
         if (this.isWindows) {
             return exec(`"${this.mpqEditorPath}" a "${outFile}" "${srcDir}" /c /auto /r`)
         } else {
-            // Wine path requires a Z: path
-            return exec(`"${this.winePath}" "${this.mpqEditorPath}" a "Z:/${outFile}" "Z:/${srcDir}" /c /auto /r`)
+            return exec(`"${this.winePath}" "Z:/${this.mpqEditorPath}" a "Z:/${outFile}" "Z:/${srcDir}" /c /auto /r`)
         }
     }
 
@@ -40,7 +37,7 @@ class MPQEditor {
         if(this.isWindows){
             return exec(`"${this.mpqEditorPath}" e "${inFile}" "${filter}" "${outDir}" /fp`)
         } else {
-            return exec(`"${this.winePath}" "${this.mpqEditorPath}" e "Z:/${inFile}" "${filter}" "Z:/${outDir}" /fp`)
+            return exec(`"${this.winePath}" "Z:/${this.mpqEditorPath}" e "Z:/${inFile}" "${filter}" "Z:/${outDir}" /fp`)
         }
     }
 
