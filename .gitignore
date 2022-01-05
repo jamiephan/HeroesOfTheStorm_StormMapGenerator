@@ -120,5 +120,4 @@ dist
 # Custom
 public
 !client/public
-_cache_maps
-!client/.env
+_cache_files
