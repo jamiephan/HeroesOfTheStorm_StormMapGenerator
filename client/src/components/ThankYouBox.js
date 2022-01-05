@@ -23,7 +23,12 @@ export default function BottomSection() {
             <hr />
             Changelog:
             <ul>
-            <li>1.10.1</li>
+              <li>2.0.0</li>
+              <ul>
+                <li>Added the ability to include <code>stormmod</code> files!</li>
+                <li><code>stormmod</code> files are listed from <a href="https://github.com/jamiephan/HeroesOfTheStorm_S2MA/tree/main/mods" target="_blank" rel="noreferer">jamiephan/s2ma</a></li>
+              </ul>
+              <li>1.10.1</li>
               <ul>
                 <li>Setup CI for automated deployment</li>
                 <li>Auto push to changes to <a href="https://stormmap.herokuapp.com" target="_blank" rel="noreferrer">https://stormmap.herokuapp.com/</a></li>
