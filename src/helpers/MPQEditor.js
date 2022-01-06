@@ -34,7 +34,7 @@ class MPQEditor {
     }
 
     async extractMPQ(inFile, outDir, filter) {
-        if(this.isWindows){
+        if (this.isWindows) {
             return exec(`"${this.mpqEditorPath}" e "${inFile}" "${filter}" "${outDir}" /fp`)
         } else {
             return exec(`"${this.winePath}" "Z:/${this.mpqEditorPath}" e "Z:/${inFile}" "${filter}" "Z:/${outDir}" /fp`)
@@ -44,13 +44,3 @@ class MPQEditor {
 }
 
 module.exports = MPQEditor;
-
-
-
-
-
-
-
-
-
-
