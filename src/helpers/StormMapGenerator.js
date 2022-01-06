@@ -12,6 +12,7 @@ const MPQEditor = require("./MPQEditor")
 const copyFile = util.promisify(fs.copyFile)
 const writeFile = util.promisify(fs.writeFile)
 const readFile = util.promisify(fs.readFile)
+const deleteFile = util.promisify(fs.unlink)
 const mkdir = util.promisify(fs.mkdir)
 
 // Get nested obj, stolen from https://stackoverflow.com/questions/2631001/test-for-existence-of-nested-javascript-object-key
@@ -60,7 +61,11 @@ class StormMapGenerator {
     // Sanitize XML file name + random id
     this.XMLFiles = XMLFiles.map(f => ({ name: randId().toString() + "-" + sanitize(f.name).replace(/ /g, ""), content: f.content }))
 
-    this.mapFileObj = tmp.fileSync({ unsafeCleanup: true })
+    // Bypass Nodejs Windows file handle
+    const tmpFile = tmp.fileSync()
+    this.mapFilePath = tmpFile.name
+    tmpFile.removeCallback()
+    // this.mapFileObj = tmp.fileSync({ unsafeCleanup: true })
     this.mapBinary = null
     this.mpqeditor = new MPQEditor()
   }
@@ -252,16 +257,21 @@ class StormMapGenerator {
     // =======================
     // Build the map
     this.logger.info(`Creating Map`)
-    await copyFile(path.resolve("./bin/empty.mpq"), this.mapFileObj.name)
+    await copyFile(path.resolve("./bin/empty.mpq"), this.mapFilePath)
     this.logger.info(`Adding Files to Map`)
-    await this.mpqeditor.createMPQ(this.mapFileObj.name, tempMapObj.name)
+    await this.mpqeditor.createMPQ(this.mapFilePath, tempMapObj.name)
     this.logger.info(`Completed Building Map`)
+
+    // Delete temp folder
+    tempMapObj.removeCallback()
   }
 
   async _readMap() {
-    this.mapBinary = await readFile(this.mapFileObj.name)
-    this.mapFileObj.removeCallback()
-    this.mapFileObj = null
+    this.mapBinary = await readFile(this.mapFilePath)
+    
+    // No need to await
+    deleteFile(this.mapFilePath)
+    this.mapFilePath = null
   }
 
   async get() {
