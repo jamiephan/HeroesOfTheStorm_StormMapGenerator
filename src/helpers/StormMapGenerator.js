@@ -1,18 +1,19 @@
-const tmp = require("tmp")
 const fs = require("fs")
-const util = require('util');
-const xml2js = require('xml2js')
 const glob = require("glob")
 const sanitize = require("sanitize-filename");
+const path = require("path");
+const tmp = require("tmp")
+const util = require('util');
+const xml2js = require('xml2js')
 
 const loggerGenerator = require("../helpers/Logger");
-const path = require("path");
+const MPQEditor = require("./MPQEditor")
 
 const copyFile = util.promisify(fs.copyFile)
 const writeFile = util.promisify(fs.writeFile)
 const readFile = util.promisify(fs.readFile)
+const deleteFile = util.promisify(fs.unlink)
 const mkdir = util.promisify(fs.mkdir)
-const exec = util.promisify(require('child_process').exec);
 
 // Get nested obj, stolen from https://stackoverflow.com/questions/2631001/test-for-existence-of-nested-javascript-object-key
 const getNested = (obj, ...args) => args.reduce((obj, level) => obj && obj[level], obj)
@@ -59,9 +60,10 @@ class StormMapGenerator {
     this.libsOptions = libsOptions
     // Sanitize XML file name + random id
     this.XMLFiles = XMLFiles.map(f => ({ name: randId().toString() + "-" + sanitize(f.name).replace(/ /g, ""), content: f.content }))
-
-    this.mapFileObj = tmp.fileSync({ unsafeCleanup: true })
+    // Bypass Nodejs Windows file handle issue when using MPQEditor.exe
+    this.mapFilePath = tmp.tmpNameSync()
     this.mapBinary = null
+    this.mpqEditor = new MPQEditor()
   }
 
   async _patchMap() {
@@ -69,21 +71,21 @@ class StormMapGenerator {
     // Extract the whole map first
     const tempMapObj = tmp.dirSync({ unsafeCleanup: true })
     this.logger.debug(`Extracting ${this.localMapPath} -> ${tempMapObj.name}`)
-    await exec(`wine "/app/bin/MPQEditor.exe" e "Z:/${this.localMapPath}" "*" "Z:/${tempMapObj.name}" /fp`)
+    await this.mpqEditor.extractMPQ(this.localMapPath, tempMapObj.name, "*")
 
+    // If there are XML Files sbmitted
     if (this.XMLFiles.length > 0) {
       this.logger.info(`Patching XML Files`)
       const modDirName = randId().toString() + "-StormMapGenerator"
 
-      const baseStormData = glob.sync(`${tempMapObj.name}/base.stormdata`, { nocase: true, })
+      const baseStormData = glob.sync(`${tempMapObj.name}/base.stormdata`, { nocase: process.platform !== "win32", })
 
       // Get Gamedata File Name
-      const gameDataFilesArr = glob.sync(`${baseStormData}/gamedata.xml`, { nocase: true, })
+      const gameDataFilesArr = glob.sync(`${baseStormData}/gamedata.xml`, { nocase: process.platform !== "win32", })
       let gameDataXMLPath = gameDataFilesArr.length > 0 ? gameDataFilesArr[0] : null
 
       // Make the dir for saving mods
       await mkdir(`${baseStormData}/${modDirName}`)
-
 
       let gameDataXMLContent
       let gameDataXMLContentParsed = {
@@ -124,16 +126,16 @@ class StormMapGenerator {
 
     }
 
-    // Add stormmods into map file
+    // If there are stormmod file names submitted
     if (this.localModsPath.length > 0) {
       this.logger.info("Patching StormMod Files, mods=" + this.localModsPath.length)
 
       const stormmodDirName = randId().toString() + "-StormMods-StormMapGenerator"
 
-      const baseStormData = glob.sync(`${tempMapObj.name}/base.stormdata`, { nocase: true, })
+      const baseStormData = glob.sync(`${tempMapObj.name}/base.stormdata`, { nocase: process.platform !== "win32", })
 
       // Get includes.xml File Name
-      const includesFilesArr = glob.sync(`${baseStormData}/includes.xml`, { nocase: true, })
+      const includesFilesArr = glob.sync(`${baseStormData}/includes.xml`, { nocase: process.platform !== "win32", })
       let includesXMLPath = includesFilesArr.length > 0 ? includesFilesArr[0] : null
 
       // Make the dir for saving mods
@@ -185,26 +187,20 @@ class StormMapGenerator {
 
     }
 
-    // Patch libs variables or message
-
+    // Patch libs variables or welcome message
     if (this.libsOptions.length > 0 || this.msg !== "") {
 
       this.logger.info(`Patching MapScript File`)
 
       // Extract MapScript.galaxy
-      const mapScriptFilePath = glob.sync(`${tempMapObj.name}/mapscript.galaxy`, { nocase: true })[0]
+      const mapScriptFilePath = glob.sync(`${tempMapObj.name}/mapscript.galaxy`, { nocase: process.platform !== "win32" })[0]
       let mapScriptFileContent = await readFile(`${mapScriptFilePath}`, { encoding: "utf-8" })
 
       // Read it
       let mapScriptInsertContentArr = []
 
       this.libsOptions.forEach(o => {
-        // const defaultLibsOption = defaultLibsOptions.find(x => x.name === o)
-        // if (defaultLibsOption) {
-        //   mapScriptInsertContentArr.push(`    ${o} = ${String(!defaultLibsOption.default)};`)
-        // }
         mapScriptInsertContentArr.push(`    ${o.name} = ${String(o.value)};`)
-
       })
 
       if (this.msg !== "") mapScriptInsertContentArr.push(`    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("${this.msg.replace(/\"/g, "'")}"));`)
@@ -217,15 +213,14 @@ class StormMapGenerator {
 
       // Save it
       await writeFile(`${mapScriptFilePath}`, mapScriptFileContent, { encoding: "utf-8" })
-
     }
 
     // Patch Map name
 
     this.logger.info(`Patching Map Name`)
     const mapDisplayName = this.name.replace(/\.stormmap/gi, "")
-    // Read it
-    const documentHeaderPath = glob.sync(`${tempMapObj.name}/documentheader`, { nocase: true })[0]
+    // Read DocumentHeader
+    const documentHeaderPath = glob.sync(`${tempMapObj.name}/documentheader`, { nocase: process.platform !== "win32" })[0]
     let documentHeaderContent = await readFile(`${documentHeaderPath}`)
     // ==================
     const documentHeaderArray = [...new Uint8Array(documentHeaderContent)].map(s => ('0' + s.toString(16)).slice(-2))
@@ -251,24 +246,27 @@ class StormMapGenerator {
     const newArrBuffer = Buffer.from((newArr.map(x => parseInt(Number("0x" + x), 10))))
     documentHeaderContent = replace(documentHeaderContent, extractedBuffer, newArrBuffer)
 
-    // Save it
+    // Save DocumentHeader
     await writeFile(`${documentHeaderPath}`, documentHeaderContent)
 
     // =======================
     // Build the map
     this.logger.info(`Creating Map`)
-    await copyFile(path.resolve("./bin/empty.mpq"), this.mapFileObj.name)
+    await copyFile(path.resolve("./bin/empty.mpq"), this.mapFilePath)
     this.logger.info(`Adding Files to Map`)
-    await exec(`wine "/app/bin/MPQEditor.exe" a "Z:/${this.mapFileObj.name}" "Z:/${tempMapObj.name}" /c /auto /r`)
+    await this.mpqEditor.createMPQ(this.mapFilePath, tempMapObj.name)
     this.logger.info(`Completed Building Map`)
+
+    // Delete temp folder
+    tempMapObj.removeCallback()
   }
 
   async _readMap() {
-    this.mapBinary = await readFile(this.mapFileObj.name)
-    this.mapFileObj.removeCallback()
-    this.mapFileObj = null
+    this.mapBinary = await readFile(this.mapFilePath)
+    // No need to await to delete the map file
+    deleteFile(this.mapFilePath)
+    this.mapFilePath = null
   }
-
 
   async get() {
     await this._patchMap()
@@ -276,4 +274,5 @@ class StormMapGenerator {
     return this.mapBinary
   }
 }
+
 module.exports = StormMapGenerator

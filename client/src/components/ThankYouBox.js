@@ -23,6 +23,11 @@ export default function BottomSection() {
             <hr />
             Changelog:
             <ul>
+              <li>2.0.1</li>
+              <ul>
+                <li>Allows the app to be run on Windows</li>
+                <li>Removed hard coded path to be run on not just only <code>/app</code></li>
+              </ul>
               <li>2.0.0</li>
               <ul>
                 <li>Added the ability to include <code>stormmod</code> files!</li>
