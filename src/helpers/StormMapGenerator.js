@@ -60,14 +60,10 @@ class StormMapGenerator {
     this.libsOptions = libsOptions
     // Sanitize XML file name + random id
     this.XMLFiles = XMLFiles.map(f => ({ name: randId().toString() + "-" + sanitize(f.name).replace(/ /g, ""), content: f.content }))
-
-    // Bypass Nodejs Windows file handle
-    const tmpFile = tmp.fileSync()
-    this.mapFilePath = tmpFile.name
-    tmpFile.removeCallback()
-    // this.mapFileObj = tmp.fileSync({ unsafeCleanup: true })
+    // Bypass Nodejs Windows file handle issue when using MPQEditor.exe
+    this.mapFilePath = tmp.tmpNameSync()
     this.mapBinary = null
-    this.mpqeditor = new MPQEditor()
+    this.mpqEditor = new MPQEditor()
   }
 
   async _patchMap() {
@@ -75,8 +71,9 @@ class StormMapGenerator {
     // Extract the whole map first
     const tempMapObj = tmp.dirSync({ unsafeCleanup: true })
     this.logger.debug(`Extracting ${this.localMapPath} -> ${tempMapObj.name}`)
-    await this.mpqeditor.extractMPQ(this.localMapPath, tempMapObj.name, "*")
+    await this.mpqEditor.extractMPQ(this.localMapPath, tempMapObj.name, "*")
 
+    // If there are XML Files sbmitted
     if (this.XMLFiles.length > 0) {
       this.logger.info(`Patching XML Files`)
       const modDirName = randId().toString() + "-StormMapGenerator"
@@ -89,7 +86,6 @@ class StormMapGenerator {
 
       // Make the dir for saving mods
       await mkdir(`${baseStormData}/${modDirName}`)
-
 
       let gameDataXMLContent
       let gameDataXMLContentParsed = {
@@ -130,7 +126,7 @@ class StormMapGenerator {
 
     }
 
-    // Add stormmods into map file
+    // If there are stormmod file names submitted
     if (this.localModsPath.length > 0) {
       this.logger.info("Patching StormMod Files, mods=" + this.localModsPath.length)
 
@@ -191,8 +187,7 @@ class StormMapGenerator {
 
     }
 
-    // Patch libs variables or message
-
+    // Patch libs variables or welcome message
     if (this.libsOptions.length > 0 || this.msg !== "") {
 
       this.logger.info(`Patching MapScript File`)
@@ -224,7 +219,7 @@ class StormMapGenerator {
 
     this.logger.info(`Patching Map Name`)
     const mapDisplayName = this.name.replace(/\.stormmap/gi, "")
-    // Read it
+    // Read DocumentHeader
     const documentHeaderPath = glob.sync(`${tempMapObj.name}/documentheader`, { nocase: process.platform !== "win32" })[0]
     let documentHeaderContent = await readFile(`${documentHeaderPath}`)
     // ==================
@@ -251,7 +246,7 @@ class StormMapGenerator {
     const newArrBuffer = Buffer.from((newArr.map(x => parseInt(Number("0x" + x), 10))))
     documentHeaderContent = replace(documentHeaderContent, extractedBuffer, newArrBuffer)
 
-    // Save it
+    // Save DocumentHeader
     await writeFile(`${documentHeaderPath}`, documentHeaderContent)
 
     // =======================
@@ -259,7 +254,7 @@ class StormMapGenerator {
     this.logger.info(`Creating Map`)
     await copyFile(path.resolve("./bin/empty.mpq"), this.mapFilePath)
     this.logger.info(`Adding Files to Map`)
-    await this.mpqeditor.createMPQ(this.mapFilePath, tempMapObj.name)
+    await this.mpqEditor.createMPQ(this.mapFilePath, tempMapObj.name)
     this.logger.info(`Completed Building Map`)
 
     // Delete temp folder
@@ -268,8 +263,7 @@ class StormMapGenerator {
 
   async _readMap() {
     this.mapBinary = await readFile(this.mapFilePath)
-    
-    // No need to await
+    // No need to await to delete the map file
     deleteFile(this.mapFilePath)
     this.mapFilePath = null
   }
