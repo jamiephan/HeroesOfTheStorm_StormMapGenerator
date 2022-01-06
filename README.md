@@ -132,7 +132,10 @@ Here are the used environment variable that you can configure:
 | `MAP_FILE_CACHE_EXPIRE` | `3600` | Seconds until the downloaded map cache expires. (`3600` = 1 hour) |
 | `LOG_LEVEL` | `info` | The logging level: `debug`, `info`, `warn`, `error` |
 
->Note: this only applies to the root directory of the project, it **does not** applies to the client's `.env` file which located at `client/.env`.
+In addition, there are two extra environment variables: `STORMMAP_GITHUB_TOKEN` and `STORMMAP_GITHUB_USERNAME`, which is used for increase the Github API call limit by using your [Personal Access Token](https://github.com/settings/tokens). This is **recommended** to use it for development. 
+
+
+>Note: These only applies to the `.env` file at the root directory of the project, it **does not** applies to the client's `.env` file which located at `client/.env`.
 
 # Building
 
