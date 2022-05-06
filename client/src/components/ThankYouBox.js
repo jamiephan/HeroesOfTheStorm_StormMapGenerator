@@ -23,6 +23,11 @@ export default function BottomSection() {
             <hr />
             Changelog:
             <ul>
+              <li>2.0.2</li>
+              <ul>
+                <li>Updated All dialogs (alert/prompt/confirm) to use modal instead of browser's native dialog</li>
+                <li>This allows to be run in Electron Application (native prompt were disabled in Electron)</li>
+              </ul>
               <li>2.0.1</li>
               <ul>
                 <li>Allows the app to be run on Windows</li>
@@ -31,7 +36,7 @@ export default function BottomSection() {
               <li>2.0.0</li>
               <ul>
                 <li>Added the ability to include <code>stormmod</code> files!</li>
-                <li><code>stormmod</code> files are listed from <a href="https://github.com/jamiephan/HeroesOfTheStorm_S2MA/tree/main/mods" target="_blank" rel="noreferer">jamiephan/s2ma</a></li>
+                <li><code>stormmod</code> files are listed from <a href="https://github.com/jamiephan/HeroesOfTheStorm_S2MA/tree/main/mods" target="_blank" rel="noreferrer">jamiephan/s2ma</a></li>
               </ul>
               <li>1.10.1</li>
               <ul>
