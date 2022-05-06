@@ -8,10 +8,10 @@ export default function useDialogs() {
         dispatch({ type: "SHOW_DIALOG", message: (<pre>{message}</pre>), title, onClose: callback, dialogType: "ALERT" })
     }
     const confirm = (message, callback) => {
-        dispatch({ type: "SHOW_DIALOG", message: (<pre>{message}</pre>), title: "Are you sure?", onClose: callback, onSubmit: callback, dialogType: "CONFIRM" })
+        dispatch({ type: "SHOW_DIALOG", message: (<pre>{message}</pre>), title: "Are you sure?", onClose: callback, dialogType: "CONFIRM" })
     }
     const prompt = (message, callback) => {
-        dispatch({ type: "SHOW_DIALOG", message: (<pre>{message}</pre>), title: "Please fill in the data:", onClose: callback, onSubmit: callback, dialogType: "PROMPT" })
+        dispatch({ type: "SHOW_DIALOG", message: (<pre>{message}</pre>), title: "Please fill in the data:", onClose: callback, dialogType: "PROMPT" })
     }
 
     return {

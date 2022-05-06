@@ -7,8 +7,7 @@ const defaultState = {
     message: '',
     title: '',
     dialogType: 'ALERT',
-    onClose: () => { },
-    onSubmit: () => { },
+    onClose: () => { }
   },
 }
 
@@ -27,8 +26,7 @@ const GlobalReducer = (
           message: payload.message ? payload.message : defaultState.message,
           title: payload.title ? payload.title : defaultState.title,
           dialogType: payload.dialogType ? payload.dialogType : defaultState.dialogType,
-          onClose: payload.onClose ? payload.onClose : defaultState.onClose,
-          onSubmit: payload.onSubmit ? payload.onSubmit : defaultState.onSubmit,
+          onClose: payload.onClose ? payload.onClose : defaultState.onClose
         },
       };
     case 'CLOSE_DIALOG':
