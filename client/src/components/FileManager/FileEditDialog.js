@@ -5,10 +5,12 @@ import { Modal } from 'react-bootstrap'
 import {
   BoxArrowRight, Palette, QuestionCircle, Save2, XLg
 } from 'react-bootstrap-icons'
+import useDialogs from '../../hooks/useDialogs'
 import TooltipButton from '../Shared/TooltipButton'
 
 export default function FileEditDialog(props) {
 
+  const { alert, confirm } = useDialogs()
   const [isEditorDarkTheme, setIsEditorDarkTheme] = useState(true)
   const [isUserHatesHisOrHerEyes, setIsUserHatesHisOrHerEyes] = useState(false)
 
@@ -24,30 +26,38 @@ export default function FileEditDialog(props) {
 
   const onClose = () => {
     if (props.promptUnedited && changed) {
-      if (!window.confirm("You have unsaved changes. Do you like to discard any changes?")) {
-        return;
-      }
+      confirm("You have unsaved changes. Do you like to discard any changes?", (s) => {
+        if (!!s) props.closeFn()
+      })
+    } else {
+      props.closeFn()
     }
-    props.closeFn()
   }
 
   const onSave = () => {
     if (props.validateOnSave && props.validateFn !== undefined) {
       const result = props.validateFn(props.file.content)
       if (result.error) {
-        if (!window.confirm([
+        confirm([
           "Your file contains the following error:",
           "",
           result.message,
           "Ignore the error and continue to save the file?"
-        ].join("\n"))) {
-          return false;
-        }
+        ].join("\n"), s => {
+          if (!!s) {
+            props.saveFn()
+            setChanged(false)
+            alert("File Saved!", "Success")
+            return true
+          }
+        })
+      } else {
+        props.saveFn()
+        setChanged(false)
+        alert("File Saved!", "Success")
+        return true
       }
     }
-    props.saveFn()
-    setChanged(false)
-    return true
   }
 
   const onSaveAndEdit = () => {
@@ -62,7 +72,7 @@ export default function FileEditDialog(props) {
       if (result.error) {
         alert(result.message)
       } else {
-        alert(`${props.language.toUpperCase()} syntax validation success!`)
+        alert(`${props.language.toUpperCase()} syntax validation success!`, "Success")
       }
     }
   }

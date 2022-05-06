@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Accordion, Alert, Button, Form } from 'react-bootstrap'
 import { ArrowRight } from 'react-bootstrap-icons'
+import useDialogs from '../hooks/useDialogs'
 import useLocalStorage from '../hooks/useLocalStorage'
 
 export default function AdvancedOptions(props) {
+
+  const { confirm } = useDialogs()
 
   const [isLoadingOptions, setIsLoadingOptions] = useState(true)
   const [isShowingAdvancedOptionAlertBox, setIsShowingAdvancedOptionAlertBox] = useLocalStorage("isShowingAdvancedOptionAlertBox", false, "bool")
@@ -149,17 +152,19 @@ export default function AdvancedOptions(props) {
   }
 
   const resetKeyToDefault = key => {
-    if (window.confirm(`Reset ${key} to default?`)) {
 
-      const index = flattedOptions.findIndex(x => x.name === key)
-      if (index === -1) return
+    confirm(`Reset ${key} to default?`, s => {
+      if (s) {
+        const index = flattedOptions.findIndex(x => x.name === key)
+        if (index === -1) return
 
-      setFlattedOptions(fo => {
-        const cp = Array.from(fo)
-        cp[index].value = cp[index].default
-        return cp
-      })
-    }
+        setFlattedOptions(fo => {
+          const cp = Array.from(fo)
+          cp[index].value = cp[index].default
+          return cp
+        })
+      }
+    })
   }
 
   return (
@@ -246,15 +251,17 @@ export default function AdvancedOptions(props) {
               </ul>
 
               <Button variant="danger" onClick={() => {
-                if (window.confirm("You sure want to reset ALL the options to default?")) {
-                  setFlattedOptions(fo => {
-                    const cp = Array.from(fo)
-                    for (let index = 0; index < cp.length; index++) {
-                      cp[index].value = cp[index].default
-                    }
-                    return cp
-                  })
-                }
+                confirm("You sure want to reset ALL the options to default?", s => {
+                  if (s) {
+                    setFlattedOptions(fo => {
+                      const cp = Array.from(fo)
+                      for (let index = 0; index < cp.length; index++) {
+                        cp[index].value = cp[index].default
+                      }
+                      return cp
+                    })
+                  }
+                })
               }}
               >Reset ALL to default</Button>
 
@@ -281,17 +288,19 @@ export default function AdvancedOptions(props) {
                             }
                             <hr />
                             <Button variant="danger" onClick={() => {
-                              if (window.confirm(`You sure want to reset ${l.title} Library to default?`)) {
-                                setFlattedOptions(fo => {
-                                  const cp = Array.from(fo)
-                                  for (let index = 0; index < cp.length; index++) {
-                                    if (cp[index].name.startsWith(l.lib)) {
-                                      cp[index].value = cp[index].default
+                              confirm(`You sure want to reset ${l.title} Library to default?`, s => {
+                                if (s) {
+                                  setFlattedOptions(fo => {
+                                    const cp = Array.from(fo)
+                                    for (let index = 0; index < cp.length; index++) {
+                                      if (cp[index].name.startsWith(l.lib)) {
+                                        cp[index].value = cp[index].default
+                                      }
                                     }
-                                  }
-                                  return cp
-                                })
-                              }
+                                    return cp
+                                  })
+                                }
+                              })
                             }}
                             >{`Reset ${l.title} Library to default`}</Button>
                           </Accordion.Body>

@@ -1,19 +1,23 @@
 import React from 'react'
+import { Container } from 'react-bootstrap'
+
+import { Provider as GlobalContextProvider } from './contexts/GlobalContext'
 import TitleBar from './components/TitleBar'
 import MainForm from "./components/MainForm"
 import ThankYouBox from './components/ThankYouBox'
-import { Container } from 'react-bootstrap'
+import Dialogs from './components/Dialogs'
 
 export default function App() {
 
   return (
-    <>
+    <GlobalContextProvider>
       <TitleBar />
       <Container>
         <h1 style={{ margin: "15px 0" }}>Storm Map Generator</h1>
         <MainForm />
         <ThankYouBox />
       </Container>
-    </>
+      <Dialogs />
+    </GlobalContextProvider>
   )
 }

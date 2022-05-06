@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { ListGroup } from 'react-bootstrap'
+import useDialogs from '../../hooks/useDialogs'
 import FileEditDialog from './FileEditDialog'
 import FileListItem from './FileListItem'
 
 export default function FileList(props) {
 
+  const { alert, confirm, prompt } = useDialogs()
   const [editingFile, setEditingFile] = useState({})
 
 
@@ -30,9 +32,9 @@ export default function FileList(props) {
       return alert("Invalid File Name")
     }
 
-    if (window.confirm(`Are you sure you want to delete ${name}?`)) {
-      props.setFiles(fs => fs.filter(f => f.name !== name))
-    }
+    confirm(`Are you sure you want to delete ${name}?`, (s => {
+      if (!!s) props.setFiles(fs => fs.filter(f => f.name !== name))
+    }))
   }
 
   const renameFile = name => {
@@ -40,24 +42,25 @@ export default function FileList(props) {
       return alert("Invalid File Name")
     }
 
-    let newName = window.prompt(`Please enter a new name for ${name}: `)
-    if (newName) {
-      newName = newName.toLowerCase()
-      if (!newName.endsWith("." + props.fileType.toLowerCase())) newName += ("." + props.fileType.toLowerCase())
+    prompt(`Please enter a new name for ${name}: `, newName => {
+      if (newName) {
+        newName = newName.toLowerCase()
+        if (!newName.endsWith("." + props.fileType.toLowerCase())) newName += ("." + props.fileType.toLowerCase())
 
-      if (!fileExist(newName)) {
-        props.setFiles(f => {
-          const newFiles = Array.from(f)
-          const index = f.findIndex(x => x.name === name)
-          newFiles[index].name = newName
-          return newFiles
-        })
+        if (!fileExist(newName)) {
+          props.setFiles(f => {
+            const newFiles = Array.from(f)
+            const index = f.findIndex(x => x.name === name)
+            newFiles[index].name = newName
+            return newFiles
+          })
+        } else {
+          alert(`Unable to rename the file. "${newName}" already exist.`)
+        }
       } else {
-        alert(`Unable to rename the file. "${newName}" already exist.`)
+        return alert("Invalid File Name")
       }
-    } else {
-      return alert("Invalid File Name")
-    }
+    })
 
   }
 

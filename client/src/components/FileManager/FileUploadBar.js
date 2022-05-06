@@ -2,8 +2,11 @@
 import React, { useEffect, useState } from 'react'
 import { Button, ButtonGroup, ButtonToolbar, Dropdown, Spinner, SplitButton } from 'react-bootstrap'
 import { PlusLg, Upload } from 'react-bootstrap-icons'
+import useDialogs from '../../hooks/useDialogs'
 
 export default function FileUploadBar(props) {
+
+  const { alert, prompt } = useDialogs()
 
   // Templates
   const [templates, setTemplates] = useState([])
@@ -51,20 +54,23 @@ export default function FileUploadBar(props) {
   const handleNewFile = templateId => {
     if (templates.length === 0) return alert(`No ${props.fileType.toUpperCase()} Templates available. Try refresh the page.`)
 
-    let fileName = prompt(`Using example: ${templates[templateId].name}\n\nPlease enter the new ${props.fileType.toUpperCase()} filename:`)
-    if (!fileName) return;
-    fileName = fileName.toLocaleLowerCase()
-    fileName = fileName.endsWith(("." + props.fileType.toLowerCase())) ? fileName : fileName + ("." + props.fileType.toLowerCase())
-    if (!/^[\x00-\x7F]*$/.test(fileName)) {
-      return alert("The file name contains invalid characters. Only ASCII characters are allowed.")
-    }
-    if (fileName && !props.files.map(f => f.name).includes(fileName) && fileName !== ("." + props.fileType.toLowerCase())) {
-      props.setFiles(fs => [...fs, {
-        name: fileName, content: props.templateFn(templates[templateId])
-      }])
-    } else {
-      alert("Invalid File name / Duplicated File name")
-    }
+    prompt(`Using example: ${templates[templateId].name}\n\nPlease enter the new ${props.fileType.toUpperCase()} filename:`, fileName => {
+      if (fileName === false) return
+      if (!fileName) return alert("Empty File Name");
+      fileName = fileName.toLocaleLowerCase()
+      fileName = fileName.endsWith(("." + props.fileType.toLowerCase())) ? fileName : fileName + ("." + props.fileType.toLowerCase())
+      if (!/^[\x00-\x7F]*$/.test(fileName)) {
+        return alert("The file name contains invalid characters. Only ASCII characters are allowed.")
+      }
+      if (fileName && !props.files.map(f => f.name).includes(fileName) && fileName !== ("." + props.fileType.toLowerCase())) {
+        props.setFiles(fs => [...fs, {
+          name: fileName, content: props.templateFn(templates[templateId])
+        }])
+      } else {
+        alert("Invalid File name / Duplicated File name")
+      }
+
+    })
   }
 
   return (
