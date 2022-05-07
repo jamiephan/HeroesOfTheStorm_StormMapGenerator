@@ -23,6 +23,15 @@ export default function BottomSection() {
             <hr />
             Changelog:
             <ul>
+              <li>2.1.0</li>
+              <ul>
+                <li>Added Compatibility Mode for Try Mode 2.0 Installer!</li>
+                <li>Check it out at: <a href="https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer" target="_blank" rel="noreferrer">https://github.com/jamiephan/HeroesOfTheStorm_TryMode2.0Installer</a></li>
+                <li>Navbar is now fixed on the screen and slightly larger</li>
+                <li>Added a custom purple scrollbar to match the theme</li>
+                <li>Now will change the title if in <code>INSTALLER</code> mode for Try Mode 2.0</li>
+
+              </ul>
               <li>2.0.2</li>
               <ul>
                 <li>Updated All dialogs (alert/prompt/confirm) to use modal instead of browser's native dialog</li>

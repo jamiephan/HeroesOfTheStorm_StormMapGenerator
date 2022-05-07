@@ -13,7 +13,7 @@ export default function App() {
     <GlobalContextProvider>
       <TitleBar />
       <Container>
-        <h1 style={{ margin: "15px 0" }}>Storm Map Generator</h1>
+        <h1 style={{ paddingTop: "80px" }}>Storm Map Generator</h1>
         <MainForm />
         <ThankYouBox />
       </Container>

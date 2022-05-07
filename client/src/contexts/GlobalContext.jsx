@@ -9,6 +9,10 @@ const defaultState = {
     dialogType: 'ALERT',
     onClose: () => { }
   },
+  installer: {
+    isInstaller: (new URLSearchParams(window.location.search)).get("type") === "INSTALLER",
+    mapName: (new URLSearchParams(window.location.search)).get("mapName")
+  }
 }
 
 const GlobalReducer = (
