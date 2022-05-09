@@ -75,6 +75,7 @@ export default function MainForm() {
       a.download = mapName
       a.click()
       a.remove()
+        window.URL.revokeObjectURL(url);
       }
 
       await generateDownload(blob)
