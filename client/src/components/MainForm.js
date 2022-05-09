@@ -140,7 +140,7 @@ export default function MainForm() {
 
         </Tabs>
 
-        <hr />
+        <div style={{ width: "100%", borderBottom: "2px solid rgba(50,251,226,.3)", ...(!alertBox.show ? { margin: "20px 0px" } : {}) }} />
 
         {/* Alert box (status) */}
         <Alert
