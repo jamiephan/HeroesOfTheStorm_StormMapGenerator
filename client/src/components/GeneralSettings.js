@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { Form } from 'react-bootstrap'
 import useLocalStorage from '../hooks/useLocalStorage'
+import GlobalContext from "../contexts/GlobalContext"
+
 
 export default function GeneralSettings(props) {
+
+  const { state } = useContext(GlobalContext)
 
   // Dropdown list
   const [listMaps, setListMaps] = useState([])
@@ -79,7 +83,7 @@ export default function GeneralSettings(props) {
         <Form.Label>The name of the map:</Form.Label>
         <Form.Control type="text" placeholder="My Map" required value={name} onChange={e => setName(e.target.value)} onBlur={e => e.target.value === "" ? setName("My Map") : null} />
         <Form.Text className="text-muted">
-          This is the name of the map during the loading screen (the title text showing "<code>Welcome to {name}</code>"), as well as the downloaded filename (<code>{name}.stormmap</code>) for your map.
+          This is the name of the map during the loading screen (the title text showing "<code>Welcome to {name}</code>"){!state?.installer?.isInstaller && (<>, as well as the downloaded filename (<code>{name}.stormmap</code>) for your map</>)}.
         </Form.Text>
       </Form.Group>
 
