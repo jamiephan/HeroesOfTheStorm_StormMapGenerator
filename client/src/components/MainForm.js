@@ -44,7 +44,7 @@ export default function MainForm() {
     const { mods } = additionalMods.current
 
     const mapName = name.toLowerCase().endsWith(".stormmap") ? name : name + ".stormmap"
-    setAlertBox({ show: true, variant: "info", message: `Generating ${mapName} ...`, dismissible: false })
+    setAlertBox({ show: true, variant: "info", message: `Generating ${state?.installer?.isInstaller && state?.installer?.mapName ? state?.installer?.mapName : mapName} ...`, dismissible: false })
 
     const body = JSON.stringify({
       name: mapName,
@@ -70,11 +70,11 @@ export default function MainForm() {
       // Download the file
       const generateDownload = async (b) => {
         const url = window.URL.createObjectURL(b);
-      const a = document.createElement("a")
-      a.href = url
-      a.download = mapName
-      a.click()
-      a.remove()
+        const a = document.createElement("a")
+        a.href = url
+        a.download = mapName
+        a.click()
+        a.remove()
         window.URL.revokeObjectURL(url);
       }
 
@@ -137,7 +137,7 @@ export default function MainForm() {
             <h3 style={{ margin: "20px 0px" }}>Advanced Options</h3>
             <AdvancedOptions onChange={ao => libsOptions.current = ao} />
           </Tab>
-          
+
         </Tabs>
 
         <hr />
