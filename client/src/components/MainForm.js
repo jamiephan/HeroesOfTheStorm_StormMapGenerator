@@ -1,8 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import {
   Alert, Button, Fade, Form, Spinner, Tab, Tabs
 } from 'react-bootstrap'
 import { CheckLg } from 'react-bootstrap-icons'
+
+import GlobalContext from '../contexts/GlobalContext'
 import BuildXMLTemplate from '../helpers/BuildXMLTemplate'
 import XMLValidate from "../helpers/XMLValidate"
 import useLocalStorage from '../hooks/useLocalStorage'
@@ -12,6 +14,8 @@ import FileManager from './FileManager/FileManager'
 import GeneralSettings from './GeneralSettings'
 
 export default function MainForm() {
+
+  const { state } = useContext(GlobalContext)
 
   // Settings
   const generalSettings = useRef({})
@@ -60,20 +64,32 @@ export default function MainForm() {
     })
 
     if (response.status === 200) {
-      // Download the file
+      // To Blob
       const blob = await response.blob()
-      const url = window.URL.createObjectURL(blob);
+
+      // Download the file
+      const generateDownload = async (b) => {
+        const url = window.URL.createObjectURL(b);
       const a = document.createElement("a")
       a.href = url
       a.download = mapName
       a.click()
       a.remove()
-      setAlertBox({ show: true, variant: "success", message: `Downloaded ${mapName}!`, dismissible: true })
+      }
+
+      await generateDownload(blob)
+
+      setAlertBox({
+        show: true, variant: "success", message: <>
+          {state?.installer?.isInstaller && state?.installer?.mapName ? `Installed ${state?.installer?.mapName}!` : `Generated ${mapName}!`}
+          {' '}
+          <Button variant="secondary" style={{ marginLeft: "10px" }} onClick={() => generateDownload(blob)}>{state?.installer?.isInstaller && state?.installer?.mapName ? `Install` : `Generate`} again</Button>
+        </>, dismissible: true
+      })
     } else {
       const json = await response.json()
       setAlertBox({ show: true, variant: "danger", message: json.message, dismissible: true })
     }
-
     setIsGenerating(false)
 
   }
