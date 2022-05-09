@@ -10,7 +10,6 @@ html {
   padding-top: 0 !important;
   z-index: 999 !important;
   padding: 0.5rem 0 !important;
-  height: 72px !important;
 }
 
 *::-webkit-scrollbar {
