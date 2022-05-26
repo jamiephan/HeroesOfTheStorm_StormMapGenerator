@@ -1,35 +1,22 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {
   Alert, Button, Fade, Form, Spinner, Tab, Tabs
 } from 'react-bootstrap'
 import { CheckLg } from 'react-bootstrap-icons'
 
 import GlobalContext from '../contexts/GlobalContext'
-import BuildXMLTemplate from '../helpers/BuildXMLTemplate'
-import XMLValidate from "../helpers/XMLValidate"
-import useLocalStorage from '../hooks/useLocalStorage'
-import AdditionalMods from './AdditionalMods'
-import AdvancedOptions from './AdvancedOptions'
-import FileManager from './FileManager/FileManager'
-import GeneralSettings from './GeneralSettings'
+import AdditionalMods from './Tabs/AdditionalMods'
+import AdvancedOptions from './Tabs/AdvancedOptions'
+import GameString from './Tabs/GameString'
+import GeneralSettings from './Tabs/GeneralSettings'
+import XMLFiles from './Tabs/XMLFiles'
 
 export default function MainForm() {
 
   const { state } = useContext(GlobalContext)
-
-  // Settings
-  const generalSettings = useRef({})
-  const additionalMods = useRef([])
-  // XML Files
-  const [xmlFiles, setXmlFiles] = useLocalStorage("xml", [], "file")
-  // Advanced Options
-  const libsOptions = useRef([])
-
-  // Button States
-  const [isLoadingMap, setIsLoadingMap] = useState(true)
   const [isGenerating, setIsGenerating] = useState(false)
 
-  // Status Alert box
+  // // Status Alert box
   const [alertBox, setAlertBox] = useState({ show: false, variant: "warning", message: "Why do people use light mode??", dismissible: true })
 
   const handleSubmit = async (e) => {
@@ -37,30 +24,19 @@ export default function MainForm() {
 
     setIsGenerating(true)
 
-    const {
-      name, map, map20, ai, msg, isUsingTryMode20, isUsingAIComp
-    } = generalSettings.current
+    setAlertBox({ show: true, variant: "info", message: `Generating ${state?.installer?.isInstaller && state?.installer?.mapName ? state?.installer?.mapName : state.settings.name} ...`, dismissible: false })
 
-    const { mods } = additionalMods.current
 
-    const mapName = name.toLowerCase().endsWith(".stormmap") ? name : name + ".stormmap"
-    setAlertBox({ show: true, variant: "info", message: `Generating ${state?.installer?.isInstaller && state?.installer?.mapName ? state?.installer?.mapName : mapName} ...`, dismissible: false })
-
-    const body = JSON.stringify({
-      name: mapName,
-      map: isUsingTryMode20 ? map20 : map,
-      trymode20: isUsingTryMode20,
-      ai: (isUsingTryMode20 || !isUsingAIComp) ? "none" : ai,
-      msg,
-      mods,
-      libsOptions: libsOptions.current,
-      xmlFiles,
-    })
 
     const response = await fetch("/build", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body
+      body: JSON.stringify(
+        {
+          ...state?.settings,
+          libsOptions: []
+        },
+      )
     })
 
     if (response.status === 200) {
@@ -72,7 +48,7 @@ export default function MainForm() {
         const url = window.URL.createObjectURL(b);
         const a = document.createElement("a")
         a.href = url
-        a.download = mapName
+        a.download = state.settings.name
         a.click()
         a.remove()
         window.URL.revokeObjectURL(url);
@@ -82,9 +58,9 @@ export default function MainForm() {
 
       setAlertBox({
         show: true, variant: "success", message: <>
-          {state?.installer?.isInstaller && state?.installer?.mapName ? `Installed ${state?.installer?.mapName}!` : `Generated ${mapName}!`}
+          {state?.installer?.isInstaller && state?.installer?.mapName ? `Installed ${state?.installer?.mapName}!` : `Generated ${state.settings.name}!`}
           {' '}
-          <Button variant="secondary" style={{ marginLeft: "10px" }} onClick={() => generateDownload(blob)}>{state?.installer?.isInstaller && state?.installer?.mapName ? `Install` : `Generate`} again</Button>
+          <Button variant="secondary" style={{ marginLeft: "10px" }} onClick={() => generateDownload(blob)}>{state?.installer?.isInstaller && state?.installer?.mapName ? "Install" : "Download"} again</Button>
         </>, dismissible: true
       })
     } else {
@@ -104,39 +80,34 @@ export default function MainForm() {
           {/* General Settings */}
           <Tab eventKey="general" title="General Settings">
             <h3 style={{ margin: "20px 0px" }}>General Settings</h3>
-            <GeneralSettings onChange={gs => generalSettings.current = gs} loadingMap={setIsLoadingMap} />
+            <GeneralSettings />
           </Tab>
+
 
           {/* Additional Mods */}
           <Tabs eventKey="additionalmods" title="Additional Mods">
             <h3 style={{ margin: "20px 0px" }}>Additional Mods</h3>
-            <AdditionalMods onChange={am => additionalMods.current = am} />
+            <AdditionalMods />
+          </Tabs>
+
+          {/* Game Strings */}
+          <Tabs eventKey="gamestrings" title="Game Strings">
+            <h3 style={{ margin: "20px 0px" }}>Game Strings</h3>
+            <GameString />
           </Tabs>
 
           {/* XMl File Manager */}
           <Tab eventKey="xmlfile" title="XML Files">
             <h3 style={{ margin: "20px 0px" }}>XML Files</h3>
-            <FileManager files={xmlFiles} setFiles={setXmlFiles} fileType="xml" mimeType="application/xml" validator={XMLValidate} template={BuildXMLTemplate}>
-              The additional <code>XML</code> (Game Data) files that will be loaded into your custom map.
-              <ul>
-                <li>
-                  For more information about XML data modding, please refer to <a href="https://jamiephan.github.io/HeroesOfTheStorm_TryMode2.0/modding.html#mod-xml" target="_blank" rel="noreferrer">jamiephan/TryMode2.0/modding.html#mod-xml</a>.
-                </li>
-                <li>
-                  Currently only supports Game Data (<code>&lt;Catalog&gt;</code>) type of <code>xml</code> files. Files such as Layouts (<code>&lt;Desc&gt;</code>) are not supported.
-                </li>
-                <li>
-                  These files are stored in your browser's storage, which will retain after a page refresh. Although the size limit is <code>5MB</code>, it should be more than enough for normal XML modding.
-                </li>
-              </ul>
-            </FileManager>
+            <XMLFiles />
           </Tab>
 
           {/* Advanced Options */}
-          <Tab eventKey="advancedoptions" title="Advanced Options">
+          {/* <Tab eventKey="advancedoptions" title="Advanced Options">
             <h3 style={{ margin: "20px 0px" }}>Advanced Options</h3>
             <AdvancedOptions onChange={ao => libsOptions.current = ao} />
-          </Tab>
+          </Tab> */}
+
 
         </Tabs>
 
@@ -160,9 +131,9 @@ export default function MainForm() {
         {/* Generate Button */}
         <Form.Group>
           {
-            isLoadingMap ?
+            (state?.IsLoadingMaps || state?.isLoadingMods) ?
               <Button variant="outline-info" type="submit" disabled={true}>
-                <><Spinner animation="border" size="sm" /> Loading Map Templates...</>
+                <><Spinner animation="border" size="sm" /> Loading Map Data...</>
               </Button> :
               <Button variant={isGenerating ? "outline-info" : "info"} type="submit" disabled={isGenerating}>
                 {isGenerating ? <><Spinner animation="border" size="sm" /> Generating Map File...</> : <><CheckLg /> Generate</>}
