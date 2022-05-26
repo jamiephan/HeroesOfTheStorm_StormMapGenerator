@@ -50,7 +50,7 @@ const getIndicesOf = (searchStr, str, caseSensitive) => {
 
 
 class StormMapGenerator {
-  constructor(name, msg, localModsPath, localMapPath, XMLFiles, libsOptions) {
+  constructor(name, msg, localModsPath, localMapPath, XMLFiles, libsOptions, gameString) {
     this.logger = loggerGenerator(`Storm Map Generator (${name})`)
     this.logger.debug(`Generator Called: ${name}, ${msg}, ${localMapPath}, ${XMLFiles.length}, ${libsOptions.length}`)
     this.name = name
@@ -58,6 +58,7 @@ class StormMapGenerator {
     this.localModsPath = localModsPath
     this.msg = msg
     this.libsOptions = libsOptions
+    this.gameString = gameString
     // Sanitize XML file name + random id
     this.XMLFiles = XMLFiles.map(f => ({ name: randId().toString() + "-" + sanitize(f.name).replace(/ /g, ""), content: f.content }))
     // Bypass Nodejs Windows file handle issue when using MPQEditor.exe
@@ -214,6 +215,28 @@ class StormMapGenerator {
       // Save it
       await writeFile(`${mapScriptFilePath}`, mapScriptFileContent, { encoding: "utf-8" })
     }
+
+    // Patch Game String
+    if (this.gameString.length > 0) {
+      let gameStringContent;
+      const gameStringsFilesArr = glob.sync(`${tempMapObj.name}/enus.stormdata/localizeddata/gamestrings.txt`, { nocase: process.platform !== "win32", })
+      let gameStringsFilePath = gameStringsFilesArr.length > 0 ? gameStringsFilesArr[0] : null
+      if (gameStringsFilePath) {
+        // gameString Exist
+        gameStringContent = await readFile(`${gameStringsFilePath}`, { encoding: "utf-8" })
+      } else {
+        // Does not Exist, 
+        gameStringsFilePath = `${tempMapObj.name}/enus.stormdata/localizeddata/gamestrings.txt`
+      }
+
+      gameStringContent += "\n" + this.gameString.join("\n")
+
+      // Write to File
+      await writeFile(`${gameStringsFilePath}`, gameStringContent, { encoding: "utf-8" })
+
+
+    }
+
 
     // Patch Map name
 

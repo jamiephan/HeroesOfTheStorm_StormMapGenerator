@@ -9,7 +9,7 @@ const { getMapLocalPath, getModsLocalPath } = require("../../helpers/GetFileLoca
 const StormMapGenerator = require("../../helpers/StormMapGenerator")
 
 router.post("/", validateBuildParams, async (req, res) => {
-  const { name, map, ai, msg, mods, xmlFiles, trymode20, libsOptions } = req.body
+  const { name, map, ai, msg, mods, xmlFiles, trymode20, libsOptions, gameString } = req.body
 
   let localTemplateMapPath;
 
@@ -34,7 +34,7 @@ router.post("/", validateBuildParams, async (req, res) => {
     logger.debug("Local Mods Paths Array: ")
     logger.debug(localModsPath)
     for (let i = 0; i < mods.length; i++) {
-      localModsPathMapping.push({name: mods[i], path: localModsPath[i]})
+      localModsPathMapping.push({ name: mods[i], path: localModsPath[i] })
     }
   } catch (e) {
     logger.error(`Error localModsPath: ${e.message}`)
@@ -43,7 +43,7 @@ router.post("/", validateBuildParams, async (req, res) => {
 
   try {
     // Create a patched map
-    const stormMap = new StormMapGenerator(name, msg, localModsPathMapping, localTemplateMapPath, xmlFiles, libsOptions)
+    const stormMap = new StormMapGenerator(name, msg, localModsPathMapping, localTemplateMapPath, xmlFiles, libsOptions, gameString)
     logger.info("Generating Map: " + name)
     const mapBinary = await stormMap.get()
     logger.info(`Generated ${name}. Size: ${Buffer.byteLength(mapBinary)}`)

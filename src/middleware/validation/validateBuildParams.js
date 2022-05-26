@@ -78,7 +78,7 @@ const buildSchema = async () => {
         .valid(...await GithubAPI(GithubAPI.mods)).messages({
           "any.only": "Mods name should be one of: " + (await GithubAPI(GithubAPI.mods)).join(", ")
         }))
-        .required(),
+      .required(),
     xmlFiles: Joi.array()
       .items(Joi.object({
         name: Joi.string().pattern(/^[\x20-\x7E]*\.xml$/i).required(),
@@ -99,6 +99,15 @@ const buildSchema = async () => {
           if (defaultData.value === option.value) return helper.message(`The value of ${defaultData.name} is same as default.`)
           if (typeof defaultData.default !== typeof option.value) return helper.message(`The type of ${defaultData.name} must be ${String(typeof defaultData.default)}.`)
           return true
+        })
+      )
+      .required(),
+    gameString: Joi.array()
+      .items(Joi.string()
+        .allow("")
+        .pattern(/^[\x20-\x7E]{1,}=/i)
+        .messages({
+          "string.pattern.base": `"gameString" must be in format of "key=value"`
         })
       )
       .required()
