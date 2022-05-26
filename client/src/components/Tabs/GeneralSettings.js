@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
 
 import { Form } from 'react-bootstrap'
-import useLocalStorage from '../hooks/useLocalStorage'
-import GlobalContext from "../contexts/GlobalContext"
+import useLocalStorage from '../../hooks/useLocalStorage'
+import GlobalContext from "../../contexts/GlobalContext"
 
 
 export default function GeneralSettings(props) {
 
-  const { state } = useContext(GlobalContext)
+  const { state, dispatch } = useContext(GlobalContext)
 
   // Dropdown list
   const [listMaps, setListMaps] = useState([])
@@ -29,20 +29,21 @@ export default function GeneralSettings(props) {
 
     (async () => {
 
-      props.loadingMap(true)
+      dispatch({ type: "SET_IS_LOADING_MAPS", loading: true })
 
-      // Load live maps
-      const mapsResponse = await fetch("/list/maps")
+      // Parallel fetching
+      const [mapsResponse, maps20Response, aiResponse] = await Promise.all([
+        fetch("/list/maps"),
+        fetch("/list/trymode20"),
+        fetch("/list/ai")])
+
+
       const mapsJson = await mapsResponse.json()
       setListMaps(mapsJson)
 
-      // Load Live Try Mode 2.0 Maps
-      const maps20Response = await fetch("/list/trymode20")
       const maps20Json = await maps20Response.json()
       setListTryMode20Maps(maps20Json)
 
-      // Load AI comps
-      const aiResponse = await fetch("/list/ai")
       const aiJson = await aiResponse.json()
       setListAIComps(aiJson)
 
@@ -59,7 +60,7 @@ export default function GeneralSettings(props) {
         setAi(aiJson[0])
       }
 
-      props.loadingMap(false)
+      dispatch({ type: "SET_IS_LOADING_MAPS", loading: false })
 
     })()
 
@@ -69,8 +70,19 @@ export default function GeneralSettings(props) {
 
   useEffect(() => {
 
-    props.onChange({
-      name, map, map20, ai, msg, isUsingTryMode20, isUsingAIComp
+  })
+
+
+  useEffect(() => {
+
+    dispatch({
+      type: "APPEND_SETTINGS", settings: {
+        name: name.toLowerCase().endsWith(".stormmap") ? name : name + ".stormmap",
+        map: isUsingTryMode20 ? map20 : map,
+        ai: (isUsingTryMode20 || !isUsingAIComp) ? "none" : ai,
+        msg,
+        trymode20: isUsingTryMode20,
+      }
     })
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

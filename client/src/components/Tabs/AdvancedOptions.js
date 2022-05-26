@@ -1,10 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Accordion, Alert, Button, Form } from 'react-bootstrap'
 import { ArrowRight } from 'react-bootstrap-icons'
-import useDialogs from '../hooks/useDialogs'
-import useLocalStorage from '../hooks/useLocalStorage'
+import useDialogs from '../../hooks/useDialogs'
+import useLocalStorage from '../../hooks/useLocalStorage'
+import GlobalContext from "../../contexts/GlobalContext"
 
 export default function AdvancedOptions(props) {
+
+  const { state, dispatch } = useContext(GlobalContext)
 
   const { confirm } = useDialogs()
 
@@ -42,7 +45,8 @@ export default function AdvancedOptions(props) {
         .filter(o => o.default !== o.value)
         .map(x => { delete x.default; delete x.type; return x })
 
-      props.onChange(obj)
+      // props.onChange(obj)
+      dispatch({ type: "APPEND_SETTINGS", settings: { libsOptions: obj } })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [flattedOptions])

@@ -1,10 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 
 import { Form, Button, ListGroup, ListGroupItem, Spinner } from 'react-bootstrap'
 import { PlusLg, Trash } from 'react-bootstrap-icons'
-import useLocalStorage from '../hooks/useLocalStorage'
+import useLocalStorage from '../../hooks/useLocalStorage'
+import GlobalContext from "../../contexts/GlobalContext"
 
 export default function AdditionalMods(props) {
+
+    const { state, dispatch } = useContext(GlobalContext)
 
     // Dropdown list
     const [listMods, setListMods] = useState([])
@@ -12,7 +15,6 @@ export default function AdditionalMods(props) {
     // Form States
     const [mods, setMods] = useLocalStorage("mods", [], "array")
     const [selectedMod, setSelectedMod] = useState("")
-    const [loadedModsList, setLoadedModsList] = useState(false)
 
     const fullModList = useRef([])
 
@@ -20,7 +22,7 @@ export default function AdditionalMods(props) {
     useEffect(() => {
 
         (async () => {
-            setLoadedModsList(false)
+            dispatch({ type: "SET_IS_LOADING_MODS", loading: true })
             // Load mods
             const modsResponse = await fetch("/list/mods")
             const modsJson = await modsResponse.json()
@@ -33,7 +35,7 @@ export default function AdditionalMods(props) {
             // Auto select the first mod in list
             setSelectedMod(modsJson.length > 0 ? modsJson[0] : null)
 
-            setLoadedModsList(true)
+            dispatch({ type: "SET_IS_LOADING_MODS", loading: false })
         })()
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,11 +45,11 @@ export default function AdditionalMods(props) {
     // Add mod to list
     useEffect(() => {
 
-        let filterMods = fullModList.current.filter(y => !mods.includes(y))
+        const filterMods = fullModList.current.filter(y => !mods.includes(y))
         setListMods(filterMods.length > 0 ? filterMods : [])
         setSelectedMod(x => filterMods.includes(x) ? x : filterMods[0])
-        props.onChange({
-            mods
+        dispatch({
+            type: "APPEND_SETTINGS", settings: { mods }
         })
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [mods])
@@ -86,7 +88,7 @@ export default function AdditionalMods(props) {
                         <li>The <code>*.stormmod</code> files are from <a href="https://github.com/jamiephan/HeroesOfTheStorm_S2MA" target="_blank" rel="noreferrer">jamiephan/s2ma</a>, which are the offical mods in-game.</li>
                     </ul>
                 </Form.Text>
-                {!loadedModsList && (
+                {!!state?.IsLoadingMods && (
                     <div style={{ display: "flex", alignItems: "center" }}>
                         <Spinner animation="border" variant="primary" />
                         <span style={{ marginLeft: "10px" }}>
@@ -94,10 +96,10 @@ export default function AdditionalMods(props) {
                         </span>
                     </div>
                 )}
-                {loadedModsList && listMods.length > 0 && (
+                {!state?.IsLoadingMods && listMods.length > 0 && (
                     <>
                         <Form.Select value={selectedMod} onChange={e => setSelectedMod(e.target.value)}>
-                            {!loadedModsList ?
+                            {!!state?.IsLoadingMods ?
                                 <option>Loading...</option> :
                                 <>
                                     {
@@ -109,11 +111,11 @@ export default function AdditionalMods(props) {
                             }
 
                         </Form.Select>
-                        <Button disabled={!loadedModsList} style={{ marginTop: "15px" }} onClick={
+                        <Button disabled={!!state?.IsLoadingMods} style={{ marginTop: "15px" }} onClick={
                             () => setMods(v => { let a = [...new Set([...v, selectedMod])]; a.sort(); return a })
                         }>
                             {
-                                loadedModsList ?
+                                !state?.IsLoadingMods ?
                                     <><PlusLg />{' '}Add Mod</> : <><Spinner animation="border" size="sm" /> Loading Mod list...</>
                             }
                         </Button>
