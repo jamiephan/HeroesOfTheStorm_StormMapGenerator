@@ -12,7 +12,10 @@ const defaultState = {
   installer: {
     isInstaller: (new URLSearchParams(window.location.search)).get("type") === "INSTALLER",
     mapName: (new URLSearchParams(window.location.search)).get("mapName")
-  }
+  },
+  settings: {},
+  IsLoadingMaps: true,
+  IsLoadingMods: true
 }
 
 const GlobalReducer = (
@@ -22,6 +25,26 @@ const GlobalReducer = (
   const { type, ...payload } = action;
 
   switch (type) {
+    // Settings
+    case 'APPEND_SETTINGS':
+      return {
+        ...state,
+        settings: { ...state.settings, ...payload.settings }
+      }
+
+    case "SET_IS_LOADING_MAPS":
+      return {
+        ...state,
+        IsLoadingMaps: payload.loading
+      }
+
+    case "SET_IS_LOADING_MODS":
+      return {
+        ...state,
+        IsLoadingMods: payload.loading
+      }
+
+    // Dialogs
     case 'SHOW_DIALOG':
       return {
         ...state,
