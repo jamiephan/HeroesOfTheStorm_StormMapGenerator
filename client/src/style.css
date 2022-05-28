@@ -29,3 +29,7 @@ html {
 *::-webkit-scrollbar-thumb:hover {
   background-color: #6610f2;
 }
+
+.btn-close {
+  -webkit-app-region: no-drag
+}
