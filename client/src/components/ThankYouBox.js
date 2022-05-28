@@ -23,6 +23,17 @@ export default function BottomSection() {
             <hr />
             Changelog:
             <ul>
+              <li>3.0.0</li>
+              <ul>
+                <li>Added the ability to append Game String in <code>GameStrings.txt</code> (<code>enUS</code> locale only)!</li>
+                <li>Added the ability to tweak <code>string</code> type variables in Advanced Options!</li>
+                <li>Clean up React code space using Context API instead of prop drilling (Except Advanced Options)</li>
+                <li>Dramatically increased page load by fetching map data in parallel, rather than sequential</li>
+                <li>Prompts (e.g dialog to enter file name) will now auto focus on text field and allow Enter key to submit</li>
+                <li>Fix the "Download" again incorrect text label</li>
+                <li>Updated "Loading Map Data..." button label</li>
+                <li>Fixed Close button in file editor not working while in <code>INSTALLER</code> mode</li>
+              </ul>
               <li>2.1.1</li>
               <ul>
                 <li>Updated some text labels if on <code>INSTALLER</code> mode</li>
