@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 
 import GlobalContext from "../contexts/GlobalContext"
@@ -7,6 +7,7 @@ export default function Dialog() {
 
     const { state, dispatch } = useContext(GlobalContext)
     const [promptInputValue, setPromptInputValue] = useState("")
+    const inputHtml = useRef(null)
 
     const handleAlertClose = () => {
         dispatch({ type: "CLOSE_DIALOG" })
@@ -27,6 +28,11 @@ export default function Dialog() {
         state?.dialog?.onClose?.(false)
     }
 
+    useEffect(() => {
+        if (state?.dialog?.dialogType === "PROMPT") {
+            inputHtml.current.focus()
+        }
+    }, [state?.dialog?.dialogType])
 
     return (
         <>
@@ -95,13 +101,14 @@ export default function Dialog() {
                         )}
                     </Modal.Header>
                     <Modal.Body>
-                        <Form>
+                        <Form onSubmit={e => { e.preventDefault(); handlePromptSubmit() }}>
                             <Form.Group className="mb-3">
                                 <Form.Label>{state?.dialog?.message}</Form.Label>
                                 <Form.Control
                                     type="text"
                                     autoFocus
                                     value={promptInputValue}
+                                    ref={inputHtml}
                                     onChange={(e) => setPromptInputValue(e.target.value)}
 
                                 />
