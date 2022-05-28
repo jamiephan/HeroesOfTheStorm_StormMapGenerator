@@ -398,6 +398,46 @@
             "name": "libCore_gv_dataXPBrawlMetaXPMaximumDuration",
             "default": 30.0,
             "type": "fixed"
+          },
+          {
+            "name": "libCore_gv_mAPMapStringID",
+            "default": "",
+            "type": "string"
+          },
+          {
+            "name": "libCore_gv_mAPMapImage",
+            "default": "",
+            "type": "string"
+          },
+          {
+            "name": "libCore_gv_mAPMapTileset",
+            "default": "",
+            "type": "string"
+          },
+          {
+            "name": "libCore_gv_mAPMapLight",
+            "default": "",
+            "type": "string"
+          },
+          {
+            "name": "libCore_gv_mAPMapAmbience",
+            "default": "",
+            "type": "string"
+          },
+          {
+            "name": "libCore_gv_heroes_RandomHeroID",
+            "default": "Random",
+            "type": "string"
+          },
+          {
+            "name": "libCore_gv_heroes_RandomSkinID",
+            "default": "Random",
+            "type": "string"
+          },
+          {
+            "name": "libCore_gv_heroes_RandomMountID",
+            "default": "Random",
+            "type": "string"
           }
         ]
       },
@@ -779,6 +819,16 @@
             "name": "libGame_gv_vehicleDragonKnightBullRushCutoffDistance",
             "default": -1.0,
             "type": "fixed"
+          },
+          {
+            "name": "libGame_gv_capturePointLastCreatedCapturePointIndex_C",
+            "default": "CapturePointLastCreatedCapturePointIndex",
+            "type": "string"
+          },
+          {
+            "name": "libGame_gv_mapFile",
+            "default": "",
+            "type": "string"
           }
         ]
       },
@@ -1020,6 +1070,11 @@
             "name": "libSprt_gv_dEBUGBaselineSpellPowerValue",
             "default": 0.0,
             "type": "fixed"
+          },
+          {
+            "name": "libSprt_gv_soundRepeatCurrentAbility",
+            "default": "",
+            "type": "string"
           }
         ]
       },
@@ -1081,6 +1136,11 @@
             "name": "libAIAI_gv_heroAITakeOverHeroRateLimitSeconds",
             "default": 5.0,
             "type": "fixed"
+          },
+          {
+            "name": "libAIAI_gv_defenderAILastCreatedDefenderAIIndex",
+            "default": "DefenderAILastCreatedDefenderAI",
+            "type": "string"
           }
         ]
       },
@@ -1924,6 +1984,11 @@
             "name": "libUIUI_gv_uIDamageFlashLowHPThreshold",
             "default": 30.0,
             "type": "fixed"
+          },
+          {
+            "name": "libUIUI_gv_uIDebugPanelUseMapAnnouncerPackID",
+            "default": "NoAnnouncerPack",
+            "type": "string"
           }
         ]
       },
@@ -1950,6 +2015,11 @@
             "name": "libSond_gv_soundtrack_MapSoundtrackIndex",
             "default": 0,
             "type": "int"
+          },
+          {
+            "name": "libSond_gv_soundtrack_NewDefaultSoundtrack",
+            "default": "",
+            "type": "string"
           }
         ]
       },
@@ -2181,6 +2251,16 @@
             "name": "libStEx_gv_targetDummyDamage",
             "default": 0.0,
             "type": "fixed"
+          },
+          {
+            "name": "libStEx_gv_tradeShowMovieLink",
+            "default": "",
+            "type": "string"
+          },
+          {
+            "name": "libStEx_gv_tutorialHero",
+            "default": "",
+            "type": "string"
           }
         ]
       }
@@ -2251,6 +2331,21 @@
             "name": "libHANA_gv_heroAnaEyeOfHorusDistancetoStructureTarget",
             "default": 0.0,
             "type": "fixed"
+          },
+          {
+            "name": "libHANA_gv_hero_Ana_Shrike_DamageDoneToken_TokenCounterStr",
+            "default": "AnaShrikeSelfHealPoisonTraitHealToken",
+            "type": "string"
+          },
+          {
+            "name": "libHANA_gv_hero_Ana_HealingDart_ConcentratedDoses_TokenCounterStr",
+            "default": "AnaHealingDartConcentratedDosesTokenCounter",
+            "type": "string"
+          },
+          {
+            "name": "libHANA_gv_hero_Ana_HealingDart_ConcentratedDoses_PoisonDotStr",
+            "default": "AnaShrikeDotDamageToken",
+            "type": "string"
           }
         ]
       },
@@ -2498,6 +2593,11 @@
             "name": "libHGUL_gv_heroGuldanTriggerRegistrationCount",
             "default": 0,
             "type": "int"
+          },
+          {
+            "name": "libHGUL_gv_heroGuldanDarknessWithinDamageTrackerScoreforTooltip",
+            "default": "GenericHeroRealScoreValue1",
+            "type": "string"
           }
         ]
       },
@@ -2509,6 +2609,16 @@
             "name": "libHGen_gv_heroGenjiTriggerRegistrationVariable",
             "default": 0,
             "type": "int"
+          },
+          {
+            "name": "libHGen_gv_heroGenjiDeflectDamageTakenLifetimeScore",
+            "default": "GenericHeroRealScoreValue1",
+            "type": "string"
+          },
+          {
+            "name": "libHGen_gv_heroGenjiDeflectDragonClawDamageAbsorbedScore",
+            "default": "GenericHeroRealScoreValue2",
+            "type": "string"
           }
         ]
       },
@@ -2579,6 +2689,11 @@
             "name": "libHKEL_gv_heroKelThuzadMasteroftheColdDarkMaxTokenCount",
             "default": 30,
             "type": "fixed"
+          },
+          {
+            "name": "libHKEL_gv_heroKelThuzadMasteroftheColdDarkMaxTokenName",
+            "default": "",
+            "type": "string"
           }
         ]
       },
@@ -3555,6 +3670,11 @@
             "name": "libMSHE_gv_punisherSiegeDamage",
             "default": 0.0,
             "type": "fixed"
+          },
+          {
+            "name": "libMSHE_gv_mMISBuff",
+            "default": "",
+            "type": "string"
           }
         ]
       },
@@ -4828,6 +4948,16 @@
             "name": "libPEB1_gv_pEB1BossImpaleLastAngle",
             "default": 0.0,
             "type": "fixed"
+          },
+          {
+            "name": "libPEB1_gv_nightLighting",
+            "default": "",
+            "type": "string"
+          },
+          {
+            "name": "libPEB1_gv_zagaraReplacementHero",
+            "default": "",
+            "type": "string"
           }
         ]
       },
@@ -4914,6 +5044,11 @@
             "name": "libPVEB_gv_pBGameOverPlayerXPGain",
             "default": 100.0,
             "type": "fixed"
+          },
+          {
+            "name": "libPVEB_gv_pvEPickupLastPickupSpawned",
+            "default": "",
+            "type": "string"
           }
         ]
       },
@@ -5087,6 +5222,11 @@
             "name": "libPVEM_gv_pvEVictoryTimeLoop",
             "default": 0,
             "type": "int"
+          },
+          {
+            "name": "libPVEM_gv_pvEPickupsLastPickupSpawned",
+            "default": "",
+            "type": "string"
           }
         ]
       },

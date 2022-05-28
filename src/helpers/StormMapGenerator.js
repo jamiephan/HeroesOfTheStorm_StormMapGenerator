@@ -201,7 +201,7 @@ class StormMapGenerator {
       let mapScriptInsertContentArr = []
 
       this.libsOptions.forEach(o => {
-        mapScriptInsertContentArr.push(`    ${o.name} = ${String(o.value)};`)
+        mapScriptInsertContentArr.push(`    ${o.name} = ${typeof o.value === "string" ? `"${String(o.value)}"` : String(o.value)};`)
       })
 
       if (this.msg !== "") mapScriptInsertContentArr.push(`    UIDisplayMessage(PlayerGroupAll(), c_messageAreaDebug, StringToText("${this.msg.replace(/\"/g, "'")}"));`)

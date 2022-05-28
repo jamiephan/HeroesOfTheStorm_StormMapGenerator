@@ -140,10 +140,38 @@ export default function AdvancedOptions(props) {
                 cp[index].value = parseFloat(e.target.value)
                 return cp
               })
-
-            }
-            }
+            }}
           />
+          <code>;</code>
+        </div>
+      case "string":
+
+        return <div key={`${i}-${j}-${k}`}>
+          {
+            o.default === currentValue ?
+              <code>{o.type} {o.name} = </code> :
+              <code style={{ fontWeight: "bolder", fontStyle: "italic" }}>* {o.type} {o.name} = </code>
+          }
+          <code>{`"`}</code>
+          <Form.Control
+            type="text"
+
+            style={{
+              width: "100px",
+              display: "inline-block",
+              fontSize: "80%",
+              padding: "2px",
+            }}
+            value={currentValue}
+            onChange={e => {
+              setFlattedOptions(fo => {
+                const cp = Array.from(fo)
+                cp[index].value = e.target.value
+                return cp
+              })
+            }}
+          />
+          <code>{`"`}</code>
           <code>;</code>
         </div>
       default:
@@ -175,7 +203,7 @@ export default function AdvancedOptions(props) {
         <Alert variant="info" dismissible="true" onClose={() => setIsShowingAdvancedOptionAlertBox(false)}>
           <h5>What is this?</h5>
           <ul>
-            <li>This section allows you to modify each non-constant variables in the game (currently only supports <code>Boolean</code>, <code>Integer</code> and <code>Decimal</code> type).</li>
+            <li>This section allows you to modify each non-constant variables in the game (currently only supports <code>Boolean</code>, <code>Integer</code>, <code>Decimal</code> and <code>String</code> type).</li>
             <li>The script will be added into the <code>MapScript.galaxy</code> after all libraries have been initialized (<code>InitLibs()</code>).</li>
             <li>The default values were gathered via the <code>InitVariables()</code> function from their respective library. Therefore it will not track any changes afterwards.</li>
           </ul>
@@ -194,6 +222,7 @@ export default function AdvancedOptions(props) {
             <li>The variable names and default values are identical in game. The data type will be appended to the variable name.</li>
             <li>For <code>boolean</code> type, click on it to toggle <code style={{ color: "green" }}>true</code> or <code style={{ color: "red" }}>false</code> and can be easily identified with its color.</li>
             <li>For both <code>int</code> and <code>fixed</code> type, You can change the value by typing on the textbox. If its over the min/max, it will reset to its type's min/max.</li>
+            <li>For <code>string</code> type, You can change the value by typing on the textbox.</li>
             <li>Any value that is not the same as the default value will be considered as "changed".</li>
             <li>You can track the changes on the "Changes" box below. Click on each of the variable inside the changes box to discard the changes.</li>
           </ul>
@@ -245,6 +274,16 @@ export default function AdvancedOptions(props) {
                           </code>
                         </> : <></>
                     }
+                    {x.type === "string" ?
+                      <>
+                        <code>{`"`}{String(x.default)}{`"`}</code>
+                        {" "}
+                        <ArrowRight />
+                        {" "}
+                        <code>
+                          {`"`}<b>{x.value}</b>{`"`}
+                        </code>
+                      </> : <> </>}
 
                   </li>
                 )}
