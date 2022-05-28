@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import {
   Alert, Button, Fade, Form, Spinner, Tab, Tabs
 } from 'react-bootstrap'
@@ -16,6 +16,9 @@ export default function MainForm() {
   const { state } = useContext(GlobalContext)
   const [isGenerating, setIsGenerating] = useState(false)
 
+  // TODO: Fix libsOptions Performance issue
+  const libsOptions = useRef([])
+
   // // Status Alert box
   const [alertBox, setAlertBox] = useState({ show: false, variant: "warning", message: "Why do people use light mode??", dismissible: true })
 
@@ -27,14 +30,13 @@ export default function MainForm() {
     setAlertBox({ show: true, variant: "info", message: `Generating ${state?.installer?.isInstaller && state?.installer?.mapName ? state?.installer?.mapName : state.settings.name} ...`, dismissible: false })
 
 
-
     const response = await fetch("/build", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(
         {
           ...state?.settings,
-          libsOptions: []
+          libsOptions: libsOptions.current
         },
       )
     })
@@ -103,10 +105,10 @@ export default function MainForm() {
           </Tab>
 
           {/* Advanced Options */}
-          {/* <Tab eventKey="advancedoptions" title="Advanced Options">
+          <Tab eventKey="advancedoptions" title="Advanced Options">
             <h3 style={{ margin: "20px 0px" }}>Advanced Options</h3>
             <AdvancedOptions onChange={ao => libsOptions.current = ao} />
-          </Tab> */}
+          </Tab>
 
 
         </Tabs>
