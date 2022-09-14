@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 seancheung/alpinewine:wine64
+FROM --platform=linux/amd64 seancheung/alpinewine:wine
 RUN apk add --update nodejs nodejs-npm
 WORKDIR /app
 COPY "." "."
