@@ -20,7 +20,13 @@ class MPQEditor {
             try {
                 this.winePath = execSync("which wine", { encoding: "utf8" }).replace(/\n/g, "");
             } catch (e) {
-                logger.error(e.message);
+                logger.error("Executable 'wine' was not found. Trying wine64...");
+                try {
+                    this.winePath = execSync("which wine64", { encoding: "utf8" }).replace(/\n/g, "");
+                } catch (e) {
+                    logger.error("Fatal: wine/win64 executable was not found in $PATH. Exiting...");
+                    process.exit(1)
+                }
             }
         }
     }
