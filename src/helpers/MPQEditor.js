@@ -6,10 +6,12 @@ const execSync = require('child_process').execSync;
 
 class MPQEditor {
     constructor() {
-        let path;
+        let path, path64;
         try {
             path = fs.realpathSync(__dirname + "/../../bin/MPQEditor.exe")
             logger.debug("MPQEditor path: " + path);
+            path64 = fs.realpathSync(__dirname + "/../../bin/MPQEditor_x64.exe")
+            logger.debug("MPQEditor 64bit path: " + path64);
         } catch (e) {
             logger.error(e.message);
         }
@@ -20,9 +22,10 @@ class MPQEditor {
             try {
                 this.winePath = execSync("which wine", { encoding: "utf8" }).replace(/\n/g, "");
             } catch (e) {
-                logger.error("Executable 'wine' was not found. Trying wine64...");
+                logger.warn("Executable 'wine' was not found. Trying wine64...");
                 try {
                     this.winePath = execSync("which wine64", { encoding: "utf8" }).replace(/\n/g, "");
+                    this.mpqEditorPath = path64;
                 } catch (e) {
                     logger.error("Fatal: wine/win64 executable was not found in $PATH. Exiting...");
                     process.exit(1)
