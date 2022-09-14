@@ -1,13 +1,10 @@
-FROM seancheung/alpinewine:wine
-
-RUN apk add nodejs npm
-
+FROM --platform=linux/amd64 seancheung/alpinewine:wine64
+RUN apk add --update nodejs nodejs-npm
 WORKDIR /app
-
 COPY "." "."
 
 RUN npm config set unsafe-perm true && \
-    npm install && \
+    npm ci && \
     npm run build && \
     rm -rf client
 
