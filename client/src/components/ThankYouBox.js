@@ -23,6 +23,11 @@ export default function BottomSection() {
             <hr />
             Changelog:
             <ul>
+              <li>4.0.0</li>
+              <ul>
+                <li>BREAKING: Changed site domain to <a href="https://stormmap.jamiephan.net">https://stormmap.jamiephan.net</a></li>
+                <li>Change backend host from Heroku to Google Cloud</li>
+              </ul>
               <li>3.0.0</li>
               <ul>
                 <li>Added the ability to append Game String in <code>GameStrings.txt</code> (<code>enUS</code> locale only)!</li>
@@ -67,7 +72,7 @@ export default function BottomSection() {
               <li>1.10.1</li>
               <ul>
                 <li>Setup CI for automated deployment</li>
-                <li>Auto push to changes to <a href="https://stormmap.herokuapp.com" target="_blank" rel="noreferrer">https://stormmap.herokuapp.com/</a></li>
+                <li>Auto push to changes to <a href="https://stormmap.jamiephan.net" target="_blank" rel="noreferrer">https://stormmap.jamiephan.net/</a></li>
                 <li>Setup <a href="https://hub.docker.com/repository/docker/jamiephan/stormmap" target="_blank" rel="noreferrer">jamiephan/stormmap</a> Docker image</li>
                 <li>Auto push to changes to <a href="https://hub.docker.com/repository/docker/jamiephan/stormmap" target="_blank" rel="noreferrer">jamiephan/stormmap</a> image</li>
               </ul>

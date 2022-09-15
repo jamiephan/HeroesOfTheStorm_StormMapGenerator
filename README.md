@@ -2,7 +2,7 @@
 
 An online Storm Map file generator for Heroes of the Storm!
 
-Try it online: https://stormmap.herokuapp.com/
+Try it online: https://stormmap.jamiephan.net/
 
 
 # What is this app?
