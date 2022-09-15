@@ -47,3 +47,15 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: '${{ secrets.GCR_ACCESS_TOKEN }}'
+      
+      - id: 'deploy'
+        uses: 'google-github-actions/deploy-cloudrun@v0'
+        with:
+          service: 'stormmap'
+          image: ${{ secrets.GCR_REGISTRY_REGION }}-docker.pkg.dev/${{ secrets.GCR_PROJECT_NAME }}/${{ secrets.GCR_REGISTRY_NAMESPACE }}/stormmap:${{ steps.docker_build.outputs.digest }}
