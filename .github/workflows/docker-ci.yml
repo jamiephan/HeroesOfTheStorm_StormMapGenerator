@@ -58,4 +58,4 @@ jobs:
         uses: 'google-github-actions/deploy-cloudrun@v0'
         with:
           service: 'stormmap'
-          image: ${{ secrets.GCR_REGISTRY_REGION }}-docker.pkg.dev/${{ secrets.GCR_PROJECT_NAME }}/${{ secrets.GCR_REGISTRY_NAMESPACE }}/stormmap:${{ steps.docker_build.outputs.digest }}
+          image: ${{ secrets.GCR_REGISTRY_REGION }}-docker.pkg.dev/${{ secrets.GCR_PROJECT_NAME }}/${{ secrets.GCR_REGISTRY_NAMESPACE }}/stormmap:latest
